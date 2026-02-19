@@ -20,17 +20,18 @@
             android:layout_marginTop="32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
+            android:contentDescription="@string/back"
             android:focusable="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back_icon" />
+            app:srcCompat="@drawable/ic_back" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="32dp"
             android:text="@string/company_register"
-            android:textSize="@dimen/title"
+            android:textSize="@dimen/PAGE_TITLE"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/fragment_company_back_icon"
             app:layout_constraintRight_toRightOf="parent"
@@ -43,7 +44,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
+            android:background="@drawable/radius_16"
             android:backgroundTint="@color/white"
             android:hint="@string/insert_company_name"
             android:inputType="text"
@@ -53,7 +54,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_company_back_icon" />
@@ -65,7 +66,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
+            android:background="@drawable/radius_16"
             android:backgroundTint="@color/white"
             android:hint="@string/insert_company_address"
             android:inputType="text"
@@ -75,7 +76,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_company_company_name" />
@@ -87,7 +88,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
+            android:background="@drawable/radius_16"
             android:backgroundTint="@color/white"
             android:hint="@string/insert_company_website"
             android:inputType="textUri"
@@ -97,7 +98,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_company_company_address" />
@@ -109,7 +110,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
+            android:background="@drawable/radius_16"
             android:backgroundTint="@color/white"
             android:hint="@string/insert_company_telephone"
             android:inputType="phone"
@@ -119,32 +120,10 @@
             android:paddingRight="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_company_company_website" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/fragment_company_company_mobile"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
-            android:backgroundTint="@color/white"
-            android:hint="@string/insert_company_mobile"
-            android:inputType="phone"
-            android:maxLength="24"
-            android:maxLines="1"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_company_company_telephone" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/fragment_company_company_email"
@@ -153,7 +132,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
+            android:background="@drawable/radius_16"
             android:backgroundTint="@color/white"
             android:hint="@string/insert_company_email"
             android:inputType="textEmailAddress"
@@ -163,10 +142,10 @@
             android:paddingRight="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_company_company_mobile" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_company_company_telephone" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/fragment_company_company_instagram"
@@ -175,7 +154,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
+            android:background="@drawable/radius_16"
             android:backgroundTint="@color/white"
             android:hint="@string/insert_company_instagram"
             android:inputType="text"
@@ -185,7 +164,7 @@
             android:paddingRight="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_company_company_email" />
@@ -197,7 +176,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
+            android:background="@drawable/radius_16"
             android:backgroundTint="@color/white"
             android:hint="@string/insert_company_telegram"
             android:inputType="text"
@@ -207,32 +186,10 @@
             android:paddingRight="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/fragment_company_company_instagram" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/fragment_company_company_whatsapp"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/radius_8"
-            android:backgroundTint="@color/white"
-            android:hint="@string/insert_company_whatsapp"
-            android:inputType="phone"
-            android:maxLength="32"
-            android:maxLines="1"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/texthintColor"
-            android:textSize="@dimen/text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_company_company_telegram" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="0dp"
@@ -240,15 +197,15 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="16dp"
-            android:backgroundTint="@color/main_color"
+            android:backgroundTint="@color/main_green"
             android:text="@string/next_step"
             android:textColor="@color/white"
-            android:textSize="@dimen/text"
+            android:textSize="@dimen/MEDIUM_TEXT_SIZE"
             android:textStyle="bold"
-            app:cornerRadius="8dp"
+            app:cornerRadius="16dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_company_company_whatsapp" />
+            app:layout_constraintTop_toBottomOf="@id/fragment_company_company_telegram" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

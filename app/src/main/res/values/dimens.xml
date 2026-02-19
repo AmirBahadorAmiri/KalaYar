@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="small_text">12sp</dimen>
-    <dimen name="text">16sp</dimen>
-    <dimen name="title">20sp</dimen>
-    <dimen name="app_title">36sp</dimen>
-    <dimen name="app_name">54sp</dimen>
+    <dimen name="SMALL_TEXT_SIZE">12sp</dimen>
+    <dimen name="MEDIUM_TEXT_SIZE">16sp</dimen>
+    <dimen name="PAGE_TITLE">20sp</dimen>
+    <dimen name="APP_TITLE">36sp</dimen>
+    <dimen name="LARGE_APP_TITLE">54sp</dimen>
 </resources>
