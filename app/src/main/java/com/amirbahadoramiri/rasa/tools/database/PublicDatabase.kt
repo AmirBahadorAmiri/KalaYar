@@ -12,26 +12,29 @@ import com.amirbahadoramiri.rasa.models.StoreKeeper
 import com.amirbahadoramiri.rasa.models.Transaction
 import com.amirbahadoramiri.rasa.models.TransactionItems
 
-@Database(version = 1, exportSchema = false, entities = [Company::class, Inventory::class, Product::class, Store::class, StoreKeeper::class, Transaction::class, TransactionItems::class])
+@Database(
+    version = 1,
+    exportSchema = false,
+    entities = [Company::class, Inventory::class, Product::class, Store::class, StoreKeeper::class, Transaction::class, TransactionItems::class]
+)
 abstract class PublicDatabase : RoomDatabase() {
 
     companion object {
 
-        private lateinit var publicDatabase: PublicDatabase
+        private var publicDatabase: PublicDatabase? = null
 
-        fun getPublicDatabase(context: Context) : PublicDatabase {
-
-            if ( publicDatabase == null ) {
-                publicDatabase = Room.databaseBuilder(context, PublicDatabase::class.java,"public-db")
-                    .allowMainThreadQueries()
-                    .fallbackToDestructiveMigration(false)
-                    .build()
+        fun getPublicDatabase(context: Context): PublicDatabase? {
+            if (publicDatabase == null) {
+                publicDatabase =
+                    Room.databaseBuilder(context, PublicDatabase::class.java, "public-db")
+                        .allowMainThreadQueries()
+                        .fallbackToDestructiveMigration(false)
+                        .build()
             }
-
             return publicDatabase;
         }
     }
 
-    abstract fun getPublicDAO() : PublicDAO
+    abstract fun getPublicDAO(): PublicDAO
 
 }
