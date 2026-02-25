@@ -16,12 +16,14 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isShrinkResources = true
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -76,5 +78,6 @@ dependencies {
 
     implementation(libs.gson)
 
+    implementation("com.github.AmirBahadorAmiri:TelegramDialog:1.1.0")
 
 }
