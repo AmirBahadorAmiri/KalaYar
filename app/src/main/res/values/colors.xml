@@ -3,7 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="background_color">#F5F5F5</color>
+    <color name="page_background">#F5F5F5</color>
     <color name="texthintColor">#B8B8B8</color>
 
     <color name="main_blue">#4A90CA</color>
@@ -15,7 +15,7 @@
     <color name="main_red_light">#F06768</color>
 
     <color name="main_green">#3EB489</color>
-    <color name="main_green_tint">#E2FFE2</color>
+    <color name="main_green_tint">#ECFFEC</color>
     <color name="main_green_light">#ACE1AF</color>
 
 </resources>

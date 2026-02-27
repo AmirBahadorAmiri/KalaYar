@@ -4,13 +4,13 @@ plugins {
 }
 
 android {
-    namespace = "com.amirbahadoramiri.rasa"
+    namespace = "com.amirbahadoramiri.kalayar"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.amirbahadoramiri.rasa"
+        applicationId = "com.amirbahadoramiri.kalayar"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -78,6 +78,6 @@ dependencies {
 
     implementation(libs.gson)
 
-    implementation("com.github.AmirBahadorAmiri:TelegramDialog:1.1.0")
+    implementation("com.github.AmirBahadorAmiri:TelegramDialog:1.2.1")
 
 }

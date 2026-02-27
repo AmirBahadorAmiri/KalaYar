@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">رسا</string>
-    <string name="app_name_en">Rasa</string>
+    <string name="app_name">کالایار</string>
+    <string name="app_name_en">KalaYar</string>
     <string name="shoar">اپلیکیشن جامع انبارداری نوین</string>
     <string name="user_register">ثبت کاربر</string>
     <string name="insert_your_name">نام خود را وارد کنید</string>
@@ -14,4 +14,8 @@
     <string name="insert_company_instagram">آیدی اینستاگرام شرکت یا مجموعه را وارد کنید</string>
     <string name="insert_company_telegram">آیدی تلگرام شرکت یا مجموعه را وارد کنید</string>
     <string name="back">بازگشت</string>
+    <string name="commonly_used">پرکاربرد ها</string>
+    <string name="product_export">صدور کالا</string>
+    <string name="transactions">تراکنش ها</string>
+    <string name="weekly_schedule">برنامه هفتگی</string>
 </resources>

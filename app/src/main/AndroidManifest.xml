@@ -14,7 +14,7 @@
         android:label="@string/app_name_en"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="false"
-        android:theme="@style/Theme.Rasa">
+        android:theme="@style/Theme.KalaYar">
 
         <activity
             android:name=".views.activities.splash.SplashActivity"

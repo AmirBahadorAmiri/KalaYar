@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_color"
+        android:background="@color/page_background"
         android:paddingBottom="64dp">
 
         <androidx.appcompat.widget.AppCompatImageView
