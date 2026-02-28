@@ -14,6 +14,7 @@ retrofit = "3.0.0"
 roomRuntime = "2.8.4"
 rxandroid = "3.0.2"
 rxjava = "3.1.12"
+telegramdialog = "1.2.1"
 
 [libraries]
 adapter-rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
@@ -33,6 +34,7 @@ room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRunti
 room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "roomRuntime" }
 rxandroid = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxandroid" }
 rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+telegramdialog = { module = "com.github.AmirBahadorAmiri:TelegramDialog", version.ref = "telegramdialog" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

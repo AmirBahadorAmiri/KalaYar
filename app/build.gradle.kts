@@ -78,6 +78,6 @@ dependencies {
 
     implementation(libs.gson)
 
-    implementation("com.github.AmirBahadorAmiri:TelegramDialog:1.2.1")
+    implementation(libs.telegramdialog)
 
 }
