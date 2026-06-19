@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/radius_16_top"
+        android:backgroundTint="@color/kalayar_page_background_color">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:layout_marginRight="@dimen/STANDARD_32dp"
+            android:text="@string/product_add"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_20sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/product_search_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:hint="@string/product_search_name"
+            android:textColor="@color/kalayar_text_color"
+            android:textColorHint="@color/kalayar_text_hint_color"
+            app:boxBackgroundColor="@color/kalayar_edittext_background_color"
+            app:boxCornerRadiusBottomEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusBottomStart="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopStart="@dimen/STANDARD_32dp"
+            app:boxStrokeColor="@color/kalayar_primary_color"
+            app:boxStrokeWidth="0dp"
+            app:hintTextColor="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/kalayar_search"
+                android:drawablePadding="@dimen/STANDARD_8dp"
+                android:inputType="text"
+                android:maxLength="32"
+                android:paddingLeft="@dimen/STANDARD_24dp"
+                android:paddingRight="@dimen/STANDARD_24dp"
+                android:textSize="@dimen/STANDARD_16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/STANDARD_48dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:background="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_search_layout" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_recyclerview_title_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical|right"
+            android:paddingRight="@dimen/STANDARD_16dp"
+            android:text="@string/products_name"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_1"
+            app:layout_constraintHorizontal_weight="0.6"
+            app:layout_constraintLeft_toRightOf="@id/product_recyclerview_title_price"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view_1" />
+
+        <View
+            android:layout_width="0.2dp"
+            android:layout_height="0dp"
+            android:background="@color/kalayar_icon_hint_color"
+            app:layout_constraintBottom_toBottomOf="@id/view_1"
+            app:layout_constraintLeft_toRightOf="@id/product_recyclerview_title_price"
+            app:layout_constraintRight_toLeftOf="@id/product_recyclerview_title_name"
+            app:layout_constraintTop_toTopOf="@id/view_1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_recyclerview_title_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical|right"
+            android:paddingLeft="@dimen/STANDARD_16dp"
+            android:paddingRight="@dimen/STANDARD_16dp"
+            android:text="@string/price_toman"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_1"
+            app:layout_constraintHorizontal_weight="0.4"
+            app:layout_constraintLeft_toRightOf="@id/product_recyclerview_title_count"
+            app:layout_constraintRight_toLeftOf="@id/product_recyclerview_title_name"
+            app:layout_constraintTop_toTopOf="@id/view_1" />
+
+        <View
+            android:layout_width="0.2dp"
+            android:layout_height="0dp"
+            android:background="@color/kalayar_icon_hint_color"
+            app:layout_constraintBottom_toBottomOf="@id/view_1"
+            app:layout_constraintLeft_toRightOf="@id/product_recyclerview_title_count"
+            app:layout_constraintRight_toLeftOf="@id/product_recyclerview_title_price"
+            app:layout_constraintTop_toTopOf="@id/view_1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/product_recyclerview_title_count"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical|right"
+            android:paddingLeft="@dimen/STANDARD_16dp"
+            android:paddingRight="@dimen/STANDARD_16dp"
+            android:text="@string/products_count"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/view_1"
+            app:layout_constraintHorizontal_weight="0.4"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/product_recyclerview_title_price"
+            app:layout_constraintTop_toTopOf="@id/view_1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

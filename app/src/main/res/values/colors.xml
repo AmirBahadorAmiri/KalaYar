@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
 
-    <color name="page_background">#F5F5F5</color>
-    <color name="texthintColor">#B8B8B8</color>
+    <!--  MAIN COLORS  -->
+    <color name="kalayar_white">@android:color/white</color>
+    <color name="kalayar_transparent">@android:color/transparent</color>
+    <color name="kalayar_black">@android:color/black</color>
+    <color name="kalayar_dark_color">#1A263E</color>
+    <color name="kalayar_light_gray_color">#F5F5F5</color>
+    <color name="kalayar_gray_color">#C2C4C3</color>
 
-    <color name="main_blue">#4A90CA</color>
-    <color name="main_blue_tint">#EDF4FA</color>
-    <color name="main_blue_light">#73B0E3</color>
+    <color name="kalayar_blue_color">#007FFF</color>
+    <color name="kalayar_blue_color_tint">#DBEAFF</color>
 
-    <color name="main_red">#CC4748</color>
-    <color name="main_red_tint">#F9EDED</color>
-    <color name="main_red_light">#F06768</color>
+    <color name="kalayar_green_color">#06d6a0</color>
+    <color name="kalayar_red_color">#F64848</color>
+    <color name="kalayar_red_color_tint">#FFE5E5</color>
 
-    <color name="main_green">#3EB489</color>
-    <color name="main_green_tint">#ECFFEC</color>
-    <color name="main_green_light">#ACE1AF</color>
+    <!--  STYLE COLORS  -->
+    <color name="kalayar_text_color">@color/kalayar_dark_color</color>
+    <color name="kalayar_text_on_primary_color">@android:color/white</color>
+    <color name="kalayar_text_hint_color">@color/kalayar_gray_color</color>
+    <color name="kalayar_icon_hint_color">@color/kalayar_gray_color</color>
+    <color name="kalayar_icon_on_item_color">@color/kalayar_dark_color</color>
+    <color name="kalayar_icon_on_primary_color">@android:color/white</color>
+    <color name="kalayar_edittext_background_color">@color/kalayar_light_gray_color</color>
+    <color name="kalayar_item_background_color">@color/kalayar_light_gray_color</color>
+    <color name="kalayar_bottom_navigation_background_color">@color/kalayar_light_gray_color</color>
+    <color name="kalayar_page_background_color">@android:color/white</color>
+    <color name="kalayar_primary_color">@color/kalayar_blue_color</color>
+    <color name="kalayar_confirm_color">@color/kalayar_green_color</color>
 
 </resources>

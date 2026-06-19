@@ -6,13 +6,13 @@ plugins {
 android {
     namespace = "com.amirbahadoramiri.kalayar"
     compileSdk {
-        version = release(36)
+        version = release(37)
     }
 
     defaultConfig {
         applicationId = "com.amirbahadoramiri.kalayar"
-        minSdk = 24
-        targetSdk = 36
+        minSdk = 26
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -43,7 +43,6 @@ android {
         dataBinding = true
         viewBinding = true
     }
-    ndkVersion = "29.0.14206865"
 
 }
 

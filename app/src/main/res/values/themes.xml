@@ -4,5 +4,10 @@
         <item name="fontFamily">@font/vazir_fd_wol_regular</item>
         <item name="font">@font/vazir_fd_wol_regular</item>
         <item name="android:fontFamily">@font/vazir_fd_wol_regular</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="popupMenuBackground">@color/kalayar_page_background_color</item>
+<!--        <item name="android:fitsSystemWindows">false</item>-->
     </style>
+
 </resources>

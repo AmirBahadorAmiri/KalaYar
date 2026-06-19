@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="SMALL_TEXT_SIZE">12sp</dimen>
-    <dimen name="MEDIUM_TEXT_SIZE">16sp</dimen>
-    <dimen name="PAGE_TITLE">20sp</dimen>
-    <dimen name="APP_TITLE">36sp</dimen>
-    <dimen name="LARGE_APP_TITLE">54sp</dimen>
+    <dimen name="STANDARD_12sp">12sp</dimen>
+    <dimen name="STANDARD_16sp">16sp</dimen>
+    <dimen name="STANDARD_20sp">20sp</dimen>
+    <dimen name="STANDARD_32sp">32sp</dimen>
+    <dimen name="APP_TITLE">54sp</dimen>
+
+    <dimen name="STANDARD_4dp">4dp</dimen>
+    <dimen name="STANDARD_8dp">8dp</dimen>
+    <dimen name="STANDARD_16dp">16dp</dimen>
+    <dimen name="STANDARD_24dp">24dp</dimen>
+    <dimen name="STANDARD_32dp">32dp</dimen>
+    <dimen name="STANDARD_36dp">36dp</dimen>
+    <dimen name="STANDARD_40dp">40dp</dimen>
+    <dimen name="STANDARD_48dp">48dp</dimen>
+    <dimen name="STANDARD_56dp">56dp</dimen>
+    <dimen name="STANDARD_60dp">60dp</dimen>
+    <dimen name="STANDARD_64dp">64dp</dimen>
+
 </resources>

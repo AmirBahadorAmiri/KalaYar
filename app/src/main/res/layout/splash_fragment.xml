@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/kalayar_primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            app:srcCompat="@drawable/ic_launcher_nobg"
+            app:layout_constraintBottom_toTopOf="@id/app_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="@dimen/STANDARD_16dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/app_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/shoar_text"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:fontFamily="@font/afrigha"
+            android:text="@string/app_name"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/APP_TITLE"
+            android:layout_marginBottom="@dimen/STANDARD_16dp"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shoar_text"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="@string/shoar"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_20sp"
+            android:layout_marginBottom="350dp"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/version_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            tools:text="نگارش 1.0"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:layout_marginBottom="@dimen/STANDARD_16dp"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

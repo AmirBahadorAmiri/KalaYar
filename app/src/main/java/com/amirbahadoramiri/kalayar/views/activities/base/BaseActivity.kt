@@ -1,12 +1,13 @@
 package com.amirbahadoramiri.kalayar.views.activities.base
 
+import android.content.Intent
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.amirbahadoramiri.kalayar.R
@@ -20,8 +21,8 @@ open class BaseActivity : AppCompatActivity() {
     fun edgeColor() {
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.light(
-                scrim = ContextCompat.getColor(this, R.color.main_green),
-                darkScrim = ContextCompat.getColor(this, R.color.main_green)
+                scrim = ContextCompat.getColor(this, R.color.kalayar_primary_color),
+                darkScrim = ContextCompat.getColor(this, R.color.kalayar_primary_color)
             )
         )
     }
@@ -29,12 +30,12 @@ open class BaseActivity : AppCompatActivity() {
     fun setViewCompat() {
 //        android.R.id.content
         ViewCompat.setOnApplyWindowInsetsListener(
-            findViewById(R.id.main),
-            OnApplyWindowInsetsListener { v: View?, insets: WindowInsetsCompat? ->
-                val systemBars = insets!!.getInsets(WindowInsetsCompat.Type.systemBars())
-                v!!.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-                insets
-            })
+            findViewById(R.id.main)
+        ) { v: View?, insets: WindowInsetsCompat? ->
+            val systemBars = insets!!.getInsets(WindowInsetsCompat.Type.systemBars())
+            v!!.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
     }
 
     fun setViewCompatForMultiEditText() {
@@ -55,6 +56,14 @@ open class BaseActivity : AppCompatActivity() {
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
+    }
+
+    fun open(cls: Class<*>?) {
+        startActivity(Intent(this, cls))
+    }
+
+    fun toast(str: String) {
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.amirbahadoramiri.kalayar.core.models.Product" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/kalayar_page_background_color"
+        android:background="@drawable/radius_16_top"
+        android:paddingBottom="@dimen/STANDARD_16sp"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:text="@string/product_insert"
+            android:textStyle="bold"
+            android:textSize="@dimen/STANDARD_20sp"
+            android:textColor="@color/kalayar_text_color"
+            android:layout_marginRight="@dimen/STANDARD_32dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/product_name_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:hint="@string/product_insert_name"
+            android:textColor="@color/kalayar_text_color"
+            android:textColorHint="@color/kalayar_text_hint_color"
+            app:boxBackgroundColor="@color/kalayar_edittext_background_color"
+            app:boxCornerRadiusBottomEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusBottomStart="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopStart="@dimen/STANDARD_32dp"
+            app:boxStrokeColor="@color/kalayar_primary_color"
+            app:boxStrokeWidth="0dp"
+            app:hintTextColor="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/kalayar_product_hint_icon"
+                android:drawablePadding="@dimen/STANDARD_8dp"
+                android:inputType="text"
+                android:text="@{product.product_name}"
+                android:maxLength="64"
+                android:paddingLeft="@dimen/STANDARD_24dp"
+                android:paddingRight="@dimen/STANDARD_24dp"
+                android:textSize="@dimen/STANDARD_16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/product_price_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_8dp"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:hint="@string/product_insert_price"
+            android:textColor="@color/kalayar_text_color"
+            android:textColorHint="@color/kalayar_text_hint_color"
+            app:boxBackgroundColor="@color/kalayar_edittext_background_color"
+            app:boxCornerRadiusBottomEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusBottomStart="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopStart="@dimen/STANDARD_32dp"
+            app:boxStrokeColor="@color/kalayar_primary_color"
+            app:boxStrokeWidth="0dp"
+            app:hintTextColor="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_name_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/kalayar_price_tag"
+                android:drawablePadding="@dimen/STANDARD_8dp"
+                android:inputType="number"
+                android:text="@{product.getProductPrice}"
+                android:maxLength="64"
+                android:paddingLeft="@dimen/STANDARD_24dp"
+                android:paddingRight="@dimen/STANDARD_24dp"
+                android:textSize="@dimen/STANDARD_16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/product_unit_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_8dp"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:hint="@string/product_insert_unit"
+            android:textColor="@color/kalayar_text_color"
+            android:textColorHint="@color/kalayar_text_hint_color"
+            app:boxBackgroundColor="@color/kalayar_edittext_background_color"
+            app:boxCornerRadiusBottomEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusBottomStart="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopStart="@dimen/STANDARD_32dp"
+            app:boxStrokeColor="@color/kalayar_primary_color"
+            app:boxStrokeWidth="0dp"
+            app:hintTextColor="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_price_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/product_unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/kalayar_info"
+                android:drawablePadding="@dimen/STANDARD_8dp"
+                android:inputType="text"
+                android:text="@{product.product_unit}"
+                android:maxLength="64"
+                android:paddingLeft="@dimen/STANDARD_24dp"
+                android:paddingRight="@dimen/STANDARD_24dp"
+                android:textSize="@dimen/STANDARD_16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/confirm_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/STANDARD_60dp"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_8dp"
+            android:text="@string/confirm"
+            android:textSize="@dimen/STANDARD_16sp"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            app:backgroundTint="@color/kalayar_primary_color"
+            app:cornerRadius="@dimen/STANDARD_32dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/product_unit_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
