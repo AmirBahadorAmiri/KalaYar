@@ -6,12 +6,12 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "transaction_item")
 data class TransactionItem(
     var product_id: Long?,
-    var product_name: String, // String (64)
-    var product_unit: String, // String (32)
-    var product_price: Long,
-    var last_value: Long,
-    var change_value: Long,
-    var new_value: Long,
+    var product_name: String,   // String (64)
+    var product_unit: String,   // String (32)
+    var product_price: Long,    // max: 9,223,372,036,854,775,808
+    var last_value: Long,       // max: 9,223,372,036,854,775,808
+    var change_value: Long,     // max: 9,223,372,036,854,775,808
+    var new_value: Long,        // max: 9,223,372,036,854,775,808
 
     @PrimaryKey(autoGenerate = true)
     var item_id: Long? = null,

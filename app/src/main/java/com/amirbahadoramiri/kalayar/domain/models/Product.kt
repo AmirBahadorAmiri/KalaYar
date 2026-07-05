@@ -7,10 +7,10 @@ import java.text.DecimalFormat
 
 @Entity(tableName = "product")
 data class Product(
-    var product_name: String, // String (64)
-    var product_unit: String, // String (32)
-    var product_price: Long,
-    var product_count: Long,
+    var product_name: String,   // String (64)
+    var product_unit: String,   // String (32)
+    var product_price: Long,    // max: 9,223,372,036,854,775,808
+    var product_count: Long,    // max: 9,223,372,036,854,775,808
 
     @PrimaryKey(autoGenerate = true)
     var product_id: Long? = null,
