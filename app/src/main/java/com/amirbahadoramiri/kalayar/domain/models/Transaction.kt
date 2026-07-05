@@ -24,7 +24,7 @@ data class Transaction(
     fun getTransactionPersianDate() : String {
         val calendar: PrimeCalendar = PersianCalendar()
         calendar.setTime(Date(transaction_create_time))
-        return "${calendar.shortDateString} ${calendar.hour}:${calendar.minute}:${calendar.second} ${calendar.weekDayName}"
+        return "${calendar.shortDateString}  ${calendar.hour}:${calendar.minute}:${calendar.second}\n${calendar.weekDayName}"
     }
 
 }
