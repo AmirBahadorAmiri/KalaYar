@@ -46,6 +46,8 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
 
     private fun setup() {
 
+        calculateLastPrice()
+
         addTransactionViewModel = ViewModelProvider(this)[AddTransactionViewModel::class]
         addTransactionViewModel.transactionAddLiveData.observe(viewLifecycleOwner) {
             if (it) popBackStack()
