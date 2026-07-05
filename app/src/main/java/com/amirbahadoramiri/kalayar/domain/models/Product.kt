@@ -3,7 +3,6 @@ package com.amirbahadoramiri.kalayar.domain.models
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import java.text.DecimalFormat
 
 @Entity(tableName = "product")
@@ -25,7 +24,7 @@ data class Product(
 
     @Ignore
     fun formatMoney(): String {
-        return TextUtils.formatMoney(product_price)
+        return DecimalFormat("#,###").format(product_price)
     }
 
     @Ignore
