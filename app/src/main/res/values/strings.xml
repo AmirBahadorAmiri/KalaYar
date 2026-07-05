@@ -31,6 +31,7 @@
     <string name="transaction_search_title">تیتر تراکنش را وارد کنید</string>
     <string name="transaction_insert_title">یک تیتر برای تراکنش درنظر بگیرید</string>
     <string name="transaction_title">تیتر تراکنش</string>
+    <string name="transaction_last_price">مبلغ نهایی تراکنش :</string>
     <string name="transaction_insert">ثبت تراکنش</string>
     <string name="transaction_insert_type">نوع تراکنش را انتخاب کنید</string>
     <string name="transaction_insert_description">توضیحاتی درباره تراکنش بنویسید</string>

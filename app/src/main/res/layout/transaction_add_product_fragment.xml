@@ -74,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/STANDARD_16dp"
-            android:layout_marginTop="@dimen/STANDARD_8dp"
+            android:layout_marginTop="@dimen/STANDARD_4dp"
             app:checkedButton="@+id/decrease"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transaction_title_layout"
@@ -121,7 +121,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/STANDARD_16dp"
-            android:layout_marginTop="@dimen/STANDARD_8dp"
             android:layout_marginRight="@dimen/STANDARD_16dp"
             android:hint="@string/transaction_insert_description"
             android:textColor="@color/kalayar_text_color"
@@ -151,15 +150,30 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/transaction_last_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="@dimen/STANDARD_4dp"
+            android:layout_marginLeft="@dimen/STANDARD_32dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transaction_description_layout"
+            android:text="@string/transaction_last_price"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_12sp"/>
+
         <View
             android:id="@+id/view_1"
             android:layout_width="0dp"
             android:layout_height="@dimen/STANDARD_48dp"
-            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_8dp"
             android:background="@color/kalayar_primary_color"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/transaction_description_layout" />
+            app:layout_constraintTop_toBottomOf="@id/transaction_last_price" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/product_recyclerview_title_name"

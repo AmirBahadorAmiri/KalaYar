@@ -20,6 +20,7 @@ import com.amirbahadoramiri.kalayar.domain.models.Transaction
 import com.amirbahadoramiri.kalayar.domain.models.TransactionType
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.text.DecimalFormat
 
 class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
 
@@ -164,6 +165,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                         product.change_value = change_value
                         product.new_value = new_value
                         transactionProductAdapter.addItem(product)
+                        calculateLastPrice()
                         addTransactionViewModel.allProductShownLiveData.value?.remove(product)
                         transactionSearchProductAdapter.getDataList().remove(product)
                         addProductBottomSheet.dismiss()
@@ -230,8 +232,18 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
         requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
 
+    fun calculateLastPrice() {
+        var last_price = 0L
+        transactionProductAdapter.getList().map { it.product_price*it.change_value }.forEach {
+            last_price+=it
+        }
+        val calculated_price = getString(R.string.transaction_last_price) + " ${DecimalFormat("#,###").format(last_price)}"
+        binding.transactionLastPrice.text = calculated_price
+    }
+
     override fun onCheck(checkedId: Int, isChecked: Boolean) {
         transactionProductAdapter.clearList()
+        calculateLastPrice()
         addTransactionViewModel.getAllProduct()
         if (isChecked) {
             if (checkedId == R.id.increase) {
