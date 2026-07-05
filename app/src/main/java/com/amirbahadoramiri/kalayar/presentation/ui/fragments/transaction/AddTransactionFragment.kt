@@ -19,6 +19,7 @@ import com.amirbahadoramiri.kalayar.domain.models.Product
 import com.amirbahadoramiri.kalayar.domain.models.Transaction
 import com.amirbahadoramiri.kalayar.domain.models.TransactionType
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.text.DecimalFormat
 
@@ -239,7 +240,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
         transactionProductAdapter.getList().map { it.product_price*it.change_value }.forEach {
             last_price+=it
         }
-        val calculated_price = getString(R.string.transaction_last_price) + " ${DecimalFormat("#,###").format(last_price)}"
+        val calculated_price = getString(R.string.transaction_last_price) + " ${TextUtils.formatMoney(last_price)}"
         binding.transactionLastPrice.text = calculated_price
     }
 

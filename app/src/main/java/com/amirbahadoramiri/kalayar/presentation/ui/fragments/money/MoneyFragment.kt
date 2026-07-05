@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.amirbahadoramiri.kalayar.databinding.MoneyFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Product
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import java.text.DecimalFormat
 
 class MoneyFragment : BaseFragment() {
@@ -54,7 +55,7 @@ class MoneyFragment : BaseFragment() {
             totalItems += product.product_count
         }
 
-        val mojodi = DecimalFormat("#,###").format(totalValue) + " تومان"
+        val mojodi = TextUtils.formatMoney(totalValue) + " تومان"
         binding.totalValue.text = mojodi
         binding.totalItems.text = totalItems.toString()
         binding.productTypesCount.text = products.size.toString()

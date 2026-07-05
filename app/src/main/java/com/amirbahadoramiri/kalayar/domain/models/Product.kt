@@ -3,14 +3,15 @@ package com.amirbahadoramiri.kalayar.domain.models
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import java.text.DecimalFormat
 
 @Entity(tableName = "product")
 data class Product(
     var product_name: String,   // String (64)
     var product_unit: String,   // String (32)
-    var product_price: Long,    // max: 9,223,372,036,854,775,808
-    var product_count: Long,    // max: 9,223,372,036,854,775,808
+    var product_price: Long,    // max: 9,223,372,036,854,775,808  /* max 12 */
+    var product_count: Long,    // max: 9,223,372,036,854,775,808  /* max 9  */
 
     @PrimaryKey(autoGenerate = true)
     var product_id: Long? = null,
@@ -23,8 +24,8 @@ data class Product(
     fun getProductCount() = product_count.toString()
 
     @Ignore
-    fun formatMoney(): String {
-        return DecimalFormat("#,###").format(product_price)
+    fun formatMoney(): String? {
+        return TextUtils.formatMoney(product_price)
     }
 
     @Ignore
