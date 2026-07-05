@@ -17,7 +17,7 @@
         android:theme="@style/Theme.KalaYar">
 
         <activity
-            android:name=".views.activities.main.MainActivity"
+            android:name=".presentation.ui.activities.main.MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

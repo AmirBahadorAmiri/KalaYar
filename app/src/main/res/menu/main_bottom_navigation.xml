@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Home" android:id="@+id/home" android:icon="@drawable/kalayar_home" />
+    <item android:title="Search" android:id="@+id/search" android:icon="@drawable/kalayar_search" />
+    <item android:title="About" android:id="@+id/about" android:icon="@drawable/kalayar_info" />
+    <item android:title="Settings" android:id="@+id/settings" android:icon="@drawable/kalayar_user" />
+
+</menu>

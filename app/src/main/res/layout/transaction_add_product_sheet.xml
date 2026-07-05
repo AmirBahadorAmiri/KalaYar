@@ -2,6 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="product"
+            type="com.amirbahadoramiri.kalayar.domain.models.Product" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,6 +39,7 @@
             android:background="@drawable/radius_32"
             android:backgroundTint="@color/kalayar_edittext_background_color"
             android:gravity="center"
+            android:text="@{product.product_unit}"
             android:textColor="@color/kalayar_text_color"
             android:textSize="@dimen/STANDARD_16sp"
             app:layout_constraintHorizontal_weight="0.65"
@@ -61,6 +70,7 @@
             android:background="@drawable/radius_32"
             android:backgroundTint="@color/kalayar_edittext_background_color"
             android:gravity="center"
+            android:text="@{product.productCount}"
             android:textColor="@color/kalayar_text_color"
             android:textSize="@dimen/STANDARD_16sp"
             app:layout_constraintHorizontal_weight="0.65"

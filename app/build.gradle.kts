@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("androidx.room")
     id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -50,6 +52,10 @@ kotlin {
     jvmToolchain(21)
 }
 
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
 }
@@ -66,17 +72,23 @@ dependencies {
 
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
-    implementation(libs.room.rxjava3)
-
-    implementation(libs.rxandroid)
-    implementation(libs.rxjava)
 
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation(libs.adapter.rxjava3)
 
     implementation(libs.gson)
 
     implementation(libs.telegramdialog)
+
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+
+    implementation("com.google.dagger:hilt-android:2.59.2")
+    implementation("com.google.dagger:dagger-android-support:2.59.2")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.59.2")
+
+    implementation("com.github.ismaeldivita:chip-navigation-bar:1.4.0")
+
+    implementation("com.aminography:primecalendar:1.7.0")
 
 }

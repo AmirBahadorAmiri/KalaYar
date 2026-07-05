@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_storeRegisterFragment"
+            app:destination="@id/storeRegisterFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.main.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_inventoryFragment"
+            app:destination="@id/inventoryFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_databaseFragment"
+            app:destination="@id/databaseFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_moneyFragment"
+            app:destination="@id/moneyFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_transactionsFragment"
+            app:destination="@id/transactionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTransactionFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.transaction.AddTransactionFragment"
+        android:label="AddTransactionFragment" />
+    <fragment
+        android:id="@+id/databaseFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.database_fragment.DatabaseFragment"
+        android:label="DatabaseFragment" />
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.inventory.InventoryFragment"
+        android:label="InventoryFragment" />
+    <fragment
+        android:id="@+id/moneyFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.money.MoneyFragment"
+        android:label="MoneyFragment" />
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.product.ProductFragment"
+        android:label="ProductFragment" />
+    <fragment
+        android:id="@+id/storeRegisterFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.store_register.StoreRegisterFragment"
+        android:label="StoreRegisterFragment" >
+        <action
+            android:id="@+id/action_storeRegisterFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.transaction.TransactionsFragment"
+        android:label="TransactionsFragment" >
+        <action
+            android:id="@+id/action_transactionsFragment_to_addTransactionFragment"
+            app:destination="@id/addTransactionFragment" />
+    </fragment>
+</navigation>

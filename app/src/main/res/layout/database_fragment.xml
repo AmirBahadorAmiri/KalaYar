@@ -1,10 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="#F44F4F"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/kalayar_page_background_color">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/STANDARD_32dp"
+            android:layout_marginRight="@dimen/STANDARD_32dp"
+            android:text="@string/import_export_database"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_20sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/kalayar_left"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/backup_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/STANDARD_32dp"
+            app:backgroundTint="@color/kalayar_blue_color"
+            android:padding="@dimen/STANDARD_16dp"
+            android:text="تهیه نسخه پشتیبان (Backup)"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            app:icon="@drawable/kalayar_database"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/restore_btn"
+            app:backgroundTint="@color/kalayar_blue_color"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/STANDARD_32dp"
+            android:padding="@dimen/STANDARD_16dp"
+            android:text="بازیابی نسخه پشتیبان (Restore)"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            app:icon="@drawable/kalayar_confirm"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backup_btn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/STANDARD_32dp"
+            android:gravity="center"
+            android:text="توجه: برای حفظ امنیت داده‌ها، حتماً نسخه پشتیبان را در محلی امن ذخیره کنید."
+            android:textColor="@color/kalayar_text_hint_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/restore_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

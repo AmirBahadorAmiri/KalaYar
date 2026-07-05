@@ -1,7 +1,6 @@
 package com.amirbahadoramiri.kalayar.tools.network;
 
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Network {
@@ -14,7 +13,6 @@ public class Network {
         return new Retrofit.Builder()
                 .baseUrl("https://google.com")
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
     }
 

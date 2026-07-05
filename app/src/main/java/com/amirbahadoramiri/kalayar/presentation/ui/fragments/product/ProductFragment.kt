@@ -1,0 +1,194 @@
+package com.amirbahadoramiri.kalayar.presentation.ui.fragments.product
+
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.amirbahadoramiri.kalayar.R
+import com.amirbahadoramiri.kalayar.databinding.ProductFragmentAddBottomSheetBinding
+import com.amirbahadoramiri.kalayar.databinding.ProductFragmentBinding
+import com.amirbahadoramiri.kalayar.domain.models.Product
+import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
+
+
+class ProductFragment : BaseFragment(), ProductEventListener {
+
+    lateinit var binding: ProductFragmentBinding
+    private lateinit var productFragmentViewModel: ProductFragmentViewModel
+    private val productAdapter = ProductAdapter(this)
+    private var ASC = true
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = ProductFragmentBinding.inflate(inflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setup()
+    }
+
+    private fun setup() {
+
+        productFragmentViewModel = ViewModelProvider(this)[ProductFragmentViewModel::class]
+        productFragmentViewModel.getAllProductLiveData.observe(viewLifecycleOwner) {
+            productAdapter.reloadProduct(it)
+        }
+
+        customOnBackPressed()
+
+        binding.productRecyclerview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = productAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    when {
+                        dy > 0 && binding.addProduct.isVisible -> binding.addProduct.hide()
+                        dy < 0 && !binding.addProduct.isVisible -> binding.addProduct.show()
+                    }
+                }
+            })
+        }
+        productFragmentViewModel.getAllProduct()
+
+        binding.productSearch.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val product_name = binding.productSearch.text.toString()
+                if (product_name.isEmpty()) {
+                    productFragmentViewModel.getAllProductLiveData.value?.let {
+                        productAdapter.reloadProduct(it)
+                    }
+                } else {
+                    productFragmentViewModel.getAllProductLiveData.value?.filter {
+                        if ( it.product_name.contains(product_name) ) true else false
+                    }?.let {
+                        productAdapter.reloadProduct(it)
+                    }
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        binding.productRecyclerviewTitleName.setOnClickListener {
+            productFragmentViewModel.getAllProductLiveData.value?.filter {
+                if ( it.product_name.contains(binding.productSearch.text.toString())) true else false
+            }?.let {
+                productAdapter.reloadProduct(if (ASC) it.sortedBy { it.product_name } else it.sortedByDescending { it.product_name })
+            }
+            ASC = !ASC
+        }
+
+        binding.productRecyclerviewTitlePrice.setOnClickListener {
+            productFragmentViewModel.getAllProductLiveData.value?.filter {
+                if ( it.product_name.contains(binding.productSearch.text.toString())) true else false
+            }?.let {
+                productAdapter.reloadProduct(if (ASC) it.sortedBy { it.product_price } else it.sortedByDescending { it.product_price })
+            }
+            ASC = !ASC
+        }
+
+        binding.backBtn.setOnClickListener {
+            popBackStack()
+        }
+
+        binding.addProduct.setOnClickListener {
+            openProduct(null,0)
+        }
+
+    }
+
+    fun openProduct(product: Product?, position: Int) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val sheetBinding = ProductFragmentAddBottomSheetBinding.inflate(bottomSheetDialog.layoutInflater)
+        bottomSheetDialog.setContentView(sheetBinding.root)
+        if ( product != null ) sheetBinding.product = product
+
+        sheetBinding.confirmButton.setOnClickListener {
+            val product_name = sheetBinding.productName.text.toString()
+            val product_unit = sheetBinding.productUnit.text.toString()
+            val product_price = sheetBinding.productPrice.text.toString()
+
+            sheetBinding.productNameLayout.isErrorEnabled = false
+            sheetBinding.productPriceLayout.isErrorEnabled = false
+            sheetBinding.productUnitLayout.isErrorEnabled = false
+
+            if (product_name.isEmpty()) {
+                sheetBinding.productNameLayout.setError(getString(R.string.is_necessary))
+                toast(getString(R.string.fill_necessary_field))
+            } else if (product_price.isEmpty()) {
+                sheetBinding.productPriceLayout.setError(getString(R.string.is_necessary))
+                toast(getString(R.string.fill_necessary_field))
+            } else if (product_unit.isEmpty()) {
+                sheetBinding.productUnitLayout.setError(getString(R.string.is_necessary))
+                toast(getString(R.string.fill_necessary_field))
+            } else {
+                lifecycleScope.launch {
+                    if ( product == null ) {
+                        val data = Product(product_name,product_unit,product_price.toLong())
+                        onAddProduct(data,0)
+                    } else {
+                        product.product_name = product_name
+                        product.product_unit = product_unit
+                        product.product_price = product_price.toLong()
+                        onUpdateProduct(product,position)
+                    }
+                }
+                bottomSheetDialog.dismiss()
+            }
+        }
+        bottomSheetDialog.show()
+    }
+
+    private fun customOnBackPressed() {
+        val backPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
+
+    override fun onShowProduct(product: Product, position: Int) {
+        openProduct(product,position)
+    }
+
+    override fun onRemoveProduct(product: Product, position: Int) {
+        lifecycleScope.launch {
+            delay(500.milliseconds)
+            productAdapter.removeProduct(position)
+            productFragmentViewModel.removeProduct(product)
+        }
+    }
+
+    override fun onUpdateProduct(product: Product, position: Int) {
+        lifecycleScope.launch {
+            delay(500.milliseconds)
+            productAdapter.removeProduct(position)
+            delay(500.milliseconds)
+            productAdapter.addProduct(product,position)
+            productFragmentViewModel.updateProduct(product)
+        }
+    }
+
+    override fun onAddProduct(product: Product, position: Int) {
+        lifecycleScope.launch {
+            delay(500.milliseconds)
+            productAdapter.addProduct(product,position)
+            productFragmentViewModel.addProduct(product)
+        }
+    }
+
+}

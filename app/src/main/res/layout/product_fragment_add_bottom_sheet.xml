@@ -6,7 +6,7 @@
 
         <variable
             name="product"
-            type="com.amirbahadoramiri.kalayar.core.models.Product" />
+            type="com.amirbahadoramiri.kalayar.domain.models.Product" />
 
     </data>
 

@@ -1,12 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="#F4B5B5"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/kalayar_page_background_color">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/STANDARD_32dp"
+            android:layout_marginRight="@dimen/STANDARD_32dp"
+            android:text="@string/inventory"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_20sp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/kalayar_left"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inventory_search_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:hint="@string/product_search_name"
+            android:textColor="@color/kalayar_text_color"
+            android:textColorHint="@color/kalayar_text_hint_color"
+            app:boxBackgroundColor="@color/kalayar_edittext_background_color"
+            app:boxCornerRadiusBottomEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusBottomStart="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopEnd="@dimen/STANDARD_32dp"
+            app:boxCornerRadiusTopStart="@dimen/STANDARD_32dp"
+            app:boxStrokeColor="@color/kalayar_primary_color"
+            app:boxStrokeWidth="0dp"
+            app:hintTextColor="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inventory_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/kalayar_search"
+                android:drawablePadding="@dimen/STANDARD_8dp"
+                android:inputType="text"
+                android:maxLength="64"
+                android:paddingLeft="@dimen/STANDARD_24dp"
+                android:paddingRight="@dimen/STANDARD_24dp"
+                android:textSize="@dimen/STANDARD_16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:id="@+id/header_bg"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/STANDARD_48dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:background="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inventory_search_layout" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical|right"
+            android:paddingRight="@dimen/STANDARD_16dp"
+            android:paddingLeft="@dimen/STANDARD_8dp"
+            android:text="@string/products_name"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/header_bg"
+            app:layout_constraintHorizontal_weight="0.5"
+            app:layout_constraintLeft_toRightOf="@id/header_count"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/header_bg" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header_count"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingLeft="@dimen/STANDARD_8dp"
+            android:paddingRight="@dimen/STANDARD_8dp"
+            android:gravity="right|center_vertical"
+            android:text="@string/product_count"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/header_bg"
+            app:layout_constraintHorizontal_weight="0.25"
+            app:layout_constraintLeft_toRightOf="@id/header_unit"
+            app:layout_constraintRight_toLeftOf="@id/header_name"
+            app:layout_constraintTop_toTopOf="@id/header_bg" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/header_unit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingLeft="@dimen/STANDARD_16dp"
+            android:paddingRight="@dimen/STANDARD_8dp"
+            android:gravity="right|center_vertical"
+            android:text="واحد"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/header_bg"
+            app:layout_constraintHorizontal_weight="0.25"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/header_count"
+            app:layout_constraintTop_toTopOf="@id/header_bg" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/inventory_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_bg" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
