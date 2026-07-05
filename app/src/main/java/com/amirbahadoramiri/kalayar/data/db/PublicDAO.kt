@@ -31,6 +31,8 @@ interface PublicDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun addTransaction(transaction: Transaction): Long?
     @Delete suspend fun deleteTransaction(transaction: Transaction)
     @Update(onConflict = OnConflictStrategy.REPLACE) suspend fun updateTransaction(transaction: Transaction)
+    @Query("SELECT * FROM `transaction` LIMIT :limit_count") suspend fun getAllTransaction(limit_count: Int): List<Transaction>
+
     @Query("SELECT * FROM `transaction`") suspend fun getAllTransaction(): List<Transaction>
     @Query("SELECT * FROM `transaction` WHERE transaction_id=:id") suspend fun getTransaction(id: Long): Transaction?
 

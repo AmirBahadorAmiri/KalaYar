@@ -8,6 +8,7 @@ class TransactionRepository(private val transactionDataSource: TransactionDataSo
     suspend fun deleteTransaction(transaction: Transaction) = transactionDataSource.deleteTransaction(transaction)
     suspend fun updateTransaction(transaction: Transaction) = transactionDataSource.updateTransaction(transaction)
     suspend fun getTransaction(id: Long) = transactionDataSource.getTransaction(id)
+    suspend fun getAllTransactions(limit_count: Int) = transactionDataSource.getAllTransactions(limit_count)
     suspend fun getAllTransactions() = transactionDataSource.getAllTransactions()
 
 }

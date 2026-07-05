@@ -8,6 +8,7 @@ interface TransactionDataSource {
     suspend fun deleteTransaction(transaction: Transaction)
     suspend fun updateTransaction(transaction: Transaction)
     suspend fun getTransaction(id: Long): Transaction?
+    suspend fun getAllTransactions(limit_count: Int): List<Transaction>
     suspend fun getAllTransactions(): List<Transaction>
 
 }

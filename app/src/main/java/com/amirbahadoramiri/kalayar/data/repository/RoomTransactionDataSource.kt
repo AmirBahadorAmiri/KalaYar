@@ -17,5 +17,7 @@ class RoomTransactionDataSource(context: Context) : TransactionDataSource {
 
     override suspend fun getTransaction(id: Long) = publicDao.getTransaction(id)
 
+    override suspend fun getAllTransactions(limit_count: Int) = publicDao.getAllTransaction(limit_count)
+
     override suspend fun getAllTransactions() = publicDao.getAllTransaction()
 }

@@ -14,9 +14,9 @@ class TransactionViewModel(application: Application) : AndroidViewModel(applicat
     val repository = TransactionRepository(RoomTransactionDataSource(application))
     val getAllTransactionLiveData = MutableLiveData<MutableList<Transaction>>()
 
-    fun getAllTransactions() {
+    fun getAllTransactions(limit_count: Int) {
         viewModelScope.launch {
-            repository.getAllTransactions().let {
+            repository.getAllTransactions(limit_count).let {
                 getAllTransactionLiveData.postValue(it.toMutableList().asReversed())
             }
         }

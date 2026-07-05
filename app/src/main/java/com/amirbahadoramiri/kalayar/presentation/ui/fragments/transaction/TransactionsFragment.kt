@@ -17,6 +17,8 @@ import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 
 class TransactionsFragment : BaseFragment() {
 
+    private val TRANSACTION_LIMIT = 100
+
     lateinit var binding: TransactionFragmentBinding
     lateinit var transactionViewModel: TransactionViewModel
     val transactionsAdapter = TransactionsAdapter()
@@ -58,7 +60,7 @@ class TransactionsFragment : BaseFragment() {
                 }
             })
         }
-        transactionViewModel.getAllTransactions()
+        transactionViewModel.getAllTransactions(TRANSACTION_LIMIT)
 
         binding.transactionSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
