@@ -30,8 +30,8 @@ class SplashFragment : BaseFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         setup()
     }
 
@@ -46,7 +46,7 @@ class SplashFragment : BaseFragment() {
         binding.versionName.text = version
 
         lifecycleScope.launch {
-            delay(250.milliseconds)
+            delay(2000.milliseconds)
             val user = PrivateDatabase.getPrivateDatabase(requireContext()).getPrivateDAO().getUser()
             if ( user == null ) {
                 val newUser = User(Devices.getUniqueId(requireContext()), false)
