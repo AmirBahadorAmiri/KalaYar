@@ -1,0 +1,194 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "b5ea521759781b22f6a3460dbbcf5bb0",
+    "entities": [
+      {
+        "tableName": "store",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`store_name` TEXT NOT NULL, `store_address` TEXT NOT NULL, `store_phonenumber` TEXT NOT NULL, `store_website` TEXT NOT NULL, PRIMARY KEY(`store_name`))",
+        "fields": [
+          {
+            "fieldPath": "store_name",
+            "columnName": "store_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "store_address",
+            "columnName": "store_address",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "store_phonenumber",
+            "columnName": "store_phonenumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "store_website",
+            "columnName": "store_website",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "store_name"
+          ]
+        }
+      },
+      {
+        "tableName": "product",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`product_name` TEXT NOT NULL, `product_unit` TEXT NOT NULL, `product_price` INTEGER NOT NULL, `product_count` INTEGER NOT NULL, `product_id` INTEGER PRIMARY KEY AUTOINCREMENT)",
+        "fields": [
+          {
+            "fieldPath": "product_name",
+            "columnName": "product_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "product_unit",
+            "columnName": "product_unit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "product_price",
+            "columnName": "product_price",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "product_count",
+            "columnName": "product_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "product_id",
+            "columnName": "product_id",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "product_id"
+          ]
+        }
+      },
+      {
+        "tableName": "transaction",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`transaction_type` INTEGER NOT NULL, `transaction_title` TEXT NOT NULL, `transaction_create_time` INTEGER NOT NULL, `transaction_description` TEXT NOT NULL, `transaction_id` INTEGER PRIMARY KEY AUTOINCREMENT)",
+        "fields": [
+          {
+            "fieldPath": "transaction_type",
+            "columnName": "transaction_type",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transaction_title",
+            "columnName": "transaction_title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transaction_create_time",
+            "columnName": "transaction_create_time",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transaction_description",
+            "columnName": "transaction_description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transaction_id",
+            "columnName": "transaction_id",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "transaction_id"
+          ]
+        }
+      },
+      {
+        "tableName": "transaction_item",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`product_id` INTEGER, `product_name` TEXT NOT NULL, `product_unit` TEXT NOT NULL, `product_price` INTEGER NOT NULL, `previous_value` INTEGER NOT NULL, `change_amount` INTEGER NOT NULL, `final_value` INTEGER NOT NULL, `item_id` INTEGER PRIMARY KEY AUTOINCREMENT, `transaction_id` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "product_id",
+            "columnName": "product_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "product_name",
+            "columnName": "product_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "product_unit",
+            "columnName": "product_unit",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "product_price",
+            "columnName": "product_price",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "previous_value",
+            "columnName": "previous_value",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "change_amount",
+            "columnName": "change_amount",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "final_value",
+            "columnName": "final_value",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "item_id",
+            "columnName": "item_id",
+            "affinity": "INTEGER"
+          },
+          {
+            "fieldPath": "transaction_id",
+            "columnName": "transaction_id",
+            "affinity": "INTEGER"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "item_id"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b5ea521759781b22f6a3460dbbcf5bb0')"
+    ]
+  }
+}

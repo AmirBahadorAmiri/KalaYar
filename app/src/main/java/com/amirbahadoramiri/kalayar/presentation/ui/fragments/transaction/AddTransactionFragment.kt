@@ -21,7 +21,6 @@ import com.amirbahadoramiri.kalayar.domain.models.TransactionType
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import java.text.DecimalFormat
 
 class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
 
@@ -163,10 +162,10 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                     }
 
                     addProductSheetBinding.confirmButton.setOnClickListener {
-                        val change_value = addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()
-                        val new_value = if ( binding.transactionType.checkedButtonId == R.id.increase ) (product.product_count+addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()) else (product.product_count-addProductSheetBinding.transactionProductChangeCount.text.toString().toLong())
-                        product.change_value = change_value
-                        product.new_value = new_value
+                        val change_amount = addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()
+                        val final_value = if ( binding.transactionType.checkedButtonId == R.id.increase ) (product.product_count+addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()) else (product.product_count-addProductSheetBinding.transactionProductChangeCount.text.toString().toLong())
+                        product.change_amount = change_amount
+                        product.final_value = final_value
                         transactionProductAdapter.addItem(product)
                         calculateLastPrice()
                         addTransactionViewModel.allProductShownLiveData.value?.remove(product)
@@ -237,7 +236,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
 
     fun calculateLastPrice() {
         var last_price = 0L
-        transactionProductAdapter.getList().map { it.product_price*it.change_value }.forEach {
+        transactionProductAdapter.getList().map { it.product_price*it.change_amount }.forEach {
             last_price+=it
         }
         val calculated_price = getString(R.string.transaction_last_price) + " ${TextUtils.formatMoney(last_price)}"

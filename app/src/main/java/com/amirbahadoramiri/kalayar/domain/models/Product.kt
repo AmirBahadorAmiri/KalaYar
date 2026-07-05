@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
-import java.text.DecimalFormat
 
 @Entity(tableName = "product")
 data class Product(
@@ -29,8 +28,9 @@ data class Product(
     }
 
     @Ignore
-    var change_value : Long = 0
+    var change_amount : Long = 0
+
     @Ignore
-    var new_value : Long = 0
+    var final_value : Long = 0
 
 }

@@ -33,9 +33,9 @@ class AddTransactionViewModel(application: Application) : AndroidViewModel(appli
                 val transactionItems = mutableListOf<TransactionItem>()
 
                 for (productItem in list) {
-                    val transactionItem = TransactionItem(productItem.product_id,productItem.product_name,productItem.product_unit,productItem.product_price,productItem.product_count,productItem.change_value,productItem.new_value, transaction_id = transaction.transaction_id)
+                    val transactionItem = TransactionItem(productItem.product_id,productItem.product_name,productItem.product_unit,productItem.product_price,productItem.product_count,productItem.change_amount,productItem.final_value, transaction_id = transaction.transaction_id)
                     transactionItems.add(transactionItem)
-                    productItem.product_count = productItem.new_value
+                    productItem.product_count = productItem.final_value
                 }
                 transactionItemRepository.addItems(transactionItems).let {
                     productRepository.updateProducts(list).let {
