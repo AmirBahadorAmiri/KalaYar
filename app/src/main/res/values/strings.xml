@@ -22,6 +22,7 @@
     <string name="product_add">افزودن محصول</string>
     <string name="product_insert_name">نام محصول را وارد کنید</string>
     <string name="product_insert_price">قیمت محصول را وارد کنید (تومان)</string>
+    <string name="product_insert_count">مقدار محصول را وارد کنید (تعداد / وزن)</string>
     <string name="product_insert_unit">واحد اندازه گیری را وارد کنید</string>
     <string name="price_toman">قیمت (تومان)</string>
     <string name="addProduct">افزودن محصول</string>

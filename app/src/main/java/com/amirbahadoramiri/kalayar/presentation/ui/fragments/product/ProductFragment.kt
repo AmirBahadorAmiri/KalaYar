@@ -120,29 +120,35 @@ class ProductFragment : BaseFragment(), ProductEventListener {
             val product_name = sheetBinding.productName.text.toString()
             val product_unit = sheetBinding.productUnit.text.toString()
             val product_price = sheetBinding.productPrice.text.toString()
+            val product_count = sheetBinding.productCount.text.toString()
 
             sheetBinding.productNameLayout.isErrorEnabled = false
             sheetBinding.productPriceLayout.isErrorEnabled = false
             sheetBinding.productUnitLayout.isErrorEnabled = false
+            sheetBinding.productCountLayout.isErrorEnabled = false
 
             if (product_name.isEmpty()) {
-                sheetBinding.productNameLayout.setError(getString(R.string.is_necessary))
+                sheetBinding.productNameLayout.error = getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
             } else if (product_price.isEmpty()) {
-                sheetBinding.productPriceLayout.setError(getString(R.string.is_necessary))
+                sheetBinding.productPriceLayout.error = getString(R.string.is_necessary)
+                toast(getString(R.string.fill_necessary_field))
+            } else if (product_count.isEmpty()) {
+                sheetBinding.productCountLayout.error = getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
             } else if (product_unit.isEmpty()) {
-                sheetBinding.productUnitLayout.setError(getString(R.string.is_necessary))
+                sheetBinding.productUnitLayout.error = getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
             } else {
                 lifecycleScope.launch {
                     if ( product == null ) {
-                        val data = Product(product_name,product_unit,product_price.toLong())
+                        val data = Product(product_name,product_unit,product_price.toLong(),product_count.toLong())
                         onAddProduct(data,0)
                     } else {
                         product.product_name = product_name
                         product.product_unit = product_unit
                         product.product_price = product_price.toLong()
+                        product.product_count = product_count.toLong()
                         onUpdateProduct(product,position)
                     }
                 }
@@ -179,6 +185,8 @@ class ProductFragment : BaseFragment(), ProductEventListener {
             productAdapter.removeProduct(position)
             delay(500.milliseconds)
             productAdapter.addProduct(product,position)
+            if (position == 0)
+                binding.productRecyclerview.scrollToPosition(0)
             productFragmentViewModel.updateProduct(product)
         }
     }
@@ -187,6 +195,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
         lifecycleScope.launch {
             delay(500.milliseconds)
             productAdapter.addProduct(product,position)
+            binding.productRecyclerview.scrollToPosition(0)
             productFragmentViewModel.addProduct(product)
         }
     }

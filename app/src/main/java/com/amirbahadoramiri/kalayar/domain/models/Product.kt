@@ -10,11 +10,10 @@ data class Product(
     var product_name: String, // String (64)
     var product_unit: String, // String (32)
     var product_price: Long,
+    var product_count: Long,
 
     @PrimaryKey(autoGenerate = true)
     var product_id: Long? = null,
-
-    var product_count: Long = 0
 ) {
 
     @Ignore
