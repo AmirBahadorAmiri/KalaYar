@@ -97,7 +97,7 @@
                 android:drawablePadding="@dimen/STANDARD_8dp"
                 android:inputType="number"
                 android:text="@{product.getProductPrice}"
-                android:maxLength="12"
+                android:maxLength="15"
                 android:paddingLeft="@dimen/STANDARD_24dp"
                 android:paddingRight="@dimen/STANDARD_24dp"
                 android:textSize="@dimen/STANDARD_16sp" />
@@ -133,8 +133,8 @@
                 android:drawableLeft="@drawable/kalayar_count"
                 android:drawablePadding="@dimen/STANDARD_8dp"
                 android:inputType="number"
+                android:maxLength="11"
                 android:text="@{product.getProductCount}"
-                android:maxLength="9"
                 android:paddingLeft="@dimen/STANDARD_24dp"
                 android:paddingRight="@dimen/STANDARD_24dp"
                 android:textSize="@dimen/STANDARD_16sp" />
