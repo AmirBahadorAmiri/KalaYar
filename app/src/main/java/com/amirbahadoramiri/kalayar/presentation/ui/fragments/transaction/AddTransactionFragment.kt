@@ -118,9 +118,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                         override fun afterTextChanged(editable: Editable?) {
                             val text = addProductSheetBinding.transactionProductChangeCount.text.toString()
                             if ( text.isNotEmpty() ) {
-
                                 val value = text.toInt()
-
                                 if ( value < 1 ) {
                                     addProductSheetBinding.transactionProductChangeCount.setText("1")
                                 } else if ( binding.transactionType.checkedButtonId == R.id.decrease ) {

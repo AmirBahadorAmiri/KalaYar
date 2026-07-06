@@ -18,7 +18,6 @@ import com.amirbahadoramiri.kalayar.databinding.ProductFragmentAddBottomSheetBin
 import com.amirbahadoramiri.kalayar.databinding.ProductFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Product
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
-import com.amirbahadoramiri.kalayar.tools.logger.Logger
 import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.delay
@@ -218,7 +217,6 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                 val formatted = TextUtils.formatMoney(text)
                 editText.setText(formatted)
                 editText.setSelection(formatted.length)
-                Logger.debug(formatted)
                 isProgrammaticChange = false
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
