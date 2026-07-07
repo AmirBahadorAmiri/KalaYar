@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/STANDARD_32dp"
-            app:backgroundTint="@color/kalayar_blue_color"
+            app:backgroundTint="@color/kalayar_primary_color"
             android:padding="@dimen/STANDARD_16dp"
             android:text="تهیه نسخه پشتیبان (Backup)"
             android:textColor="@color/kalayar_text_on_primary_color"
@@ -49,7 +49,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/restore_btn"
-            app:backgroundTint="@color/kalayar_blue_color"
+            app:backgroundTint="@color/kalayar_primary_color"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/STANDARD_32dp"

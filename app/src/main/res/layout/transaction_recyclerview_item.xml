@@ -1,75 +1,88 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/STANDARD_48dp"
-    android:background="@color/kalayar_item_background_color"
-    android:foreground="?attr/selectableItemBackground"
-    android:clickable="true"
-    android:focusable="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/transaction_recyclerview_title"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingRight="@dimen/STANDARD_16dp"
-        android:gravity="right|center_vertical"
-        android:textColor="@color/kalayar_text_color"
-        android:textSize="@dimen/STANDARD_12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_weight="0.5"
-        app:layout_constraintLeft_toRightOf="@id/transaction_recyclerview_time"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <View
-        android:background="@color/kalayar_icon_hint_color"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/transaction_recyclerview_time"
-        app:layout_constraintRight_toLeftOf="@id/transaction_recyclerview_title"
-        android:layout_width="0.2dp"
-        android:layout_height="0dp" />
+        <variable
+            name="transaction"
+            type="com.amirbahadoramiri.kalayar.domain.models.Transaction" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/transaction_recyclerview_time"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:paddingLeft="@dimen/STANDARD_16dp"
-        android:paddingRight="@dimen/STANDARD_16dp"
-        android:gravity="center"
-        android:textColor="@color/kalayar_text_color"
-        android:textSize="@dimen/STANDARD_12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_weight="0.5"
-        app:layout_constraintLeft_toRightOf="@id/menu_icon"
-        app:layout_constraintRight_toLeftOf="@id/transaction_recyclerview_title"
-        app:layout_constraintTop_toTopOf="parent" />
+    </data>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/menu_icon"
-        android:layout_width="@dimen/STANDARD_48dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/STANDARD_16dp"
-        android:layout_marginTop="@dimen/STANDARD_8dp"
-        android:layout_marginBottom="@dimen/STANDARD_8dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/STANDARD_48dp"
+        android:background="@color/kalayar_item_background_color"
+        android:foreground="?attr/selectableItemBackground"
         android:clickable="true"
-        android:focusable="true"
-        android:paddingTop="@dimen/STANDARD_8dp"
-        android:paddingBottom="@dimen/STANDARD_8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/kalayar_horizontal_menu" />
+        android:focusable="true">
 
-    <View
-        android:background="@color/kalayar_icon_hint_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_width="0dp"
-        android:layout_height="0.2dp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/transaction_recyclerview_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingRight="@dimen/STANDARD_16dp"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            android:text="@{transaction.transaction_title}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="0.5"
+            app:layout_constraintLeft_toRightOf="@id/transaction_recyclerview_time"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:background="@color/kalayar_icon_hint_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/transaction_recyclerview_time"
+            app:layout_constraintRight_toLeftOf="@id/transaction_recyclerview_title"
+            android:layout_width="0.2dp"
+            android:layout_height="0dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/transaction_recyclerview_time"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingLeft="@dimen/STANDARD_16dp"
+            android:paddingRight="@dimen/STANDARD_16dp"
+            android:gravity="center"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_12sp"
+            android:textStyle="bold"
+            android:text="@{transaction.transactionPersianDate}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_weight="0.5"
+            app:layout_constraintLeft_toRightOf="@id/menu_icon"
+            app:layout_constraintRight_toLeftOf="@id/transaction_recyclerview_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/menu_icon"
+            android:layout_width="@dimen/STANDARD_48dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_8dp"
+            android:layout_marginBottom="@dimen/STANDARD_8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingTop="@dimen/STANDARD_8dp"
+            android:paddingBottom="@dimen/STANDARD_8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/kalayar_horizontal_menu" />
+
+        <View
+            android:background="@color/kalayar_icon_hint_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0.2dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

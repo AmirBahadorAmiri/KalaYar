@@ -4,11 +4,10 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
+import com.amirbahadoramiri.kalayar.databinding.ProductRecyclerviewItemBinding
 import com.amirbahadoramiri.kalayar.domain.models.Product
 import com.github.amirbahadoramiri.telegramdialog.library.TeleDirection
 import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDouble
@@ -17,34 +16,25 @@ import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDoubleListener
 class ProductAdapter(val productEventListener: ProductEventListener) : RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
 
     private var dataList: MutableList<Product> = mutableListOf()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProductHolder(LayoutInflater.from(parent.context).inflate(R.layout.product_recyclerview_item,parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProductHolder(ProductRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     override fun getItemCount() = dataList.size
     override fun onBindViewHolder(holder: ProductHolder, position: Int) { holder.bind() }
 
 
     inner class ProductHolder : RecyclerView.ViewHolder {
-
-        var product_recyclerview_name : AppCompatTextView
-        var product_recyclerview_price : AppCompatTextView
-        var menu_icon : AppCompatImageView
-
-        constructor(itemView: View) : super(itemView) {
-
-            product_recyclerview_name = itemView.findViewById(R.id.product_recyclerview_name)
-            product_recyclerview_price = itemView.findViewById(R.id.product_recyclerview_price)
-            menu_icon = itemView.findViewById(R.id.menu_icon)
-
+        val binding: ProductRecyclerviewItemBinding
+        constructor(binding: ProductRecyclerviewItemBinding) : super(binding.root) {
+            this.binding = binding
         }
 
         fun bind() {
-
-            product_recyclerview_name.setText(dataList.get(absoluteAdapterPosition).product_name)
-            product_recyclerview_price.setText(dataList.get(absoluteAdapterPosition).formatMoney())
-
-            menu_icon.setOnClickListener {
+            binding.product = dataList[absoluteAdapterPosition]
+            binding.menuIcon.setOnClickListener {
                 showPopupMenu(it)
             }
-            itemView.setOnClickListener { productEventListener.onShowProduct(dataList[absoluteAdapterPosition],absoluteAdapterPosition) }
+            itemView.setOnClickListener {
+                productEventListener.onShowProduct(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
+            }
 
         }
 
