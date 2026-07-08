@@ -6,7 +6,7 @@
     <data>
         <variable
             name="page"
-            type="com.amirbahadoramiri.kalayar.presentation.ui.fragments.main.PageModel" />
+            type="com.amirbahadoramiri.kalayar.presentation.ui.fragments.home.PageModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

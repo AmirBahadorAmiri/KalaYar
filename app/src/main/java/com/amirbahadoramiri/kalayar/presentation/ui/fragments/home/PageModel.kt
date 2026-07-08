@@ -1,4 +1,4 @@
-package com.amirbahadoramiri.kalayar.presentation.ui.fragments.main
+package com.amirbahadoramiri.kalayar.presentation.ui.fragments.home
 
 import android.view.View
 
