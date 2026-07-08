@@ -107,12 +107,21 @@ class ProductFragment : BaseFragment(), ProductEventListener {
         }
 
         binding.addProduct.setOnClickListener {
-            openProduct(null,0)
+            onShowProduct(null,0)
         }
 
     }
 
-    fun openProduct(product: Product?, position: Int) {
+    private fun customOnBackPressed() {
+        val backPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+    }
+
+    override fun onShowProduct(product: Product?, position: Int) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         val sheetBinding = ProductFragmentAddBottomSheetBinding.inflate(bottomSheetDialog.layoutInflater)
         bottomSheetDialog.setContentView(sheetBinding.root)
@@ -161,19 +170,6 @@ class ProductFragment : BaseFragment(), ProductEventListener {
             }
         }
         bottomSheetDialog.show()
-    }
-
-    private fun customOnBackPressed() {
-        val backPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                popBackStack()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
-    }
-
-    override fun onShowProduct(product: Product, position: Int) {
-        openProduct(product,position)
     }
 
     override fun onRemoveProduct(product: Product, position: Int) {

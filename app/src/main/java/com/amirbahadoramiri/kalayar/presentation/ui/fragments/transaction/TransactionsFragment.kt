@@ -9,19 +9,25 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.databinding.TransactionFragmentBinding
+import com.amirbahadoramiri.kalayar.domain.models.Transaction
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
-class TransactionsFragment : BaseFragment() {
+class TransactionsFragment : BaseFragment(), TransactionEventListener {
 
     private val TRANSACTION_LIMIT = 100
 
     lateinit var binding: TransactionFragmentBinding
     lateinit var transactionViewModel: TransactionViewModel
-    val transactionsAdapter = TransactionsAdapter()
+    val transactionsAdapter = TransactionsAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -97,5 +103,26 @@ class TransactionsFragment : BaseFragment() {
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
+
+    override fun onShowTransaction(transaction: Transaction, position: Int) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        toast("show")
+        bottomSheetDialog.show()
+    }
+    override fun onRemoveTransaction(transaction: Transaction, position: Int) {
+        lifecycleScope.launch {
+            delay(500.milliseconds)
+            transactionsAdapter.removeTransaction(position)
+            transactionViewModel.removeTransaction(transaction)
+            transactionViewModel.removeTransactionItems(transaction)
+        }
+    }
+    override fun onPrintTransaction(transaction: Transaction, position: Int) {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        toast("print")
+        bottomSheetDialog.show()
+    }
+    override fun onUpdateTransaction(transaction: Transaction, position: Int) {}
+    override fun onAddTransaction(transaction: Transaction, position: Int) {}
 
 }

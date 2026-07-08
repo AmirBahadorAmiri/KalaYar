@@ -8,7 +8,7 @@ class TransactionItemRepository(private val transactionItemDataSource: Transacti
     suspend fun addItems(transactionItems: List<TransactionItem>) = transactionItemDataSource.addItems(transactionItems)
     suspend fun deleteItem(transactionItem: TransactionItem) = transactionItemDataSource.deleteItem(transactionItem)
     suspend fun deleteItems(transactionItems: List<TransactionItem>) = transactionItemDataSource.deleteItems(transactionItems)
-    suspend fun deleteItems(transaction_id: Long) = transactionItemDataSource.deleteItems(transaction_id)
+    suspend fun deleteItems(transaction_id: Long?) = transactionItemDataSource.deleteItems(transaction_id)
     suspend fun updateItem(transactionItem: TransactionItem) = transactionItemDataSource.updateItem(transactionItem)
     suspend fun updateItems(transactionItems: List<TransactionItem>) = transactionItemDataSource.updateItems(transactionItems)
     suspend fun getItem(item_id: Long) = transactionItemDataSource.getItem(item_id)

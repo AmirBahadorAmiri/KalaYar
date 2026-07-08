@@ -17,7 +17,7 @@ class RoomTransactionItemDataSource(context: Context) : TransactionItemDataSourc
 
     override suspend fun deleteItems(transactionItems: List<TransactionItem>) = publicDao.deleteTransactionItems(transactionItems)
 
-    override suspend fun deleteItems(transaction_id: Long) = publicDao.deleteTransactionItems(transaction_id)
+    override suspend fun deleteItems(transaction_id: Long?) = publicDao.deleteTransactionItems(transaction_id)
 
     override suspend fun updateItem(transactionItem: TransactionItem) = publicDao.updateTransactionItem(transactionItem)
 

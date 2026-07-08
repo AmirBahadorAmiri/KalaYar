@@ -8,7 +8,7 @@ interface TransactionItemDataSource {
     suspend fun addItems(transactionItems: List<TransactionItem>)
     suspend fun deleteItem(transactionItem: TransactionItem)
     suspend fun deleteItems(transactionItems: List<TransactionItem>)
-    suspend fun deleteItems(transaction_id: Long)
+    suspend fun deleteItems(transaction_id: Long?)
     suspend fun updateItem(transactionItem: TransactionItem)
     suspend fun updateItems(transactionItems: List<TransactionItem>)
     suspend fun getItem(item_id: Long): TransactionItem?

@@ -40,4 +40,8 @@
     <string name="increase">افزایشی</string>
     <string name="decrease">کاهشی</string>
     <string name="products_count">تعداد (مقدار)</string>
+    <string name="edit">ویرایش</string>
+    <string name="delete">حذف</string>
+    <string name="transaction_show">نمایش تراکنش</string>
+    <string name="print">پرینت</string>
 </resources>

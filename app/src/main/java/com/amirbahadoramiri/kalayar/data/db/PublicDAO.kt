@@ -41,7 +41,7 @@ interface PublicDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun addTransactionItems(transactionItems: List<TransactionItem>)
     @Delete suspend fun deleteTransactionItem(transactionItem: TransactionItem)
     @Delete suspend fun deleteTransactionItems(transactionItems: List<TransactionItem>)
-    @Query("DELETE FROM transaction_item WHERE transaction_id = :transaction_id") suspend fun deleteTransactionItems(transaction_id: Long)
+    @Query("DELETE FROM transaction_item WHERE transaction_id = :transaction_id") suspend fun deleteTransactionItems(transaction_id: Long?)
     @Update(onConflict = OnConflictStrategy.REPLACE) suspend fun updateTransactionItem(transactionItem: TransactionItem)
     @Update(onConflict = OnConflictStrategy.REPLACE) suspend fun updateTransactionItems(transactionItems: List<TransactionItem>)
     @Query("SELECT * FROM transaction_item WHERE item_id = :item_id") suspend fun getTransactionItem(item_id: Long): TransactionItem?

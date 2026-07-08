@@ -20,7 +20,6 @@ class ProductAdapter(val productEventListener: ProductEventListener) : RecyclerV
     override fun getItemCount() = dataList.size
     override fun onBindViewHolder(holder: ProductHolder, position: Int) { holder.bind() }
 
-
     inner class ProductHolder : RecyclerView.ViewHolder {
         val binding: ProductRecyclerviewItemBinding
         constructor(binding: ProductRecyclerviewItemBinding) : super(binding.root) {
@@ -35,12 +34,15 @@ class ProductAdapter(val productEventListener: ProductEventListener) : RecyclerV
             itemView.setOnClickListener {
                 productEventListener.onShowProduct(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
             }
-
+            itemView.setOnLongClickListener {
+                showPopupMenu(it)
+                true
+            }
         }
 
         private fun showPopupMenu(it: View) {
             val popupMenu = PopupMenu(it.context,it)
-            popupMenu.menuInflater.inflate(R.menu.product_fragment_recyclerview_popup_menu,popupMenu.menu)
+            popupMenu.menuInflater.inflate(R.menu.product_recyclerview_popup_menu,popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
 
                 when(it.itemId) {
