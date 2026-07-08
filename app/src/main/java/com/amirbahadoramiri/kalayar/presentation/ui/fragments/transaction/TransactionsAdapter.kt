@@ -37,7 +37,7 @@ class TransactionsAdapter(val transactionEventListener: TransactionEventListener
                 transactionEventListener.onShowTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
             }
             itemView.setOnLongClickListener {
-                showPopupMenu(it)
+                showPopupMenu(binding.transactionRecyclerviewTitle)
                 true
             }
         }

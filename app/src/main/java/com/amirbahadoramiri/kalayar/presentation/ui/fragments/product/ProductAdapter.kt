@@ -35,7 +35,7 @@ class ProductAdapter(val productEventListener: ProductEventListener) : RecyclerV
                 productEventListener.onShowProduct(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
             }
             itemView.setOnLongClickListener {
-                showPopupMenu(it)
+                showPopupMenu(binding.productRecyclerviewName)
                 true
             }
         }
