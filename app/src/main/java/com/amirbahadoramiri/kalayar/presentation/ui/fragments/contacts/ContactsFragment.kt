@@ -9,9 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.AddContactBottomSheetBinding
 import com.amirbahadoramiri.kalayar.databinding.ContactsFragmentBinding
@@ -51,6 +53,14 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
         binding.contactRecyclerview.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = contactAdapter
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    when {
+                        dy > 0 && binding.addContact.isVisible -> binding.addContact.hide()
+                        dy < 0 && !binding.addContact.isVisible -> binding.addContact.show()
+                    }
+                }
+            })
         }
         contactViewModel.getAllContacts()
 
@@ -126,7 +136,6 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
     }
 
     override fun onContactLongClick(contact: Contact, position: Int) {
-        toast(contact.contact_number)
     }
 
     override fun onContactCall(contact: Contact, position: Int) {
