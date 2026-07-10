@@ -154,17 +154,15 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                 sheetBinding.productUnitLayout.error = getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
             } else {
-                lifecycleScope.launch {
-                    if ( product == null ) {
-                        val data = Product(product_name,product_unit,product_price.toLong(),product_count.toLong())
-                        onAddProduct(data,0)
-                    } else {
-                        product.product_name = product_name
-                        product.product_unit = product_unit
-                        product.product_price = product_price.toLong()
-                        product.product_count = product_count.toLong()
-                        onUpdateProduct(product,position)
-                    }
+                if ( product == null ) {
+                    val newProduct = Product(product_name,product_unit,product_price.toLong(),product_count.toLong())
+                    onAddProduct(newProduct,0)
+                } else {
+                    product.product_name = product_name
+                    product.product_unit = product_unit
+                    product.product_price = product_price.toLong()
+                    product.product_count = product_count.toLong()
+                    onUpdateProduct(product,position)
                 }
                 bottomSheetDialog.dismiss()
             }

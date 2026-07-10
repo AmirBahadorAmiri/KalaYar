@@ -12,14 +12,12 @@ import kotlinx.coroutines.launch
 class ProductFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     val repository = ProductRepository(RoomProductDataSource(application))
-    val addProductLiveData = MutableLiveData<Boolean>()
     val getAllProductLiveData = MutableLiveData<MutableList<Product>>()
 
     fun addProduct(product: Product) {
         viewModelScope.launch {
             repository.addProduct(product).let {
                 product.product_id = it
-                addProductLiveData.postValue(true)
             }
         }
     }
