@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.data.db.PrivateDatabase
@@ -55,10 +56,10 @@ class SplashFragment : BaseFragment() {
             val store = PublicDatabase.getPublicDatabase(requireContext()).getPublicDAO().getStore()
             if ( store == null ) {
                 val action = SplashFragmentDirections.actionSplashFragmentToStoreRegisterFragment()
-                findNavController().navigate(action)
+                requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
             } else {
                 val action = SplashFragmentDirections.actionSplashFragmentToMainFragment()
-                findNavController().navigate(action)
+                requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
             }
         }
     }

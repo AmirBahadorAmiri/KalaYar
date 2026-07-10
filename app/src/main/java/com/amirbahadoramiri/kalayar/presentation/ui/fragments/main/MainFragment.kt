@@ -10,6 +10,7 @@ import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.MainFragmentBinding
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
+import androidx.navigation.findNavController
 
 class MainFragment: BaseFragment() {
 
@@ -36,13 +37,13 @@ class MainFragment: BaseFragment() {
             override fun onItemSelected(id: Int) {
                 when(id) {
                     R.id.home->{
-                        Navigation.findNavController(binding.fragmentContainer).navigate(R.id.homeFragment)
+                        binding.fragmentMainFragmentContainer.findNavController().navigate(R.id.homeFragment)
                     }
                     R.id.contacts->{
-                        Navigation.findNavController(binding.fragmentContainer).navigate(R.id.contactsFragment)
+                        binding.fragmentMainFragmentContainer.findNavController().navigate(R.id.contactsFragment)
                     }
                     R.id.profile->{
-                        Navigation.findNavController(binding.fragmentContainer).navigate(R.id.profileFragment)
+                        binding.fragmentMainFragmentContainer.findNavController().navigate(R.id.profileFragment)
                     }
                 }
             }

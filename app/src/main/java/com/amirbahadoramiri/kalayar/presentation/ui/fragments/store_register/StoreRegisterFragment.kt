@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.StoreRegisterFragmentBinding
@@ -33,7 +34,7 @@ class StoreRegisterFragment : BaseFragment() {
         storeViewModel.storeIsSaved.observe(viewLifecycleOwner) {
             if ( it ) {
                 val action = StoreRegisterFragmentDirections.actionStoreRegisterFragmentToMainFragment()
-                findNavController().navigate(action)
+                requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
             }
         }
 

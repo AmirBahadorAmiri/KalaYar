@@ -40,23 +40,23 @@ class HomeFragment : BaseFragment() {
         val dataList = mutableListOf<PageModel>()
         dataList.add(PageModel(getString(R.string.products), R.drawable.kalayar_products) {
             val action = MainFragmentDirections.actionMainFragmentToProductFragment()
-            requireActivity().findNavController(R.id.fragmentContainer).navigate(action)
+            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
         })
         dataList.add(PageModel(getString(R.string.transactions), R.drawable.kalayar_transactions) {
             val action = MainFragmentDirections.actionMainFragmentToTransactionsFragment()
-            requireActivity().findNavController(R.id.fragmentContainer).navigate(action)
+            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
         })
         dataList.add(PageModel(getString(R.string.inventory), R.drawable.kalayar_inventory) {
             val action = MainFragmentDirections.actionMainFragmentToInventoryFragment()
-            requireActivity().findNavController(R.id.fragmentContainer).navigate(action)
+            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
         })
         dataList.add(PageModel(getString(R.string.money), R.drawable.kalayar_money) {
             val action = MainFragmentDirections.actionMainFragmentToMoneyFragment()
-            requireActivity().findNavController(R.id.fragmentContainer).navigate(action)
+            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
         })
         dataList.add(PageModel(getString(R.string.import_export_database), R.drawable.kalayar_database) {
             val action = MainFragmentDirections.actionMainFragmentToDatabaseFragment()
-            requireActivity().findNavController(R.id.fragmentContainer).navigate(action)
+            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
         })
 
         val adapter1 = HomeFragmentPageRecyclerViewAdapter(dataList)

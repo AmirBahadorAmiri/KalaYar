@@ -10,9 +10,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.TransactionFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Transaction
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
@@ -90,7 +92,7 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
 
         binding.addTransaction.setOnClickListener {
             val action = TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
-            findNavController().navigate(action)
+            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
         }
 
     }
