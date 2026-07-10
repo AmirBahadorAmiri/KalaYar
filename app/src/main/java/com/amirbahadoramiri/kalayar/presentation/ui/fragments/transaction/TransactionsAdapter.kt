@@ -37,7 +37,7 @@ class TransactionsAdapter(val transactionEventListener: TransactionEventListener
                 transactionEventListener.onShowTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
             }
             itemView.setOnLongClickListener {
-                showPopupMenu(binding.transactionRecyclerviewTitle)
+                showPopupMenu(it)
                 true
             }
         }
@@ -56,13 +56,12 @@ class TransactionsAdapter(val transactionEventListener: TransactionEventListener
                     R.id.delete -> {
                         val dialog = TeleDialogDouble(view.context)
                             .setDirection(TeleDirection.RTL)
-                            .setTitle("حذف تراکنش")
-                            .setMessage("تمامی موجودی ها ها باقی خواهند ماند\n" +
-                                    "با حذف تراکنش موافقید ؟")
-                            .setButtonOneText("حذف")
+                            .setTitle(view.context.getString(R.string.transaction_delete))
+                            .setMessage(view.context.getString(R.string.transaction_delete_message))
+                            .setButtonOneText(view.context.getString(R.string.delete))
                             .setButtonOneTextColor(R.color.kalayar_red_color)
                             .setButtonOneRippleColor(R.color.kalayar_red_color_tint)
-                            .setButtonTwoText("لغو")
+                            .setButtonTwoText(view.context.getString(R.string.cancel))
                             .setButtonTwoTextColor(R.color.kalayar_blue_color)
                             .setButtonTwoRippleColor(R.color.kalayar_blue_color_tint)
 

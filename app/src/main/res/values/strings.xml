@@ -42,6 +42,7 @@
     <string name="products_count">تعداد (مقدار)</string>
     <string name="edit">ویرایش</string>
     <string name="delete">حذف</string>
+    <string name="cancel">لغو</string>
     <string name="transaction_show">نمایش تراکنش</string>
     <string name="print">پرینت</string>
     <string name="home">خانه</string>
@@ -52,4 +53,10 @@
     <string name="contact_insert">ثبت مشتری</string>
     <string name="contact_insert_name">نام مشتری را وارد کنید</string>
     <string name="contact_insert_number">تلفن مشتری را وارد کنید</string>
+    <string name="transaction_delete">حذف تراکنش</string>
+    <string name="transaction_delete_message">تمامی موجودی ها ها باقی خواهند ماند\nبا حذف تراکنش موافقید ؟</string>
+    <string name="product_delete">حذف محصول</string>
+    <string name="product_delete_message">محصول و موجودی های آن حذف خواهند شد\nتمامی تراکنش ها باقی خواهند ماند، با حذف\nمحصول موافقید ؟</string>
+    <string name="contact_delete">حذف مشتری</string>
+    <string name="contact_delete_message">آیا با حذف مشتری موافقید ؟</string>
 </resources>

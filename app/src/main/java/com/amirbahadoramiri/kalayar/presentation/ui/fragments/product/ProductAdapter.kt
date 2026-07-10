@@ -35,13 +35,13 @@ class ProductAdapter(val productEventListener: ProductEventListener) : RecyclerV
                 productEventListener.onShowProduct(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
             }
             itemView.setOnLongClickListener {
-                showPopupMenu(binding.productRecyclerviewName)
+                showPopupMenu(it)
                 true
             }
         }
 
-        private fun showPopupMenu(it: View) {
-            val popupMenu = PopupMenu(it.context,it)
+        private fun showPopupMenu(view: View) {
+            val popupMenu = PopupMenu(view.context,view)
             popupMenu.menuInflater.inflate(R.menu.product_recyclerview_popup_menu,popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
 
@@ -50,14 +50,12 @@ class ProductAdapter(val productEventListener: ProductEventListener) : RecyclerV
 
                         val dialog = TeleDialogDouble(itemView.context)
                             .setDirection(TeleDirection.RTL)
-                            .setTitle("حذف محصول")
-                            .setMessage("محصول و موجودی های آن حذف خواهند شد\n" +
-                                    "تمامی تراکنش ها باقی خواهند ماند، با حذف\n" +
-                                    "محصول موافقید ؟")
-                            .setButtonOneText("حذف")
+                            .setTitle(view.context.getString(R.string.product_delete))
+                            .setMessage(view.context.getString(R.string.product_delete_message))
+                            .setButtonOneText(view.context.getString(R.string.delete))
                             .setButtonOneTextColor(R.color.kalayar_red_color)
                             .setButtonOneRippleColor(R.color.kalayar_red_color_tint)
-                            .setButtonTwoText("لغو")
+                            .setButtonTwoText(view.context.getString(R.string.cancel))
                             .setButtonTwoTextColor(R.color.kalayar_blue_color)
                             .setButtonTwoRippleColor(R.color.kalayar_blue_color_tint)
 

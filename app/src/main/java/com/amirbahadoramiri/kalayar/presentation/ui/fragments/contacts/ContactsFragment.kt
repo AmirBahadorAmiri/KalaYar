@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,10 @@ import com.amirbahadoramiri.kalayar.databinding.AddContactBottomSheetBinding
 import com.amirbahadoramiri.kalayar.databinding.ContactsFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Contact
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.github.amirbahadoramiri.telegramdialog.library.TeleDirection
+import com.github.amirbahadoramiri.telegramdialog.one.TeleDialogSingle
+import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDouble
+import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDoubleListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -135,9 +140,6 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
         bottomSheetDialog.show()
     }
 
-    override fun onContactLongClick(contact: Contact, position: Int) {
-    }
-
     override fun onContactCall(contact: Contact, position: Int) {
         val intent = Intent(Intent.ACTION_DIAL).apply {
             data = "tel:${contact.contact_number}".toUri()
@@ -153,6 +155,11 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
     }
 
     override fun onContactDelete(contact: Contact, position: Int) {
+        lifecycleScope.launch {
+            delay(500.milliseconds)
+            contactAdapter.removeContact(position)
+            contactViewModel.deleteContact(contact)
+        }
     }
 
     override fun onContactEdit(contact: Contact, position: Int) {
