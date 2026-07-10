@@ -44,4 +44,12 @@
     <string name="delete">حذف</string>
     <string name="transaction_show">نمایش تراکنش</string>
     <string name="print">پرینت</string>
+    <string name="home">خانه</string>
+    <string name="contacts">مشتریان</string>
+    <string name="profile">پروفایل</string>
+    <string name="contact_search_name">نام مشتری را وارد کنید</string>
+    <string name="addContact">افزودن مشتری</string>
+    <string name="contact_insert">ثبت مشتری</string>
+    <string name="contact_insert_name">نام مشتری را وارد کنید</string>
+    <string name="contact_insert_number">تلفن مشتری را وارد کنید</string>
 </resources>

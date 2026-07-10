@@ -5,19 +5,19 @@
     <item
         android:id="@+id/home"
         android:icon="@drawable/kalayar_home"
-        android:title="خانه"
+        android:title="@string/home"
         app:cnb_iconColor="@color/kalayar_primary_color" />
 
     <item
         android:id="@+id/contacts"
         android:icon="@drawable/kalayar_contacts"
-        android:title="مشتریان"
+        android:title="@string/contacts"
         app:cnb_iconColor="@color/kalayar_primary_color" />
 
     <item
         android:id="@+id/profile"
         android:icon="@drawable/kalayar_user"
-        android:title="پروفایل"
+        android:title="@string/profile"
         app:cnb_iconColor="@color/kalayar_primary_color" />
 
 </menu>

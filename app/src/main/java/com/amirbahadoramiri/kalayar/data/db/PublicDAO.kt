@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.amirbahadoramiri.kalayar.domain.models.Contact
 import com.amirbahadoramiri.kalayar.domain.models.Product
 import com.amirbahadoramiri.kalayar.domain.models.Store
 import com.amirbahadoramiri.kalayar.domain.models.Transaction
@@ -32,7 +33,6 @@ interface PublicDAO {
     @Delete suspend fun deleteTransaction(transaction: Transaction)
     @Update(onConflict = OnConflictStrategy.REPLACE) suspend fun updateTransaction(transaction: Transaction)
     @Query("SELECT * FROM `transaction` LIMIT :limit_count") suspend fun getAllTransaction(limit_count: Int): List<Transaction>
-
     @Query("SELECT * FROM `transaction`") suspend fun getAllTransaction(): List<Transaction>
     @Query("SELECT * FROM `transaction` WHERE transaction_id=:id") suspend fun getTransaction(id: Long): Transaction?
 
@@ -47,5 +47,13 @@ interface PublicDAO {
     @Query("SELECT * FROM transaction_item WHERE item_id = :item_id") suspend fun getTransactionItem(item_id: Long): TransactionItem?
     @Query("SELECT * FROM transaction_item WHERE transaction_id = :transaction_id") suspend fun getTransactionItems(transaction_id: Long): List<TransactionItem>
     @Query("SELECT * FROM transaction_item") suspend fun getAllTransactionItems(): List<TransactionItem>
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun addContact(contact: Contact): Long?
+    @Update(onConflict = OnConflictStrategy.REPLACE) suspend fun updateContact(contact: Contact)
+    @Delete suspend fun deleteContact(contact: Contact)
+    @Delete suspend fun deleteContacts(contacts: List<Contact>)
+    @Query("SELECT * FROM contacts WHERE contact_id = :id") suspend fun getContact(id: Long): Contact?
+    @Query("SELECT * FROM contacts") suspend fun getContacts(): List<Contact>
 
 }

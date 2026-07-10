@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="contact"
+            type="com.amirbahadoramiri.kalayar.domain.models.Contact" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginBottom="@dimen/STANDARD_8dp"
+        android:layout_marginLeft="@dimen/STANDARD_16dp"
+        android:layout_marginRight="@dimen/STANDARD_16dp"
+        android:layout_width="match_parent"
+        app:cardBackgroundColor="@color/kalayar_item_background_color"
+        app:cardCornerRadius="@dimen/STANDARD_32dp"
+        android:clickable="true"
+        app:strokeWidth="0dp"
+        app:strokeColor="@android:color/transparent"
+        android:layout_height="60dp" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/contact_call"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="@dimen/STANDARD_4dp"
+                android:layout_marginLeft="@dimen/STANDARD_24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/store_phone_register_icon"
+                app:tint="@color/kalayar_primary_color" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/contact_sms"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="@dimen/STANDARD_4dp"
+                android:layout_marginLeft="@dimen/STANDARD_16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/contact_call"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/kalayar_sms" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/contact_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="@dimen/STANDARD_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/kalayar_user" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contact_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/STANDARD_16dp"
+                android:layout_marginRight="@dimen/STANDARD_16dp"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:maxLines="1"
+                android:text="@{contact.contact_name}"
+                android:textColor="@color/kalayar_text_color"
+                android:textSize="@dimen/STANDARD_16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/contact_sms"
+                app:layout_constraintRight_toLeftOf="@id/contact_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
