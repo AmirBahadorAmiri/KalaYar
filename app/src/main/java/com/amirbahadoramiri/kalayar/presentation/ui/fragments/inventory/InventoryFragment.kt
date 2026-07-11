@@ -8,9 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amirbahadoramiri.kalayar.databinding.InventoryFragmentBinding
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 class InventoryFragment : BaseFragment() {
 
@@ -18,7 +23,9 @@ class InventoryFragment : BaseFragment() {
     lateinit var inventoryFragmentViewModel: InventoryFragmentViewModel
     private val productAdapter = InventoryAdapter()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
         binding = InventoryFragmentBinding.inflate(inflater)
         return binding.root
     }
@@ -49,20 +56,28 @@ class InventoryFragment : BaseFragment() {
         }
 
         binding.inventorySearch.addTextChangedListener(object : TextWatcher {
+            var job: Job = Job()
             override fun afterTextChanged(s: Editable?) {
-                val product_name = s.toString()
-                if (product_name.isEmpty()) {
-                    inventoryFragmentViewModel.getAllProductLiveData.value?.let {
-                        productAdapter.reloadProduct(it)
-                    }
-                } else {
-                    inventoryFragmentViewModel.getAllProductLiveData.value?.filter {
-                        if ( it.product_name.contains(product_name) ) true else false
-                    }?.let {
-                        productAdapter.reloadProduct(it)
+                if (job.isActive) {
+                    job.cancel()
+                }
+                job = lifecycleScope.launch {
+                    delay(500.milliseconds)
+                    val product_name = s.toString()
+                    if (product_name.isEmpty()) {
+                        inventoryFragmentViewModel.getAllProductLiveData.value?.let {
+                            productAdapter.reloadProduct(it)
+                        }
+                    } else {
+                        inventoryFragmentViewModel.getAllProductLiveData.value?.filter {
+                            if (it.product_name.contains(product_name)) true else false
+                        }?.let {
+                            productAdapter.reloadProduct(it)
+                        }
                     }
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })

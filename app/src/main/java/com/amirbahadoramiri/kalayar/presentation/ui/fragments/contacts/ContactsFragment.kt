@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.widget.PopupMenu
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
@@ -20,25 +19,20 @@ import com.amirbahadoramiri.kalayar.databinding.AddContactBottomSheetBinding
 import com.amirbahadoramiri.kalayar.databinding.ContactsFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Contact
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
-import com.github.amirbahadoramiri.telegramdialog.library.TeleDirection
-import com.github.amirbahadoramiri.telegramdialog.one.TeleDialogSingle
-import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDouble
-import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDoubleListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-class ContactsFragment: BaseFragment(), ContactEventListener {
+class ContactsFragment : BaseFragment(), ContactEventListener {
 
     lateinit var binding: ContactsFragmentBinding
     lateinit var contactViewModel: ContactViewModel
     val contactAdapter = ContactAdapter(this)
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = ContactsFragmentBinding.inflate(inflater)
         return binding.root
@@ -70,24 +64,37 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
         contactViewModel.getAllContacts()
 
         binding.addContact.setOnClickListener {
-            onContactClick(null,0)
+            onContactClick(null, 0)
         }
 
         binding.contactSearch.addTextChangedListener(object : TextWatcher {
+
+            var job: Job = Job()
+
             override fun afterTextChanged(s: Editable?) {
-                val searchText = s.toString()
-                if (searchText.isEmpty()) {
-                    contactViewModel.allContactsLiveData.value?.let {
-                        contactAdapter.reloadContacts(it)
-                    }
-                } else {
-                    contactViewModel.allContactsLiveData.value?.filter {
-                        if (it.contact_name.contains(searchText) || it.contact_number.contains(searchText)) true else false
-                    }?.let {
-                        contactAdapter.reloadContacts(it)
+                if (job.isActive) {
+                    job.cancel()
+                }
+                job = lifecycleScope.launch {
+                    delay(500.milliseconds)
+                    val searchText = s.toString()
+                    if (searchText.isEmpty()) {
+                        contactViewModel.allContactsLiveData.value?.let {
+                            contactAdapter.reloadContacts(it)
+                        }
+                    } else {
+                        contactViewModel.allContactsLiveData.value?.filter {
+                            if (it.contact_name.contains(searchText) || it.contact_number.contains(
+                                    searchText
+                                )
+                            ) true else false
+                        }?.let {
+                            contactAdapter.reloadContacts(it)
+                        }
                     }
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
@@ -108,7 +115,7 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
         val addContactBottomSheetBinding = AddContactBottomSheetBinding.inflate(layoutInflater)
         bottomSheetDialog.setContentView(addContactBottomSheetBinding.root)
 
-        if ( contact!= null ) addContactBottomSheetBinding.contact = contact
+        if (contact != null) addContactBottomSheetBinding.contact = contact
 
         addContactBottomSheetBinding.confirmButton.setOnClickListener {
 
@@ -119,19 +126,21 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
             addContactBottomSheetBinding.contactNumberLayout.isErrorEnabled = false
 
             if (contact_name.isEmpty()) {
-                addContactBottomSheetBinding.contactNameLayout.error = getString(R.string.is_necessary)
+                addContactBottomSheetBinding.contactNameLayout.error =
+                    getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
-            } else if ( contact_number.isEmpty()) {
-                addContactBottomSheetBinding.contactNumberLayout.error = getString(R.string.is_necessary)
+            } else if (contact_number.isEmpty()) {
+                addContactBottomSheetBinding.contactNumberLayout.error =
+                    getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
             } else {
-                if ( contact == null ) {
-                    val newContact = Contact(contact_name,contact_number)
-                    onContactAdd(newContact,0)
+                if (contact == null) {
+                    val newContact = Contact(contact_name, contact_number)
+                    onContactAdd(newContact, 0)
                 } else {
                     contact.contact_name = contact_name
                     contact.contact_number = contact_number
-                    onContactEdit(contact,position)
+                    onContactEdit(contact, position)
                 }
                 bottomSheetDialog.dismiss()
             }
@@ -167,9 +176,8 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
             delay(500.milliseconds)
             contactAdapter.removeContact(position)
             delay(500.milliseconds)
-            contactAdapter.addContact(contact,position)
-            if (position == 0)
-                binding.contactRecyclerview.scrollToPosition(0)
+            contactAdapter.addContact(contact, position)
+            if (position == 0) binding.contactRecyclerview.scrollToPosition(0)
             contactViewModel.updateContact(contact)
         }
     }
@@ -177,7 +185,7 @@ class ContactsFragment: BaseFragment(), ContactEventListener {
     override fun onContactAdd(contact: Contact, position: Int) {
         lifecycleScope.launch {
             delay(500.milliseconds)
-            contactAdapter.addContact(contact,position)
+            contactAdapter.addContact(contact, position)
             binding.contactRecyclerview.scrollToPosition(0)
             contactViewModel.addContact(contact)
         }

@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
@@ -19,6 +18,7 @@ import com.amirbahadoramiri.kalayar.databinding.TransactionFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Transaction
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
@@ -71,17 +71,24 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         transactionViewModel.getAllTransactions(TRANSACTION_LIMIT)
 
         binding.transactionSearch.addTextChangedListener(object : TextWatcher {
+            var job: Job = Job()
             override fun afterTextChanged(s: Editable?) {
-                val text = s.toString()
-                if ( text.isEmpty() ) {
-                    transactionViewModel.getAllTransactionLiveData.value?.let {
-                        transactionsAdapter.reloadTransactions(it)
-                    }
-                } else {
-                    transactionViewModel.getAllTransactionLiveData.value?.filter {
-                        if ( it.transaction_title.contains(text) || it.transaction_description.contains(text) ) true else false
-                    }?.let {
-                        transactionsAdapter.reloadTransactions(it)
+                if (job.isActive) {
+                    job.cancel()
+                }
+                job = lifecycleScope.launch {
+                    delay(500.milliseconds)
+                    val text = s.toString()
+                    if (text.isEmpty()) {
+                        transactionViewModel.getAllTransactionLiveData.value?.let {
+                            transactionsAdapter.reloadTransactions(it)
+                        }
+                    } else {
+                        transactionViewModel.getAllTransactionLiveData.value?.filter {
+                            if (it.transaction_title.contains(text) || it.transaction_description.contains(text)) true else false
+                        }?.let {
+                            transactionsAdapter.reloadTransactions(it)
+                        }
                     }
                 }
             }
@@ -91,7 +98,8 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         })
 
         binding.addTransaction.setOnClickListener {
-            val action = TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
+            val action =
+                TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
             requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
         }
 
@@ -111,6 +119,7 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         toast("show")
         bottomSheetDialog.show()
     }
+
     override fun onRemoveTransaction(transaction: Transaction, position: Int) {
         lifecycleScope.launch {
             delay(500.milliseconds)
@@ -119,11 +128,13 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
             transactionViewModel.removeTransactionItems(transaction)
         }
     }
+
     override fun onPrintTransaction(transaction: Transaction, position: Int) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
         toast("print")
         bottomSheetDialog.show()
     }
+
     override fun onUpdateTransaction(transaction: Transaction, position: Int) {}
     override fun onAddTransaction(transaction: Transaction, position: Int) {}
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
@@ -21,6 +22,10 @@ import com.amirbahadoramiri.kalayar.domain.models.TransactionType
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
 
@@ -31,9 +36,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
     val transactionSearchProductAdapter = TransactionSearchProductAdapter()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = TransactionAddProductFragmentBinding.inflate(inflater)
         return binding.root
@@ -56,13 +59,13 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
             transactionSearchProductAdapter.addProducts(it)
         }
         addTransactionViewModel.getAllProductLiveData.observe(viewLifecycleOwner) {
-            if ( binding.transactionType.checkedButtonId == R.id.increase ) {
+            if (binding.transactionType.checkedButtonId == R.id.increase) {
                 addTransactionViewModel.getAllProductLiveData.value?.let {
                     addTransactionViewModel.allProductShownLiveData.postValue(it.toMutableList())
                 }
             } else {
                 addTransactionViewModel.getAllProductLiveData.value?.filter {
-                    if (it.product_count>0) true else false
+                    if (it.product_count > 0) true else false
                 }?.let {
                     addTransactionViewModel.allProductShownLiveData.postValue(it.toMutableList())
                 }
@@ -82,6 +85,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                             binding.addProduct.hide()
                             binding.confirmButton.hide()
                         }
+
                         dy < 0 && !binding.addProduct.isVisible -> {
                             binding.addProduct.show()
                             binding.confirmButton.show()
@@ -92,13 +96,14 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
         }
 
         binding.transactionType.addOnButtonCheckedListener { group, checkedId, isChecked ->
-            onCheck(checkedId,isChecked)
+            onCheck(checkedId, isChecked)
         }
 
         binding.addProduct.setOnClickListener {
 
             val searchProductBottomSheet = BottomSheetDialog(requireContext())
-            val searchProductBinding = TransactionAddProductSearchSheetBinding.inflate(layoutInflater)
+            val searchProductBinding =
+                TransactionAddProductSearchSheetBinding.inflate(layoutInflater)
             searchProductBottomSheet.setContentView(searchProductBinding.root)
             searchProductBinding.productRecyclerview.apply {
                 layoutManager = LinearLayoutManager(requireContext())
@@ -110,38 +115,57 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                     searchProductBottomSheet.dismiss()
 
                     val addProductBottomSheet = BottomSheetDialog(requireContext())
-                    val addProductSheetBinding = TransactionAddProductSheetBinding.inflate(layoutInflater)
+                    val addProductSheetBinding =
+                        TransactionAddProductSheetBinding.inflate(layoutInflater)
                     addProductBottomSheet.setContentView(addProductSheetBinding.root)
                     addProductSheetBinding.product = product
 
                     addProductSheetBinding.transactionProductChangeCount.addTextChangedListener(object : TextWatcher {
                         override fun afterTextChanged(editable: Editable?) {
-                            val text = addProductSheetBinding.transactionProductChangeCount.text.toString()
-                            if ( text.isNotEmpty() ) {
+                            val text =
+                                addProductSheetBinding.transactionProductChangeCount.text.toString()
+                            if (text.isNotEmpty()) {
                                 val value = text.toInt()
-                                if ( value < 1 ) {
-                                    addProductSheetBinding.transactionProductChangeCount.setText("1")
-                                } else if ( binding.transactionType.checkedButtonId == R.id.decrease ) {
-                                    if ( value > product.product_count.toInt() ) {
-                                        addProductSheetBinding.transactionProductChangeCount.setText(product.product_count.toString())
+                                if (value < 1) {
+                                    addProductSheetBinding.transactionProductChangeCount.setText(
+                                        "1"
+                                    )
+                                } else if (binding.transactionType.checkedButtonId == R.id.decrease) {
+                                    if (value > product.product_count.toInt()) {
+                                        addProductSheetBinding.transactionProductChangeCount.setText(
+                                            product.product_count.toString()
+                                        )
                                     }
                                 }
                             }
                         }
-                        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                        override fun beforeTextChanged(
+                            p0: CharSequence?, p1: Int, p2: Int, p3: Int
+                        ) {
+                        }
+
+                        override fun onTextChanged(
+                            p0: CharSequence?, p1: Int, p2: Int, p3: Int
+                        ) {
+                        }
                     })
 
                     addProductSheetBinding.productPlus.setOnClickListener {
-                        val text = addProductSheetBinding.transactionProductChangeCount.text.toString()
-                        if ( text.isNotEmpty() ) {
+                        val text =
+                            addProductSheetBinding.transactionProductChangeCount.text.toString()
+                        if (text.isNotEmpty()) {
                             val value = text.toInt()
-                            val newValue = (value+1).toString()
-                            if ( binding.transactionType.checkedButtonId == R.id.increase ) {
-                                addProductSheetBinding.transactionProductChangeCount.setText(newValue)
-                            } else if ( binding.transactionType.checkedButtonId == R.id.decrease ) {
-                                if ( value < product.product_count.toInt() ) {
-                                    addProductSheetBinding.transactionProductChangeCount.setText(newValue)
+                            val newValue = (value + 1).toString()
+                            if (binding.transactionType.checkedButtonId == R.id.increase) {
+                                addProductSheetBinding.transactionProductChangeCount.setText(
+                                    newValue
+                                )
+                            } else if (binding.transactionType.checkedButtonId == R.id.decrease) {
+                                if (value < product.product_count.toInt()) {
+                                    addProductSheetBinding.transactionProductChangeCount.setText(
+                                        newValue
+                                    )
                                 }
                             }
                         } else {
@@ -150,18 +174,23 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                     }
 
                     addProductSheetBinding.productMinus.setOnClickListener {
-                        val text = addProductSheetBinding.transactionProductChangeCount.text.toString()
-                        if ( text.isNotEmpty() ) {
+                        val text =
+                            addProductSheetBinding.transactionProductChangeCount.text.toString()
+                        if (text.isNotEmpty()) {
                             val value = text.toInt()
-                            if ( value > 1) addProductSheetBinding.transactionProductChangeCount.setText((value-1).toString())
-                        } else{
+                            if (value > 1) addProductSheetBinding.transactionProductChangeCount.setText(
+                                (value - 1).toString()
+                            )
+                        } else {
                             addProductSheetBinding.transactionProductChangeCount.setText("1")
                         }
                     }
 
                     addProductSheetBinding.confirmButton.setOnClickListener {
-                        val change_amount = addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()
-                        val final_value = if ( binding.transactionType.checkedButtonId == R.id.increase ) (product.product_count+addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()) else (product.product_count-addProductSheetBinding.transactionProductChangeCount.text.toString().toLong())
+                        val change_amount =
+                            addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()
+                        val final_value =
+                            if (binding.transactionType.checkedButtonId == R.id.increase) (product.product_count + addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()) else (product.product_count - addProductSheetBinding.transactionProductChangeCount.text.toString().toLong())
                         product.change_amount = change_amount
                         product.final_value = final_value
                         transactionProductAdapter.addItem(product)
@@ -177,22 +206,30 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
             })
 
             searchProductBinding.productSearch.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(p0: Editable?) {
-                    val text = searchProductBinding.productSearch.text.toString()
 
-                    if ( text.isEmpty() ) {
-                        addTransactionViewModel.allProductShownLiveData.value?.let {
-                            transactionSearchProductAdapter.addProducts(it)
-                        }
-                    } else {
-                        addTransactionViewModel.allProductShownLiveData.value?.filter {
-                            if (it.product_name.contains(text)) true else false
-                        }?.let {
-                            transactionSearchProductAdapter.addProducts(it)
+                var job: Job = Job()
+
+                override fun afterTextChanged(p0: Editable?) {
+                    if (job.isActive) {
+                        job.cancel()
+                    }
+                    job = lifecycleScope.launch {
+                        delay(500.milliseconds)
+                        val text = searchProductBinding.productSearch.text.toString()
+                        if (text.isEmpty()) {
+                            addTransactionViewModel.allProductShownLiveData.value?.let {
+                                transactionSearchProductAdapter.addProducts(it)
+                            }
+                        } else {
+                            addTransactionViewModel.allProductShownLiveData.value?.filter {
+                                if (it.product_name.contains(text)) true else false
+                            }?.let {
+                                transactionSearchProductAdapter.addProducts(it)
+                            }
                         }
                     }
-
                 }
+
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             })
@@ -206,14 +243,16 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
             val transactionTitle = binding.transactionTitle.text.toString()
             val transactionDescription = binding.transactionDescription.text.toString()
 
-            if (transactionProductAdapter.getList().isEmpty())
-                toast("هیچ محصولی اضافه نکردید")
+            if (transactionProductAdapter.getList().isEmpty()) toast("هیچ محصولی اضافه نکردید")
             else if (transactionTitle.isEmpty()) {
                 toast("تیتر تراکنش نمیتواند خالی باشد")
             } else {
-                val transaction = Transaction(if (binding.transactionType.checkedButtonId==R.id.increase) TransactionType.INCREASE else TransactionType.DECREASE,transactionTitle,
-                    System.currentTimeMillis(),transactionDescription)
-                addTransactionViewModel.addTransaction(transaction,transactionProductAdapter.getList())
+                val transaction = Transaction(
+                    if (binding.transactionType.checkedButtonId == R.id.increase) TransactionType.INCREASE else TransactionType.DECREASE, transactionTitle, System.currentTimeMillis(), transactionDescription
+                )
+                addTransactionViewModel.addTransaction(
+                    transaction, transactionProductAdapter.getList()
+                )
             }
         }
 
@@ -234,10 +273,11 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
 
     fun calculateLastPrice() {
         var last_price = 0L
-        transactionProductAdapter.getList().map { it.product_price*it.change_amount }.forEach {
-            last_price+=it
+        transactionProductAdapter.getList().map { it.product_price * it.change_amount }.forEach {
+            last_price += it
         }
-        val calculated_price = getString(R.string.transaction_last_price) + " ${TextUtils.formatMoney(last_price)}"
+        val calculated_price =
+            getString(R.string.transaction_last_price) + " ${TextUtils.formatMoney(last_price)}"
         binding.transactionLastPrice.text = calculated_price
     }
 

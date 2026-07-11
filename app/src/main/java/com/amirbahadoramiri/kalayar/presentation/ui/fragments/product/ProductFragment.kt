@@ -20,6 +20,7 @@ import com.amirbahadoramiri.kalayar.domain.models.Product
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
@@ -66,27 +67,35 @@ class ProductFragment : BaseFragment(), ProductEventListener {
         productFragmentViewModel.getAllProduct()
 
         binding.productSearch.addTextChangedListener(object : TextWatcher {
+            var job: Job = Job()
             override fun afterTextChanged(s: Editable?) {
-                val product_name = binding.productSearch.text.toString()
-                if (product_name.isEmpty()) {
-                    productFragmentViewModel.getAllProductLiveData.value?.let {
-                        productAdapter.reloadProduct(it)
-                    }
-                } else {
-                    productFragmentViewModel.getAllProductLiveData.value?.filter {
-                        if ( it.product_name.contains(product_name) ) true else false
-                    }?.let {
-                        productAdapter.reloadProduct(it)
+                if (job.isActive) {
+                    job.cancel()
+                }
+                job = lifecycleScope.launch {
+                    delay(500.milliseconds)
+                    val product_name = binding.productSearch.text.toString()
+                    if (product_name.isEmpty()) {
+                        productFragmentViewModel.getAllProductLiveData.value?.let {
+                            productAdapter.reloadProduct(it)
+                        }
+                    } else {
+                        productFragmentViewModel.getAllProductLiveData.value?.filter {
+                            if (it.product_name.contains(product_name)) true else false
+                        }?.let {
+                            productAdapter.reloadProduct(it)
+                        }
                     }
                 }
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
         binding.productRecyclerviewTitleName.setOnClickListener {
             productFragmentViewModel.getAllProductLiveData.value?.filter {
-                if ( it.product_name.contains(binding.productSearch.text.toString())) true else false
+                if (it.product_name.contains(binding.productSearch.text.toString())) true else false
             }?.let {
                 productAdapter.reloadProduct(if (ASC) it.sortedBy { it.product_name } else it.sortedByDescending { it.product_name })
             }
@@ -95,7 +104,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
 
         binding.productRecyclerviewTitlePrice.setOnClickListener {
             productFragmentViewModel.getAllProductLiveData.value?.filter {
-                if ( it.product_name.contains(binding.productSearch.text.toString())) true else false
+                if (it.product_name.contains(binding.productSearch.text.toString())) true else false
             }?.let {
                 productAdapter.reloadProduct(if (ASC) it.sortedBy { it.product_price } else it.sortedByDescending { it.product_price })
             }
@@ -107,7 +116,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
         }
 
         binding.addProduct.setOnClickListener {
-            onShowProduct(null,0)
+            onShowProduct(null, 0)
         }
 
     }
@@ -123,12 +132,21 @@ class ProductFragment : BaseFragment(), ProductEventListener {
 
     override fun onShowProduct(product: Product?, position: Int) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
-        val sheetBinding = ProductFragmentAddBottomSheetBinding.inflate(bottomSheetDialog.layoutInflater)
+        val sheetBinding =
+            ProductFragmentAddBottomSheetBinding.inflate(bottomSheetDialog.layoutInflater)
         bottomSheetDialog.setContentView(sheetBinding.root)
-        if ( product != null ) sheetBinding.product = product
+        if (product != null) sheetBinding.product = product
 
-        sheetBinding.productCount.addTextChangedListener(textChangeListener(sheetBinding.productCount,9))
-        sheetBinding.productPrice.addTextChangedListener(textChangeListener(sheetBinding.productPrice,12))
+        sheetBinding.productCount.addTextChangedListener(
+            textChangeListener(
+                sheetBinding.productCount, 9
+            )
+        )
+        sheetBinding.productPrice.addTextChangedListener(
+            textChangeListener(
+                sheetBinding.productPrice, 12
+            )
+        )
 
         sheetBinding.confirmButton.setOnClickListener {
             val product_name = sheetBinding.productName.text.toString()
@@ -154,15 +172,17 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                 sheetBinding.productUnitLayout.error = getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
             } else {
-                if ( product == null ) {
-                    val newProduct = Product(product_name,product_unit,product_price.toLong(),product_count.toLong())
-                    onAddProduct(newProduct,0)
+                if (product == null) {
+                    val newProduct = Product(
+                        product_name, product_unit, product_price.toLong(), product_count.toLong()
+                    )
+                    onAddProduct(newProduct, 0)
                 } else {
                     product.product_name = product_name
                     product.product_unit = product_unit
                     product.product_price = product_price.toLong()
                     product.product_count = product_count.toLong()
-                    onUpdateProduct(product,position)
+                    onUpdateProduct(product, position)
                 }
                 bottomSheetDialog.dismiss()
             }
@@ -183,9 +203,8 @@ class ProductFragment : BaseFragment(), ProductEventListener {
             delay(500.milliseconds)
             productAdapter.removeProduct(position)
             delay(500.milliseconds)
-            productAdapter.addProduct(product,position)
-            if (position == 0)
-                binding.productRecyclerview.scrollToPosition(0)
+            productAdapter.addProduct(product, position)
+            if (position == 0) binding.productRecyclerview.scrollToPosition(0)
             productFragmentViewModel.updateProduct(product)
         }
     }
@@ -193,7 +212,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
     override fun onAddProduct(product: Product, position: Int) {
         lifecycleScope.launch {
             delay(500.milliseconds)
-            productAdapter.addProduct(product,position)
+            productAdapter.addProduct(product, position)
             binding.productRecyclerview.scrollToPosition(0)
             productFragmentViewModel.addProduct(product)
         }
@@ -205,14 +224,15 @@ class ProductFragment : BaseFragment(), ProductEventListener {
             var isProgrammaticChange = false
 
             override fun afterTextChanged(s: Editable?) {
-                val text = s.toString().replace(",","")
-                if (text.isEmpty() || text.length>maxLength || isProgrammaticChange ) return
+                val text = s.toString().replace(",", "")
+                if (text.isEmpty() || text.length > maxLength || isProgrammaticChange) return
                 isProgrammaticChange = true
                 val formatted = TextUtils.formatMoney(text)
                 editText.setText(formatted)
                 editText.setSelection(formatted.length)
                 isProgrammaticChange = false
             }
+
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
         }
