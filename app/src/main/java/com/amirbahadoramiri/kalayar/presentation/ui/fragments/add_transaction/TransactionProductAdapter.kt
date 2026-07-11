@@ -1,4 +1,4 @@
-package com.amirbahadoramiri.kalayar.presentation.ui.fragments.transaction
+package com.amirbahadoramiri.kalayar.presentation.ui.fragments.add_transaction
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,8 @@ import com.amirbahadoramiri.kalayar.domain.models.Product
 class TransactionProductAdapter : RecyclerView.Adapter<TransactionProductAdapter.TransactionItemsHolder>() {
 
     private val dataList = mutableListOf<Product>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TransactionItemsHolder(ProductRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TransactionItemsHolder(
+        ProductRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     override fun getItemCount() = dataList.size
     override fun onBindViewHolder(holder: TransactionItemsHolder, position: Int) = holder.bind()
 

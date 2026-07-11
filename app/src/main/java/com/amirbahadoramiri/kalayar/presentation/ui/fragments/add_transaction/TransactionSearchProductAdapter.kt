@@ -1,4 +1,4 @@
-package com.amirbahadoramiri.kalayar.presentation.ui.fragments.transaction
+package com.amirbahadoramiri.kalayar.presentation.ui.fragments.add_transaction
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -16,7 +16,8 @@ class TransactionSearchProductAdapter : RecyclerView.Adapter<TransactionSearchPr
     }
 
     private val dataList = mutableListOf<Product>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProductHolder(TransactionProductRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ProductHolder(
+        TransactionProductRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     override fun onBindViewHolder(holder: ProductHolder, position: Int) = holder.bind()
     override fun getItemCount() = dataList.size
 

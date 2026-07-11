@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTransactionFragment"
-        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.transaction.AddTransactionFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.add_transaction.AddTransactionFragment"
         android:label="AddTransactionFragment" />
     <fragment
         android:id="@+id/databaseFragment"

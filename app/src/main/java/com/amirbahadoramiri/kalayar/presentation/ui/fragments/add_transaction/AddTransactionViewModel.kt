@@ -1,4 +1,4 @@
-package com.amirbahadoramiri.kalayar.presentation.ui.fragments.transaction
+package com.amirbahadoramiri.kalayar.presentation.ui.fragments.add_transaction
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
