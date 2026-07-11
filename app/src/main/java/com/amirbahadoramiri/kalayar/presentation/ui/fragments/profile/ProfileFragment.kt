@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.amirbahadoramiri.kalayar.databinding.ProfileFragmentBinding
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.amirbahadoramiri.kalayar.tools.darkmode.DarkMode
+import com.amirbahadoramiri.kalayar.tools.shared_helper.SharedHelper
 
 class ProfileFragment: BaseFragment() {
 
@@ -33,6 +36,17 @@ class ProfileFragment: BaseFragment() {
             binding.storeWebsite.text = it.store_website
         }
         profileViewModel.getStore()
+
+        binding.themeSwitchButton.isChecked = DarkMode.checkDarkMode(requireContext())
+        binding.themeSwitchButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            run {
+                if (isChecked) {
+                    DarkMode.enableDarkMode(requireContext())
+                } else {
+                    DarkMode.disableDarkMode(requireContext())
+                }
+            }
+        }
 
         customOnBackPressed()
     }

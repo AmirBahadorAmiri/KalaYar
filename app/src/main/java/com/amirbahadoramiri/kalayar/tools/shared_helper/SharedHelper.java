@@ -1,0 +1,70 @@
+package com.amirbahadoramiri.kalayar.tools.shared_helper;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+/*
+ *   Created by: @AmirBahadorAmiri
+ *   Update at: 2026-06-18 09:55:48
+ *   Github: https://github.com/AmirBahadorAmiri
+ */
+
+public class SharedHelper {
+
+    private static SharedHelper sharedHelper;
+
+    private static String SHARED_KEY = "kalayar";
+    private static SharedPreferences sharedPreferences;
+    private static SharedPreferences.Editor sharedPreferencesEditor;
+
+    private SharedHelper(Context context) {
+        sharedPreferences = context.getSharedPreferences(SHARED_KEY, Context.MODE_PRIVATE);
+        sharedPreferencesEditor = sharedPreferences.edit();
+    }
+
+    public static void init(Context context) {
+        if ( sharedHelper == null | sharedPreferences == null | sharedPreferencesEditor == null )
+            sharedHelper = new SharedHelper(context);
+    }
+
+    public static SharedHelper getInstance(Context context) {
+        init(context);
+        return sharedHelper;
+    }
+
+    public String readString(String key) {
+        return sharedPreferences.getString(key, "");
+    }
+
+    public int readInt(String key) {
+        return sharedPreferences.getInt(key, -1);
+    }
+
+    public Boolean readBoolean(String key) {
+        return sharedPreferences.getBoolean(key, false);
+    }
+
+    public Long readLong(String key) {
+        return sharedPreferences.getLong(key, -1);
+    }
+
+    public void insert(String key, String value) {
+        sharedPreferencesEditor.putString(key, value);
+        sharedPreferencesEditor.apply();
+    }
+
+    public void insert(String key, Boolean value) {
+        sharedPreferencesEditor.putBoolean(key, value);
+        sharedPreferencesEditor.apply();
+    }
+
+    public void insert(String key, Long value) {
+        sharedPreferencesEditor.putLong(key, value);
+        sharedPreferencesEditor.apply();
+    }
+
+    public void insert(String key, int value) {
+        sharedPreferencesEditor.putInt(key, value);
+        sharedPreferencesEditor.apply();
+    }
+}
