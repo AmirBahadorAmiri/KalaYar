@@ -16,24 +16,27 @@ import com.github.amirbahadoramiri.telegramdialog.listeners.OnConfirmListener
 class TransactionsAdapter(val transactionEventListener: TransactionEventListener) : RecyclerView.Adapter<TransactionsAdapter.TransactionHolder>() {
 
     private var dataList: MutableList<Transaction> = mutableListOf()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TransactionHolder(TransactionRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        TransactionHolder(TransactionRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
     override fun getItemCount() = dataList.size
     override fun onBindViewHolder(holder: TransactionHolder, position: Int) = holder.bind()
 
 
-    inner class TransactionHolder :
-        RecyclerView.ViewHolder {
+    inner class TransactionHolder : RecyclerView.ViewHolder {
         val binding: TransactionRecyclerviewItemBinding
+
         constructor(binding: TransactionRecyclerviewItemBinding) : super(binding.root) {
             this.binding = binding
         }
+
         fun bind() {
             binding.transaction = dataList[absoluteAdapterPosition]
             binding.menuIcon.setOnClickListener {
                 showPopupMenu(it)
             }
             itemView.setOnClickListener {
-                transactionEventListener.onShowTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
+                transactionEventListener.onShowTransaction(dataList[absoluteAdapterPosition], absoluteAdapterPosition)
             }
             itemView.setOnLongClickListener {
                 showPopupMenu(it)
@@ -42,37 +45,29 @@ class TransactionsAdapter(val transactionEventListener: TransactionEventListener
         }
 
         private fun showPopupMenu(view: View) {
-            val popupMenu = PopupMenu(view.context,view)
-            popupMenu.menuInflater.inflate(R.menu.transaction_recyclerview_popup_menu,popupMenu.menu)
+            val popupMenu = PopupMenu(view.context, view)
+            popupMenu.menuInflater.inflate(R.menu.transaction_recyclerview_popup_menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
-                when(it.itemId) {
+                when (it.itemId) {
                     R.id.transaction_show -> {
-                        transactionEventListener.onShowTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
+                        transactionEventListener.onShowTransaction(dataList[absoluteAdapterPosition], absoluteAdapterPosition)
                     }
+
                     R.id.print -> {
-                        transactionEventListener.onPrintTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
+                        transactionEventListener.onPrintTransaction(dataList[absoluteAdapterPosition], absoluteAdapterPosition)
                     }
+
                     R.id.delete -> {
-                        val dialog = TelegramConfirmDialog(view.context)
-                            .setDirection(DialogDirection.RTL)
-                            .setTitle(view.context.getString(R.string.transaction_delete))
-                            .setMessage(view.context.getString(R.string.transaction_delete_message))
-                            .setCardBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
-                            .setNegativeButtonText(view.context.getString(R.string.delete))
-                            .setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color))
-                            .setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint))
-                            .setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
-                            .setPositiveButtonText(view.context.getString(R.string.cancel))
-                            .setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color))
-                            .setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint))
-                            .setPositiveButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
+                        val dialog =
+                            TelegramConfirmDialog(view.context).setDirection(DialogDirection.RTL).setTitle(view.context.getString(R.string.transaction_delete)).setMessage(view.context.getString(R.string.transaction_delete_message)).setCardBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color)).setNegativeButtonText(view.context.getString(R.string.delete)).setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color)).setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint)).setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color)).setPositiveButtonText(view.context.getString(R.string.cancel)).setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color)).setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint)).setPositiveButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
 
                         dialog.setOnClickListener(object : OnConfirmListener {
                             override fun onPositiveButtonClicked() {
                                 dialog.dismiss()
                             }
+
                             override fun onNegativeButtonClicked() {
-                                transactionEventListener.onRemoveTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
+                                transactionEventListener.onRemoveTransaction(dataList[absoluteAdapterPosition], absoluteAdapterPosition)
                                 dialog.dismiss()
                             }
                         })

@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.data.db.PrivateDatabase
@@ -41,25 +42,29 @@ class SplashFragment : BaseFragment() {
         onBackPressed()
 
         val version = "نگارش " + requireContext().packageManager.getPackageInfo(
-            requireContext().packageName,
-            0
+            requireContext().packageName, 0
         ).versionName
         binding.versionName.text = version
 
-        lifecycleScope.launch {
-            delay(2000.milliseconds)
-            val user = PrivateDatabase.getPrivateDatabase(requireContext()).getPrivateDAO().getUser()
-            if ( user == null ) {
-                val newUser = User(Devices.getUniqueId(requireContext()), false)
-                PrivateDatabase.getPrivateDatabase(requireContext()).getPrivateDAO().addUser(newUser)
-            }
-            val store = PublicDatabase.getPublicDatabase(requireContext()).getPublicDAO().getStore()
-            if ( store == null ) {
-                val action = SplashFragmentDirections.actionSplashFragmentToStoreRegisterFragment()
-                requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
-            } else {
-                val action = SplashFragmentDirections.actionSplashFragmentToMainFragment()
-                requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                delay(2000.milliseconds)
+                val user = PrivateDatabase.getPrivateDatabase(requireContext()).getPrivateDAO().getUser()
+                if (user == null) {
+                    val newUser = User(Devices.getUniqueId(requireContext()), false)
+                    PrivateDatabase.getPrivateDatabase(requireContext()).getPrivateDAO().addUser(newUser)
+                }
+                val store = PublicDatabase.getPublicDatabase(requireContext()).getPublicDAO().getStore()
+                val navController = findNavController()
+                if (navController.currentDestination?.id == R.id.splashFragment) {
+                    if (store == null) {
+                        val action = SplashFragmentDirections.actionSplashFragmentToStoreRegisterFragment()
+                        navController.navigate(action)
+                    } else {
+                        val action = SplashFragmentDirections.actionSplashFragmentToMainFragment()
+                        navController.navigate(action)
+                    }
+                }
             }
         }
     }
@@ -71,8 +76,7 @@ class SplashFragment : BaseFragment() {
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(
-            requireActivity(),
-            backPressedCallback
+            requireActivity(), backPressedCallback
         )
     }
 

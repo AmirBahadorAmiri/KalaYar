@@ -39,25 +39,49 @@ class HomeFragment : BaseFragment() {
     private fun setupAdapter() {
         val dataList = mutableListOf<PageModel>()
         dataList.add(PageModel(getString(R.string.products), R.drawable.kalayar_products) {
-            val action = MainFragmentDirections.actionMainFragmentToProductFragment()
-            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
+            val navController =
+                requireActivity().findNavController(R.id.activityMainFragmentContainer)
+            if (navController.currentDestination?.id == R.id.mainFragment) {
+                val action = MainFragmentDirections.actionMainFragmentToProductFragment()
+                navController.navigate(action)
+            }
         })
         dataList.add(PageModel(getString(R.string.transactions), R.drawable.kalayar_transactions) {
-            val action = MainFragmentDirections.actionMainFragmentToTransactionsFragment()
-            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
+            val navController =
+                requireActivity().findNavController(R.id.activityMainFragmentContainer)
+            if (navController.currentDestination?.id == R.id.mainFragment) {
+                val action = MainFragmentDirections.actionMainFragmentToTransactionsFragment()
+                navController.navigate(action)
+            }
         })
         dataList.add(PageModel(getString(R.string.inventory), R.drawable.kalayar_inventory) {
-            val action = MainFragmentDirections.actionMainFragmentToInventoryFragment()
-            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
+            val navController =
+                requireActivity().findNavController(R.id.activityMainFragmentContainer)
+            if (navController.currentDestination?.id == R.id.mainFragment) {
+                val action = MainFragmentDirections.actionMainFragmentToInventoryFragment()
+                navController.navigate(action)
+            }
         })
         dataList.add(PageModel(getString(R.string.money), R.drawable.kalayar_money) {
-            val action = MainFragmentDirections.actionMainFragmentToMoneyFragment()
-            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
+            val navController =
+                requireActivity().findNavController(R.id.activityMainFragmentContainer)
+            if (navController.currentDestination?.id == R.id.mainFragment) {
+                val action = MainFragmentDirections.actionMainFragmentToMoneyFragment()
+                navController.navigate(action)
+            }
         })
-        dataList.add(PageModel(getString(R.string.import_export_database), R.drawable.kalayar_database) {
-            val action = MainFragmentDirections.actionMainFragmentToDatabaseFragment()
-            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
-        })
+        dataList.add(
+            PageModel(
+                getString(R.string.import_export_database),
+                R.drawable.kalayar_database
+            ) {
+                val navController =
+                    requireActivity().findNavController(R.id.activityMainFragmentContainer)
+                if (navController.currentDestination?.id == R.id.mainFragment) {
+                    val action = MainFragmentDirections.actionMainFragmentToDatabaseFragment()
+                    navController.navigate(action)
+                }
+            })
 
         val adapter1 = HomeFragmentPageRecyclerViewAdapter(dataList)
         binding.recyclerview1.apply {

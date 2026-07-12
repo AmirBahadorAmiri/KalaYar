@@ -33,17 +33,25 @@ class MainFragment: BaseFragment() {
 
     private fun setupBottomNavigation() {
         binding.chipNavigationBar.setItemSelected(R.id.home)
-        binding.chipNavigationBar.setOnItemSelectedListener(object: ChipNavigationBar.OnItemSelectedListener {
+        binding.chipNavigationBar.setOnItemSelectedListener(object :
+            ChipNavigationBar.OnItemSelectedListener {
             override fun onItemSelected(id: Int) {
-                when(id) {
-                    R.id.home->{
-                        binding.fragmentMainFragmentContainer.findNavController().navigate(R.id.homeFragment)
+                val navController = binding.fragmentMainFragmentContainer.findNavController()
+                when (id) {
+                    R.id.home -> {
+                        if (navController.currentDestination?.id != R.id.homeFragment) {
+                            navController.navigate(R.id.homeFragment)
+                        }
                     }
-                    R.id.contacts->{
-                        binding.fragmentMainFragmentContainer.findNavController().navigate(R.id.contactsFragment)
+                    R.id.contacts -> {
+                        if (navController.currentDestination?.id != R.id.contactsFragment) {
+                            navController.navigate(R.id.contactsFragment)
+                        }
                     }
-                    R.id.profile->{
-                        binding.fragmentMainFragmentContainer.findNavController().navigate(R.id.profileFragment)
+                    R.id.profile -> {
+                        if (navController.currentDestination?.id != R.id.profileFragment) {
+                            navController.navigate(R.id.profileFragment)
+                        }
                     }
                 }
             }

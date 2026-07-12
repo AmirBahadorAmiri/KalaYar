@@ -32,9 +32,13 @@ class StoreRegisterFragment : BaseFragment() {
 
         storeViewModel = ViewModelProvider(this).get(StoreViewModel::class)
         storeViewModel.storeIsSaved.observe(viewLifecycleOwner) {
-            if ( it ) {
-                val action = StoreRegisterFragmentDirections.actionStoreRegisterFragmentToMainFragment()
-                requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
+            if (it) {
+                val navController = findNavController()
+                if (navController.currentDestination?.id == R.id.storeRegisterFragment) {
+                    val action =
+                        StoreRegisterFragmentDirections.actionStoreRegisterFragmentToMainFragment()
+                    navController.navigate(action)
+                }
             }
         }
 
