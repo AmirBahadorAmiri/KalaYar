@@ -84,12 +84,14 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
 
-    implementation("com.google.dagger:hilt-android:2.59.2")
-    implementation("com.google.dagger:dagger-android-support:2.59.2")
-    annotationProcessor("com.google.dagger:hilt-compiler:2.59.2")
+    implementation(libs.hilt.android)
+    implementation(libs.dagger.android.support)
+    annotationProcessor(libs.dagger.hilt.compiler)
 
-    implementation("com.github.ismaeldivita:chip-navigation-bar:1.4.0")
+    implementation(libs.chip.navigation.bar)
 
-    implementation("com.aminography:primecalendar:1.7.0")
+    implementation(libs.primecalendar)
+
+    implementation(libs.pinview)
 
 }

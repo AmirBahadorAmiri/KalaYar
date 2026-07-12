@@ -4,15 +4,14 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.TransactionRecyclerviewItemBinding
 import com.amirbahadoramiri.kalayar.domain.models.Transaction
-import com.github.amirbahadoramiri.telegramdialog.library.TeleDirection
-import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDouble
-import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDoubleListener
+import com.github.amirbahadoramiri.telegramdialog.TelegramConfirmDialog
+import com.github.amirbahadoramiri.telegramdialog.direction.DialogDirection
+import com.github.amirbahadoramiri.telegramdialog.listeners.OnConfirmListener
 
 class TransactionsAdapter(val transactionEventListener: TransactionEventListener) : RecyclerView.Adapter<TransactionsAdapter.TransactionHolder>() {
 
@@ -54,23 +53,26 @@ class TransactionsAdapter(val transactionEventListener: TransactionEventListener
                         transactionEventListener.onPrintTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
                     }
                     R.id.delete -> {
-                        val dialog = TeleDialogDouble(view.context)
-                            .setDirection(TeleDirection.RTL)
+                        val dialog = TelegramConfirmDialog(view.context)
+                            .setDirection(DialogDirection.RTL)
                             .setTitle(view.context.getString(R.string.transaction_delete))
                             .setMessage(view.context.getString(R.string.transaction_delete_message))
-                            .setButtonOneText(view.context.getString(R.string.delete))
-                            .setButtonOneTextColor(R.color.kalayar_red_color)
-                            .setButtonOneRippleColor(R.color.kalayar_red_color_tint)
-                            .setButtonTwoText(view.context.getString(R.string.cancel))
-                            .setButtonTwoTextColor(R.color.kalayar_blue_color)
-                            .setButtonTwoRippleColor(R.color.kalayar_blue_color_tint)
+                            .setCardBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
+                            .setNegativeButtonText(view.context.getString(R.string.delete))
+                            .setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color))
+                            .setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint))
+                            .setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
+                            .setPositiveButtonText(view.context.getString(R.string.cancel))
+                            .setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color))
+                            .setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint))
+                            .setPositiveButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
 
-                        dialog.setOnClickListener(object : TeleDialogDoubleListener {
-                            override fun onFirstButtonClicked() {
-                                transactionEventListener.onRemoveTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
+                        dialog.setOnClickListener(object : OnConfirmListener {
+                            override fun onPositiveButtonClicked() {
                                 dialog.dismiss()
                             }
-                            override fun onSecondButtonClicked() {
+                            override fun onNegativeButtonClicked() {
+                                transactionEventListener.onRemoveTransaction(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
                                 dialog.dismiss()
                             }
                         })

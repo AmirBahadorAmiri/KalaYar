@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.ContactItemBinding
 import com.amirbahadoramiri.kalayar.domain.models.Contact
-import com.github.amirbahadoramiri.telegramdialog.library.TeleDirection
-import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDouble
-import com.github.amirbahadoramiri.telegramdialog.two.TeleDialogDoubleListener
-import kotlin.text.get
+import com.github.amirbahadoramiri.telegramdialog.TelegramConfirmDialog
+import com.github.amirbahadoramiri.telegramdialog.direction.DialogDirection
+import com.github.amirbahadoramiri.telegramdialog.listeners.OnConfirmListener
 
 class ContactAdapter(val contactEventListener: ContactEventListener) : RecyclerView.Adapter<ContactAdapter.ContactHolder>() {
 
@@ -42,23 +41,26 @@ class ContactAdapter(val contactEventListener: ContactEventListener) : RecyclerV
                 popupMenu.setOnMenuItemClickListener {
                     when(it.itemId) {
                         R.id.delete -> {
-                            val dialog = TeleDialogDouble(itemView.context)
-                                .setDirection(TeleDirection.RTL)
+                            val dialog = TelegramConfirmDialog(itemView.context)
+                                .setDirection(DialogDirection.RTL)
                                 .setTitle(itemView.context.getString(R.string.contact_delete))
                                 .setMessage(itemView.context.getString(R.string.contact_delete_message))
-                                .setButtonOneText(itemView.context.getString(R.string.delete))
-                                .setButtonOneTextColor(R.color.kalayar_red_color)
-                                .setButtonOneRippleColor(R.color.kalayar_red_color_tint)
-                                .setButtonTwoText(itemView.context.getString(R.string.cancel))
-                                .setButtonTwoTextColor(R.color.kalayar_blue_color)
-                                .setButtonTwoRippleColor(R.color.kalayar_blue_color_tint)
+                                .setCardBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
+                                .setNegativeButtonText(itemView.context.getString(R.string.delete))
+                                .setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color))
+                                .setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint))
+                                .setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
+                                .setPositiveButtonText(itemView.context.getString(R.string.cancel))
+                                .setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color))
+                                .setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint))
+                                .setPositiveButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
 
-                            dialog.setOnClickListener(object : TeleDialogDoubleListener {
-                                override fun onFirstButtonClicked() {
-                                    contactEventListener.onContactDelete(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
+                            dialog.setOnClickListener(object : OnConfirmListener {
+                                override fun onPositiveButtonClicked() {
                                     dialog.dismiss()
                                 }
-                                override fun onSecondButtonClicked() {
+                                override fun onNegativeButtonClicked() {
+                                    contactEventListener.onContactDelete(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
                                     dialog.dismiss()
                                 }
                             })
