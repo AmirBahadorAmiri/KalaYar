@@ -31,7 +31,8 @@
             android:src="@drawable/kalayar_left"
             app:layout_constraintBottom_toBottomOf="@id/title"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/title" />
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:tint="@color/kalayar_icon_color" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inventory_search_layout"
@@ -84,8 +85,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center_vertical|right"
-            android:paddingRight="@dimen/STANDARD_16dp"
             android:paddingLeft="@dimen/STANDARD_8dp"
+            android:paddingRight="@dimen/STANDARD_16dp"
             android:text="@string/products_name"
             android:textColor="@color/kalayar_text_on_primary_color"
             android:textSize="@dimen/STANDARD_12sp"
@@ -100,9 +101,9 @@
             android:id="@+id/header_count"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:gravity="right|center_vertical"
             android:paddingLeft="@dimen/STANDARD_8dp"
             android:paddingRight="@dimen/STANDARD_8dp"
-            android:gravity="right|center_vertical"
             android:text="@string/product_count"
             android:textColor="@color/kalayar_text_on_primary_color"
             android:textSize="@dimen/STANDARD_12sp"
@@ -117,9 +118,9 @@
             android:id="@+id/header_unit"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:gravity="right|center_vertical"
             android:paddingLeft="@dimen/STANDARD_16dp"
             android:paddingRight="@dimen/STANDARD_8dp"
-            android:gravity="right|center_vertical"
             android:text="واحد"
             android:textColor="@color/kalayar_text_on_primary_color"
             android:textSize="@dimen/STANDARD_12sp"

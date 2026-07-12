@@ -31,7 +31,8 @@
             android:src="@drawable/kalayar_left"
             app:layout_constraintBottom_toBottomOf="@id/title"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/title" />
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:tint="@color/kalayar_icon_color" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/totalValueCard"

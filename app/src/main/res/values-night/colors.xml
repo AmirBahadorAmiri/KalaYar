@@ -5,6 +5,7 @@
     <color name="kalayar_text_on_primary_color">@android:color/white</color>
     <color name="kalayar_text_hint_color">#959595</color>
     <color name="kalayar_icon_hint_color">#959595</color>
+    <color name="kalayar_icon_color">#f5f5f5</color>
     <color name="kalayar_icon_on_item_color">#f5f5f5</color>
     <color name="kalayar_icon_on_primary_color">@android:color/white</color>
     <color name="kalayar_edittext_background_color">#363636</color>

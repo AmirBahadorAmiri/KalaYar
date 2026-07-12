@@ -29,6 +29,7 @@
             android:focusable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/back_btn"
+            app:tint="@color/kalayar_icon_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/STANDARD_32dp"

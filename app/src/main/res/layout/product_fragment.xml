@@ -21,17 +21,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:id="@+id/back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/STANDARD_32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             android:src="@drawable/kalayar_left"
             app:layout_constraintBottom_toBottomOf="@id/title"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/title" />
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:tint="@color/kalayar_icon_color" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/product_search_layout"
@@ -80,14 +81,14 @@
             app:layout_constraintTop_toBottomOf="@id/product_search_layout" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground"
-            android:paddingRight="@dimen/STANDARD_16dp"
             android:id="@+id/product_recyclerview_title_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical|right"
+            android:paddingRight="@dimen/STANDARD_16dp"
             android:text="@string/products_name"
             android:textColor="@color/kalayar_text_on_primary_color"
             android:textSize="@dimen/STANDARD_12sp"
@@ -99,15 +100,15 @@
             app:layout_constraintTop_toTopOf="@id/view_1" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackground"
-            android:paddingRight="@dimen/STANDARD_16dp"
             android:id="@+id/product_recyclerview_title_price"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:paddingLeft="@dimen/STANDARD_16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center_vertical|right"
+            android:paddingLeft="@dimen/STANDARD_16dp"
+            android:paddingRight="@dimen/STANDARD_16dp"
             android:text="@string/price_toman"
             android:textColor="@color/kalayar_text_on_primary_color"
             android:textSize="@dimen/STANDARD_12sp"
@@ -129,11 +130,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/product_recyclerview"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_1" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -143,8 +144,8 @@
             android:layout_marginRight="@dimen/STANDARD_32dp"
             android:layout_marginBottom="@dimen/STANDARD_32dp"
             android:text="@string/addProduct"
-            android:textSize="@dimen/STANDARD_16sp"
             android:textColor="@color/kalayar_text_on_primary_color"
+            android:textSize="@dimen/STANDARD_16sp"
             app:backgroundTint="@color/kalayar_primary_color"
             app:icon="@drawable/kalayar_add_icon"
             app:iconTint="@color/kalayar_icon_on_primary_color"

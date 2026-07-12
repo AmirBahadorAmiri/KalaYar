@@ -31,17 +31,18 @@
             android:src="@drawable/kalayar_left"
             app:layout_constraintBottom_toBottomOf="@id/title"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="@id/title" />
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:tint="@color/kalayar_icon_color" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/backup_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/STANDARD_32dp"
-            app:backgroundTint="@color/kalayar_primary_color"
             android:padding="@dimen/STANDARD_16dp"
             android:text="تهیه نسخه پشتیبان (Backup)"
             android:textColor="@color/kalayar_text_on_primary_color"
+            app:backgroundTint="@color/kalayar_primary_color"
             app:icon="@drawable/kalayar_database"
             app:iconTint="@color/kalayar_icon_on_primary_color"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -50,13 +51,13 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/restore_btn"
-            app:backgroundTint="@color/kalayar_primary_color"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/STANDARD_32dp"
             android:padding="@dimen/STANDARD_16dp"
             android:text="بازیابی نسخه پشتیبان (Restore)"
             android:textColor="@color/kalayar_text_on_primary_color"
+            app:backgroundTint="@color/kalayar_primary_color"
             app:icon="@drawable/kalayar_confirm"
             app:iconTint="@color/kalayar_icon_on_primary_color"
             app:layout_constraintLeft_toLeftOf="parent"
