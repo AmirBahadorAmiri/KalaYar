@@ -180,8 +180,8 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                 } else {
                     product.product_name = product_name
                     product.product_unit = product_unit
-                    product.product_price = product_price.toLong()
-                    product.product_count = product_count.toLong()
+                    product.product_price = product_price.replace(",","").toLong()
+                    product.product_count = product_count.replace(",","").toLong()
                     onUpdateProduct(product, position)
                 }
                 bottomSheetDialog.dismiss()
