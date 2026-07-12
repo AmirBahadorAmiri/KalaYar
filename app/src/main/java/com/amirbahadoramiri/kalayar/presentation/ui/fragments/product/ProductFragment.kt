@@ -180,8 +180,8 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                 } else {
                     product.product_name = product_name
                     product.product_unit = product_unit
-                    product.product_price = product_price.replace(",","").toLong()
-                    product.product_count = product_count.replace(",","").toLong()
+                    product.product_price = product_price.replace(",", "").toLong()
+                    product.product_count = product_count.replace(",", "").toLong()
                     onUpdateProduct(product, position)
                 }
                 bottomSheetDialog.dismiss()
@@ -227,7 +227,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                 val text = s.toString().replace(",", "")
                 if (text.isEmpty() || text.length > maxLength || isProgrammaticChange) return
                 isProgrammaticChange = true
-                val formatted = TextUtils.formatMoney(text)
+                val formatted = TextUtils.numberFormat(text)
                 editText.setText(formatted)
                 editText.setSelection(formatted.length)
                 isProgrammaticChange = false

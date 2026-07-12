@@ -277,7 +277,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
             last_price += it
         }
         val calculated_price =
-            getString(R.string.transaction_last_price) + " ${TextUtils.formatMoney(last_price)}"
+            getString(R.string.transaction_last_price) + " ${TextUtils.numberFormat(last_price)}"
         binding.transactionLastPrice.text = calculated_price
     }
 

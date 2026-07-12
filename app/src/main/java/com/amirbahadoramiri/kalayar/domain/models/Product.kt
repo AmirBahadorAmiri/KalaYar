@@ -23,8 +23,8 @@ data class Product(
     fun getProductCount() = product_count.toString()
 
     @Ignore
-    fun formatMoney(): String? {
-        return TextUtils.formatMoney(product_price)
+    fun formatMoney(): String {
+        return TextUtils.numberFormat(product_price)
     }
 
     @Ignore
