@@ -1,9 +1,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="false">
         <shape android:shape="oval">
-            <solid android:color="@color/kalayar_white" />
+            <solid android:color="@android:color/white" />
             <size android:width="@dimen/STANDARD_24dp" android:height="@dimen/STANDARD_24dp" />
-            <stroke android:width="3dp" android:color="@color/kalayar_white" />
+            <stroke android:width="3dp" android:color="@android:color/white" />
         </shape>
     </item>
 </selector>

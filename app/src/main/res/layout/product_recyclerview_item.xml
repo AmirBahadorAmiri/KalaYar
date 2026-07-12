@@ -68,6 +68,7 @@
             android:clickable="true"
             android:focusable="true"
             android:paddingTop="@dimen/STANDARD_8dp"
+            app:tint="@color/kalayar_icon_on_item_color"
             android:paddingBottom="@dimen/STANDARD_8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

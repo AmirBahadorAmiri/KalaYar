@@ -105,8 +105,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/product_minus"
-                android:layout_width="@dimen/STANDARD_32dp"
-                android:layout_height="@dimen/STANDARD_32dp"
+                android:layout_width="@dimen/STANDARD_40dp"
+                android:layout_height="@dimen/STANDARD_40dp"
                 android:layout_margin="@dimen/STANDARD_8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
@@ -115,8 +115,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/product_plus"
-                android:layout_width="@dimen/STANDARD_32dp"
-                android:layout_height="@dimen/STANDARD_32dp"
+                android:layout_width="@dimen/STANDARD_40dp"
+                android:layout_height="@dimen/STANDARD_40dp"
                 android:layout_margin="@dimen/STANDARD_8dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"

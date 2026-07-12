@@ -16,7 +16,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/maincard"
             app:cardCornerRadius="@dimen/STANDARD_8dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/kalayar_page_background_color"
             app:cardElevation="0dp"
             app:strokeWidth="0dp"
             android:padding="@dimen/STANDARD_8dp"
@@ -59,6 +59,7 @@
                             android:id="@+id/imageView"
                             app:imageRes="@{page.drawable}"
                             tools:src="@drawable/kalayar_products"
+                            app:tint="@color/kalayar_primary_color"
                             android:layout_width="@dimen/STANDARD_36dp"
                             android:layout_height="@dimen/STANDARD_36dp" />
 

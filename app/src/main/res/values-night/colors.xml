@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  STYLE COLORS  -->
+    <color name="kalayar_text_color">#f5f5f5</color>
+    <color name="kalayar_text_on_primary_color">@android:color/white</color>
+    <color name="kalayar_text_hint_color">#959595</color>
+    <color name="kalayar_icon_hint_color">#959595</color>
+    <color name="kalayar_icon_on_item_color">#f5f5f5</color>
+    <color name="kalayar_icon_on_primary_color">@android:color/white</color>
+    <color name="kalayar_edittext_background_color">#363636</color>
+    <color name="kalayar_item_background_color">#363636</color>
+    <color name="kalayar_page_background_color">#272727</color>
+    <color name="kalayar_primary_color">#DD481E</color>
+    <color name="kalayar_confirm_color">#06d6a0</color>
+    <color name="kalayar_button_group_stroke_color">#363636</color>
+    <color name="kalayar_track_selector_disable_color">#959595</color>
+    <color name="kalayar_item_ripple_color">#959595</color>
+    <color name="kalayar_dialog_blue_color">#007FFF</color>
+    <color name="kalayar_dialog_blue_color_tint">#590052A4</color>
+    <color name="kalayar_dialog_red_color">#F64848</color>
+    <color name="kalayar_dialog_red_color_tint">#59B43535</color>
+</resources>
