@@ -38,7 +38,6 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setup()
@@ -68,24 +67,34 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
                 }
             })
         }
-        transactionViewModel.getAllTransactions(TRANSACTION_LIMIT)
+
+        if (transactionViewModel.getAllTransactionLiveData.value == null) {
+            transactionViewModel.getAllTransactions(TRANSACTION_LIMIT)
+        }
 
         binding.transactionSearch.addTextChangedListener(object : TextWatcher {
             var job: Job = Job()
+            private var lastText = ""
+
             override fun afterTextChanged(s: Editable?) {
+                val text = s.toString()
+                if (text == lastText) return
+                lastText = text
+
                 if (job.isActive) {
                     job.cancel()
                 }
                 job = lifecycleScope.launch {
                     delay(500.milliseconds)
-                    val text = s.toString()
                     if (text.isEmpty()) {
                         transactionViewModel.getAllTransactionLiveData.value?.let {
                             transactionsAdapter.reloadTransactions(it)
                         }
                     } else {
                         transactionViewModel.getAllTransactionLiveData.value?.filter {
-                            if (it.transaction_title.contains(text) || it.transaction_description.contains(text)) true else false
+                            it.transaction_title.contains(text) || it.transaction_description.contains(
+                                text
+                            )
                         }?.let {
                             transactionsAdapter.reloadTransactions(it)
                         }
@@ -98,9 +107,13 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         })
 
         binding.addTransaction.setOnClickListener {
-            val action =
-                TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
-            requireActivity().findNavController(R.id.activityMainFragmentContainer).navigate(action)
+            val navController =
+                requireActivity().findNavController(R.id.activityMainFragmentContainer)
+            if (navController.currentDestination?.id == R.id.transactionsFragment) {
+                val action =
+                    TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
+                navController.navigate(action)
+            }
         }
 
     }
