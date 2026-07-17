@@ -16,7 +16,7 @@ pinview = "1.0.3"
 primecalendar = "1.7.0"
 retrofit = "3.0.0"
 roomRuntime = "2.8.4"
-telegramdialog = "2.0.0"
+telegramdialog = "2.2.0"
 navigationFragmentKtx = "2.9.8"
 navigationUiKtx = "2.9.8"
 
