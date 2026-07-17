@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import com.amirbahadoramiri.kalayar.R
-import com.amirbahadoramiri.kalayar.databinding.DatabaseFragmentBinding
 import com.amirbahadoramiri.kalayar.data.db.PublicDatabase
+import com.amirbahadoramiri.kalayar.databinding.DatabaseFragmentBinding
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import java.io.File
 import java.io.FileInputStream
@@ -59,7 +59,9 @@ class DatabaseFragment : BaseFragment() {
 
     private fun backupDatabase(uri: Uri) {
         try {
-            PublicDatabase.getPublicDatabase(requireContext()).openHelper.writableDatabase.query("PRAGMA wal_checkpoint(FULL)")
+            val db = PublicDatabase.getPublicDatabase(requireContext())
+            db.openHelper.writableDatabase.query("PRAGMA wal_checkpoint(FULL)").use { it.moveToFirst() }
+            PublicDatabase.closeDatabase()
 
             val dbFile = requireContext().getDatabasePath("public.db")
             if (!dbFile.exists()) {

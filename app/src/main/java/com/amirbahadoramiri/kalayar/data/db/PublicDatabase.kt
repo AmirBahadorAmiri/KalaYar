@@ -30,7 +30,6 @@ abstract class PublicDatabase : RoomDatabase() {
                 publicDatabase =
                     Room.databaseBuilder(context.applicationContext, PublicDatabase::class.java, "public.db")
                         .allowMainThreadQueries()
-//                        .setJournalMode(JournalMode.AUTOMATIC)
                         .fallbackToDestructiveMigration(false)
                         .addMigrations(*MIGRATIONS)
                         .build()
