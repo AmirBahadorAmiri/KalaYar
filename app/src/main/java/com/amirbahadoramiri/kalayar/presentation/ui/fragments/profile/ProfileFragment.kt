@@ -11,10 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.ProfileFragmentBinding
 import com.amirbahadoramiri.kalayar.databinding.ProfileStoreBottomSheetBinding
-import com.amirbahadoramiri.kalayar.databinding.StoreRegisterFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Store
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
 import com.amirbahadoramiri.kalayar.tools.darkmode.DarkMode
+import com.amirbahadoramiri.kalayar.tools.packager.Packager
 import com.github.amirbahadoramiri.telegramdialog.TelegramConfirmDialog
 import com.github.amirbahadoramiri.telegramdialog.TelegramInputConfirmDialog
 import com.github.amirbahadoramiri.telegramdialog.direction.DialogDirection
@@ -54,6 +54,22 @@ class ProfileFragment : BaseFragment() {
         profileViewModel.getStore()
         profileViewModel.checkPassword()
 
+        binding.storeView.setOnClickListener {
+            val storeViewSheet = BottomSheetDialog(requireContext())
+            val storeViewSheetBinding = ProfileStoreBottomSheetBinding.inflate(layoutInflater)
+            storeViewSheet.setContentView(storeViewSheetBinding.root)
+
+            storeViewSheetBinding.store = store
+            storeViewSheetBinding.confirmButton.setOnClickListener {
+                store.store_name = storeViewSheetBinding.storeName.text.toString()
+                store.store_address = storeViewSheetBinding.storeAddress.text.toString()
+                store.store_website = storeViewSheetBinding.storeWebsite.text.toString()
+                store.store_phonenumber = storeViewSheetBinding.storePhone.text.toString()
+                profileViewModel.updateStore(store)
+                storeViewSheet.dismiss()
+            }
+            storeViewSheet.show()
+        }
 
         binding.themeSwitchButton.isChecked = DarkMode.checkDarkMode(requireContext())
         binding.themeSwitchButton.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -62,6 +78,9 @@ class ProfileFragment : BaseFragment() {
             } else {
                 DarkMode.disableDarkMode(requireContext())
             }
+        }
+        binding.themeButton.setOnClickListener {
+            binding.themeSwitchButton.isChecked = !binding.themeSwitchButton.isChecked
         }
 
         binding.passwordSwitchButton.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
@@ -146,23 +165,12 @@ class ProfileFragment : BaseFragment() {
                 }
             }
         })
+        binding.passwordButton.setOnClickListener {
+            binding.passwordSwitchButton.isChecked = !binding.passwordSwitchButton.isChecked
+        }
 
-
-        binding.storeView.setOnClickListener {
-            val storeViewSheet = BottomSheetDialog(requireContext())
-            val storeViewSheetBinding = ProfileStoreBottomSheetBinding.inflate(layoutInflater)
-            storeViewSheet.setContentView(storeViewSheetBinding.root)
-
-            storeViewSheetBinding.store = store
-            storeViewSheetBinding.confirmButton.setOnClickListener {
-                store.store_name = storeViewSheetBinding.storeName.text.toString()
-                store.store_address = storeViewSheetBinding.storeAddress.text.toString()
-                store.store_website = storeViewSheetBinding.storeWebsite.text.toString()
-                store.store_phonenumber = storeViewSheetBinding.storePhone.text.toString()
-                profileViewModel.updateStore(store)
-                storeViewSheet.dismiss()
-            }
-            storeViewSheet.show()
+        binding.rateButton.setOnClickListener {
+            Packager.openInMarket(requireContext())
         }
 
         customOnBackPressed()

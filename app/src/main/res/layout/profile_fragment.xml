@@ -213,22 +213,5 @@
             app:layout_constraintTop_toBottomOf="@id/theme_button"
             app:rippleColor="@color/kalayar_item_ripple_color" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/about_button"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/STANDARD_60dp"
-            android:layout_marginLeft="@dimen/STANDARD_16dp"
-            android:layout_marginRight="@dimen/STANDARD_16dp"
-            android:gravity="right|center_vertical"
-            android:text="@string/about_us"
-            android:textColor="@color/kalayar_text_color"
-            android:textSize="@dimen/STANDARD_16sp"
-            app:backgroundTint="@color/kalayar_item_background_color"
-            app:cornerRadius="@dimen/STANDARD_32dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rate_button"
-            app:rippleColor="@color/kalayar_item_ripple_color" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
