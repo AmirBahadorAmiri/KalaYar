@@ -1,5 +1,6 @@
 package com.amirbahadoramiri.kalayar.presentation.ui.fragments.database_fragment
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -58,7 +59,6 @@ class DatabaseFragment : BaseFragment() {
 
     private fun backupDatabase(uri: Uri) {
         try {
-            // First, trigger a checkpoint to merge WAL into the main DB file
             PublicDatabase.getPublicDatabase(requireContext()).openHelper.writableDatabase.query("PRAGMA wal_checkpoint(FULL)")
 
             val dbFile = requireContext().getDatabasePath("public.db")
@@ -80,7 +80,6 @@ class DatabaseFragment : BaseFragment() {
 
     private fun restoreDatabase(uri: Uri) {
         try {
-            // Close database before restoring
             PublicDatabase.closeDatabase()
 
             val dbFile = requireContext().getDatabasePath("public.db")
@@ -90,14 +89,24 @@ class DatabaseFragment : BaseFragment() {
                     input.copyTo(output)
                 }
             }
-            
-            // Also handle SHM and WAL files if they exist - they should be deleted for a clean restore
+
             val shmFile = File(dbFile.path + "-shm")
             val walFile = File(dbFile.path + "-wal")
             if (shmFile.exists()) shmFile.delete()
             if (walFile.exists()) walFile.delete()
 
-            toast(getString(R.string.database_restored_successfully_restart_required))
+            val intent = requireContext().packageManager
+                .getLaunchIntentForPackage(requireContext().packageName)
+                ?.apply {
+                    addFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK or
+                                Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    )
+                }
+            intent?.let {
+                startActivity(it)
+                requireActivity().finishAffinity()
+            }
             
         } catch (e: Exception) {
             toast("خطا در بازیابی دیتابیس: ${e.message}")

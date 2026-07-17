@@ -79,7 +79,6 @@
     <string name="transaction_title_cannot_be_empty">تیتر تراکنش نمیتواند خالی باشد</string>
     <string name="database_not_initialized">دیتابیس هنوز ایجاد نشده است</string>
     <string name="backup_saved_successfully">نسخه پشتیبان با موفقیت ذخیره شد</string>
-    <string name="database_restored_successfully_restart_required">دیتابیس با موفقیت بازیابی شد. لطفا جهت اعمال تغییرات برنامه را مجددا باز کنید.</string>
     <string name="toman">" تومان"</string>
     <string name="warning">هشدار</string>
     <string name="password_warning_data_loss">در صورت فراموشی رمز عبور تمام اطلاعات پاک خواهند شد آیا با گذاشتن رمز عبور موافقید ؟</string>
