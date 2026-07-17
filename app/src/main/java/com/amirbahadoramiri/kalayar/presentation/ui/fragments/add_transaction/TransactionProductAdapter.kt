@@ -9,8 +9,7 @@ import com.amirbahadoramiri.kalayar.domain.models.Product
 class TransactionProductAdapter : RecyclerView.Adapter<TransactionProductAdapter.TransactionItemsHolder>() {
 
     private val dataList = mutableListOf<Product>()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TransactionItemsHolder(
-        ProductRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = TransactionItemsHolder(ProductRecyclerviewItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     override fun getItemCount() = dataList.size
     override fun onBindViewHolder(holder: TransactionItemsHolder, position: Int) = holder.bind()
 
@@ -37,6 +36,16 @@ class TransactionProductAdapter : RecyclerView.Adapter<TransactionProductAdapter
     fun removeItem(position: Int) {
         dataList.removeAt(position)
         notifyItemRemoved(position)
+    }
+    fun removeItems(list: List<Product>) {
+        dataList.removeAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun reloadItems(list: List<Product>) {
+        dataList.clear()
+        dataList.addAll(list)
+        notifyDataSetChanged()
     }
 
     fun clearList() {

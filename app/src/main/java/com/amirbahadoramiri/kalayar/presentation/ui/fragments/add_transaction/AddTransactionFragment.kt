@@ -283,25 +283,6 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
         transactionProductAdapter.clearList()
         calculateLastPrice()
         addTransactionViewModel.getAllProduct()
-        if (isChecked) {
-            if (checkedId == R.id.increase) {
-            } else if (checkedId == R.id.decrease) {
-                val items = transactionProductAdapter.getList()
-                val toRemove = mutableListOf<Product>()
-                for (item in items) {
-                    if (item.product_count <= 0) {
-                        toRemove.add(item)
-                    }
-                }
-                if (toRemove.isNotEmpty()) {
-                    toast(getString(R.string.items_removed_out_of_stock))
-                    for (item in toRemove) {
-                        val pos = items.indexOf(item)
-                        transactionProductAdapter.removeItem(pos)
-                    }
-                }
-            }
-        }
     }
 
 }
