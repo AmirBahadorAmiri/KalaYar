@@ -92,4 +92,5 @@
     <string name="yes_delete_it">بله، حذف شود!</string>
     <string name="type_agree_to_continue">در صورت آگاهی از پیامدهای این عملیات، عبارت «موافقم» را در فیلد زیر وارد کنید.</string>
     <string name="delete_it">حذف شود!</string>
+    <string name="password_too_short">رمز عبور باید حداقل ۴ کاراکتر باشد</string>
 </resources>

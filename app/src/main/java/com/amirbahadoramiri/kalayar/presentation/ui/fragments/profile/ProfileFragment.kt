@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.CompoundButton
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
@@ -44,25 +45,24 @@ class ProfileFragment : BaseFragment() {
             binding.storeAddress.text = it.store_address
             binding.storeWebsite.text = it.store_website
         }
-        profileViewModel.getStore()
-
-        binding.themeSwitchButton.isChecked = DarkMode.checkDarkMode(requireContext())
-        binding.themeSwitchButton.setOnCheckedChangeListener(object :
-            CompoundButton.OnCheckedChangeListener {
-            override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-                if (isChecked) {
-                    DarkMode.enableDarkMode(requireContext())
-                } else {
-                    DarkMode.disableDarkMode(requireContext())
-                }
-            }
-        })
-
-
         profileViewModel.userLiveData.observe(viewLifecycleOwner) {
             binding.passwordSwitchButton.isChecked = it.user_password.isNotEmpty()
         }
+        profileViewModel.getStore()
         profileViewModel.checkPassword()
+
+
+
+        binding.themeSwitchButton.isChecked = DarkMode.checkDarkMode(requireContext())
+        binding.themeSwitchButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                DarkMode.enableDarkMode(requireContext())
+            } else {
+                DarkMode.disableDarkMode(requireContext())
+            }
+        }
+
+
         binding.passwordSwitchButton.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
                 if (!buttonView.isPressed) return
@@ -112,22 +112,23 @@ class ProfileFragment : BaseFragment() {
                                 .setNegativeButtonBackgroundColor(requireContext().getColor(R.color.kalayar_page_background_color))
 
                             passwordDialog.setOnClickListener(object : OnInputConfirmListener {
+                                override fun onCanceled() {
+                                    binding.passwordSwitchButton.isChecked = false
+                                }
                                 override fun onNegativeButtonClicked(p0: String?) {
                                     binding.passwordSwitchButton.isChecked = false
                                     passwordDialog.dismiss()
                                 }
                                 override fun onPositiveButtonClicked(p0: String?) {
-                                    if (!p0.isNullOrEmpty()) {
-                                        user.user_password = p0
+                                    if (p0.toString().length > 3) {
+                                        user.user_password = p0.toString()
                                         profileViewModel.updateUser(user)
                                         passwordDialog.dismiss()
                                     } else {
-                                        binding.passwordSwitchButton.isChecked = false
-                                        passwordDialog.dismiss()
+                                        val shake_animation = AnimationUtils.loadAnimation(requireContext(), R.anim.shake_animation)
+                                        passwordDialog.startEditTextAnimation(shake_animation)
+                                        toast(getString(R.string.password_too_short))
                                     }
-                                }
-                                override fun onCanceled() {
-                                    binding.passwordSwitchButton.isChecked = false
                                 }
                             })
 
