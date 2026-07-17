@@ -121,7 +121,7 @@
             android:gravity="right|center_vertical"
             android:paddingLeft="@dimen/STANDARD_16dp"
             android:paddingRight="@dimen/STANDARD_8dp"
-            android:text="واحد"
+            android:text="@string/unit"
             android:textColor="@color/kalayar_text_on_primary_color"
             android:textSize="@dimen/STANDARD_12sp"
             android:textStyle="bold"

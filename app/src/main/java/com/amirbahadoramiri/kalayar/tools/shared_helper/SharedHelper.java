@@ -13,7 +13,7 @@ public class SharedHelper {
 
     private static SharedHelper sharedHelper;
 
-    private static String SHARED_KEY = "kalayar";
+    private static final String SHARED_KEY = "kalayar";
     private static SharedPreferences sharedPreferences;
     private static SharedPreferences.Editor sharedPreferencesEditor;
 

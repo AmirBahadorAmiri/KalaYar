@@ -154,7 +154,7 @@
                 android:inputType="number"
                 android:paddingLeft="@dimen/STANDARD_24dp"
                 android:paddingRight="@dimen/STANDARD_24dp"
-                android:text="1"
+                android:text="@string/one"
                 android:textSize="@dimen/STANDARD_16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

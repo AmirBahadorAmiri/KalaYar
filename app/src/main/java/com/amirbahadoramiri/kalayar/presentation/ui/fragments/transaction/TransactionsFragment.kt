@@ -107,11 +107,9 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         })
 
         binding.addTransaction.setOnClickListener {
-            val navController =
-                requireActivity().findNavController(R.id.activityMainFragmentContainer)
+            val navController = requireActivity().findNavController(R.id.activityMainFragmentContainer)
             if (navController.currentDestination?.id == R.id.transactionsFragment) {
-                val action =
-                    TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
+                val action = TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
                 navController.navigate(action)
             }
         }

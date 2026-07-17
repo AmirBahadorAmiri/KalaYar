@@ -127,9 +127,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                             if (text.isNotEmpty()) {
                                 val value = text.toInt()
                                 if (value < 1) {
-                                    addProductSheetBinding.transactionProductChangeCount.setText(
-                                        "1"
-                                    )
+                                    addProductSheetBinding.transactionProductChangeCount.setText(getString(R.string.one))
                                 } else if (binding.transactionType.checkedButtonId == R.id.decrease) {
                                     if (value > product.product_count.toInt()) {
                                         addProductSheetBinding.transactionProductChangeCount.setText(
@@ -169,7 +167,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                                 }
                             }
                         } else {
-                            addProductSheetBinding.transactionProductChangeCount.setText("1")
+                            addProductSheetBinding.transactionProductChangeCount.setText(getString(R.string.one))
                         }
                     }
 
@@ -182,7 +180,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                                 (value - 1).toString()
                             )
                         } else {
-                            addProductSheetBinding.transactionProductChangeCount.setText("1")
+                            addProductSheetBinding.transactionProductChangeCount.setText(getString(R.string.one))
                         }
                     }
 
@@ -243,9 +241,9 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
             val transactionTitle = binding.transactionTitle.text.toString()
             val transactionDescription = binding.transactionDescription.text.toString()
 
-            if (transactionProductAdapter.getList().isEmpty()) toast("هیچ محصولی اضافه نکردید")
+            if (transactionProductAdapter.getList().isEmpty()) toast(getString(R.string.no_products_added))
             else if (transactionTitle.isEmpty()) {
-                toast("تیتر تراکنش نمیتواند خالی باشد")
+                toast(getString(R.string.transaction_title_cannot_be_empty))
             } else {
                 val transaction = Transaction(
                     if (binding.transactionType.checkedButtonId == R.id.increase) TransactionType.INCREASE else TransactionType.DECREASE, transactionTitle, System.currentTimeMillis(), transactionDescription
@@ -296,7 +294,7 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
                     }
                 }
                 if (toRemove.isNotEmpty()) {
-                    toast("برخی کالاها به دلیل عدم موجودی از لیست حذف شدند")
+                    toast(getString(R.string.items_removed_out_of_stock))
                     for (item in toRemove) {
                         val pos = items.indexOf(item)
                         transactionProductAdapter.removeItem(pos)

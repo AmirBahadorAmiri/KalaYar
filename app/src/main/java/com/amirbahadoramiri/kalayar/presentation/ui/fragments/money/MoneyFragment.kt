@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
+import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.MoneyFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.Product
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
@@ -54,7 +55,7 @@ class MoneyFragment : BaseFragment() {
             totalItems += product.product_count
         }
 
-        val mojodi = TextUtils.numberFormat(totalValue) + " تومان"
+        val mojodi = TextUtils.numberFormat(totalValue) + getString(R.string.toman)
         binding.totalValue.text = mojodi
         binding.totalItems.text = totalItems.toString()
         binding.productTypesCount.text = products.size.toString()

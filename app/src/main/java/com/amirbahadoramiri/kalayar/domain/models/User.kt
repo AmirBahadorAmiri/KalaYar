@@ -9,6 +9,8 @@ data class User(
     @PrimaryKey
     var android_id: String,
 
-    var is_activated: Boolean = false
+    var is_activated: Boolean = false,
+
+    var user_password: String = ""
 
 )

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.DatabaseFragmentBinding
 import com.amirbahadoramiri.kalayar.data.db.PublicDatabase
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
@@ -62,7 +63,7 @@ class DatabaseFragment : BaseFragment() {
 
             val dbFile = requireContext().getDatabasePath("public.db")
             if (!dbFile.exists()) {
-                toast("دیتابیس هنوز ایجاد نشده است")
+                toast(getString(R.string.database_not_initialized))
                 return
             }
 
@@ -71,7 +72,7 @@ class DatabaseFragment : BaseFragment() {
                     input.copyTo(output)
                 }
             }
-            toast("نسخه پشتیبان با موفقیت ذخیره شد")
+            toast(getString(R.string.backup_saved_successfully))
         } catch (e: Exception) {
             toast("خطا در تهیه نسخه پشتیبان: ${e.message}")
         }
@@ -96,7 +97,7 @@ class DatabaseFragment : BaseFragment() {
             if (shmFile.exists()) shmFile.delete()
             if (walFile.exists()) walFile.delete()
 
-            toast("دیتابیس با موفقیت بازیابی شد. لطفا جهت اعمال تغییرات برنامه را مجددا باز کنید.")
+            toast(getString(R.string.database_restored_successfully_restart_required))
             
         } catch (e: Exception) {
             toast("خطا در بازیابی دیتابیس: ${e.message}")

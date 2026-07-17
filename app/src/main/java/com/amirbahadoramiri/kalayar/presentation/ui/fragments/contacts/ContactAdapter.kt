@@ -41,26 +41,25 @@ class ContactAdapter(val contactEventListener: ContactEventListener) : RecyclerV
                 popupMenu.setOnMenuItemClickListener {
                     when(it.itemId) {
                         R.id.delete -> {
-                            val dialog = TelegramConfirmDialog(itemView.context)
-                                .setDirection(DialogDirection.RTL)
+                            val dialog = TelegramConfirmDialog(itemView.context, DialogDirection.RTL)
                                 .setTitle(itemView.context.getString(R.string.contact_delete))
                                 .setMessage(itemView.context.getString(R.string.contact_delete_message))
                                 .setCardBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
-                                .setNegativeButtonText(itemView.context.getString(R.string.delete))
-                                .setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color))
-                                .setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint))
-                                .setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
-                                .setPositiveButtonText(itemView.context.getString(R.string.cancel))
-                                .setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color))
-                                .setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint))
+                                .setPositiveButtonText(itemView.context.getString(R.string.delete))
+                                .setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color))
+                                .setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint))
                                 .setPositiveButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
+                                .setNegativeButtonText(itemView.context.getString(R.string.cancel))
+                                .setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color))
+                                .setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint))
+                                .setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
 
                             dialog.setOnClickListener(object : OnConfirmListener {
                                 override fun onPositiveButtonClicked() {
+                                    contactEventListener.onContactDelete(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
                                     dialog.dismiss()
                                 }
                                 override fun onNegativeButtonClicked() {
-                                    contactEventListener.onContactDelete(dataList[absoluteAdapterPosition],absoluteAdapterPosition)
                                     dialog.dismiss()
                                 }
                             })

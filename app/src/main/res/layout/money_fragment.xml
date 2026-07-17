@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="ارزش کل موجودی"
+                    android:text="@string/total_inventory_value"
                     android:textColor="@color/kalayar_text_on_primary_color"
                     android:textSize="@dimen/STANDARD_16sp" />
 
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/STANDARD_8dp"
                     android:gravity="center"
-                    android:text="0 تومان"
+                    android:text="@string/default_price"
                     android:textColor="@color/kalayar_text_on_primary_color"
                     android:textSize="@dimen/STANDARD_32sp"
                     android:textStyle="bold" />
@@ -99,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="تعداد کل کالاها"
+                        android:text="@string/total_products_count"
                         android:textColor="@color/kalayar_text_color"
                         android:textSize="@dimen/STANDARD_16sp" />
 
@@ -108,7 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textColor="@color/kalayar_primary_color"
                         android:textSize="@dimen/STANDARD_16sp"
                         android:textStyle="bold" />
@@ -128,7 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="تعداد انواع محصولات"
+                        android:text="@string/product_types_count"
                         android:textColor="@color/kalayar_text_color"
                         android:textSize="@dimen/STANDARD_16sp" />
 
@@ -137,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="0"
+                        android:text="@string/zero"
                         android:textColor="@color/kalayar_primary_color"
                         android:textSize="@dimen/STANDARD_16sp"
                         android:textStyle="bold" />
