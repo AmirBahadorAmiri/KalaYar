@@ -21,7 +21,7 @@ class AddTransactionViewModel(application: Application) : AndroidViewModel(appli
     val transactionRepository = TransactionRepository(RoomTransactionDataSource(application))
     val transactionItemRepository = TransactionItemRepository(RoomTransactionItemDataSource(application))
 
-    val transactionAddLiveData = MutableLiveData<Boolean>()
+    val transactionAddLiveData = MutableLiveData<Transaction>()
     val getAllProductLiveData = MutableLiveData<List<Product>>()
     val allProductShownLiveData = MutableLiveData<MutableList<Product>>()
 
@@ -39,7 +39,7 @@ class AddTransactionViewModel(application: Application) : AndroidViewModel(appli
                 }
                 transactionItemRepository.addItems(transactionItems).let {
                     productRepository.updateProducts(listProducts).let {
-                        transactionAddLiveData.postValue(true)
+                        transactionAddLiveData.postValue(transaction)
                     }
                 }
             }

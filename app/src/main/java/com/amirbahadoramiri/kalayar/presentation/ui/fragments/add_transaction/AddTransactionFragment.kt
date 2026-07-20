@@ -10,6 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
@@ -53,7 +54,10 @@ class AddTransactionFragment : BaseFragment(), TransactionProductAdapterListener
 
         addTransactionViewModel = ViewModelProvider(this)[AddTransactionViewModel::class]
         addTransactionViewModel.transactionAddLiveData.observe(viewLifecycleOwner) {
-            if (it) popBackStack()
+            it?.let { transaction ->
+                findNavController().previousBackStackEntry?.savedStateHandle?.set("new_transaction", transaction)
+                popBackStack()
+            }
         }
         addTransactionViewModel.allProductShownLiveData.observe(viewLifecycleOwner) {
             transactionSearchProductAdapter.addProducts(it)

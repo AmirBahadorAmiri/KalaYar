@@ -120,7 +120,9 @@ class TransactionsAdapter(val transactionEventListener: TransactionEventListener
         notifyDataSetChanged()
     }
 
-    fun addTransaction() {
+    fun addTransaction(transaction: Transaction,position: Int) {
+        dataList.add(position, transaction)
+        notifyItemInserted(position)
     }
 
     fun removeTransaction(position: Int) {

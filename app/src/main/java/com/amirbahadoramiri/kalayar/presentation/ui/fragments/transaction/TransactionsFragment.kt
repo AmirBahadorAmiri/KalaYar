@@ -10,7 +10,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
@@ -72,6 +72,14 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
             transactionViewModel.getAllTransactions(TRANSACTION_LIMIT)
         }
 
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Transaction>("new_transaction")
+            ?.observe(viewLifecycleOwner) { transaction ->
+                transaction?.let {
+                    onAddTransaction(it,0)
+                    findNavController().currentBackStackEntry?.savedStateHandle?.remove<Transaction>("new_transaction")
+                }
+            }
+
         binding.transactionSearch.addTextChangedListener(object : TextWatcher {
             var job: Job = Job()
             private var lastText = ""
@@ -107,13 +115,11 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         })
 
         binding.addTransaction.setOnClickListener {
-            val navController = requireActivity().findNavController(R.id.activityMainFragmentContainer)
-            if (navController.currentDestination?.id == R.id.transactionsFragment) {
+            if (findNavController().currentDestination?.id == R.id.transactionsFragment) {
                 val action = TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
-                navController.navigate(action)
+                findNavController().navigate(action)
             }
         }
-
     }
 
     private fun customOnBackPressed() {
@@ -127,7 +133,6 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
 
     override fun onShowTransaction(transaction: Transaction, position: Int) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
-        toast("show")
         bottomSheetDialog.show()
     }
 
@@ -142,11 +147,17 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
 
     override fun onPrintTransaction(transaction: Transaction, position: Int) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
-        toast("print")
         bottomSheetDialog.show()
     }
 
     override fun onUpdateTransaction(transaction: Transaction, position: Int) {}
-    override fun onAddTransaction(transaction: Transaction, position: Int) {}
+    override fun onAddTransaction(transaction: Transaction, position: Int) {
+        lifecycleScope.launch {
+            delay(500.milliseconds)
+            transactionsAdapter.addTransaction(transaction,position)
+            binding.transactionRecyclerview.scrollToPosition(position)
+            transactionViewModel.getAllTransactionLiveData.value?.add(position, transaction)
+        }
+    }
 
 }

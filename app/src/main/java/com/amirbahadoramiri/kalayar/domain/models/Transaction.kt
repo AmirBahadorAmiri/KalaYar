@@ -5,6 +5,7 @@ import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.aminography.primecalendar.PrimeCalendar
 import com.aminography.primecalendar.persian.PersianCalendar
+import java.io.Serializable
 import java.util.Date
 
 
@@ -18,7 +19,7 @@ data class Transaction(
     @PrimaryKey(autoGenerate = true)
     var transaction_id: Long? = null,
 
-) {
+) : Serializable {
 
     @Ignore
     fun getTransactionPersianDate() : String {
