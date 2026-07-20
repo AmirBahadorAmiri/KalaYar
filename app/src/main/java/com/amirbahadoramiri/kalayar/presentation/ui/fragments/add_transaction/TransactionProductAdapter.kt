@@ -68,6 +68,11 @@ class TransactionProductAdapter(val listener: TransactionProductAdapterListener)
         dataList.removeAt(position)
         notifyItemRemoved(position)
     }
+
+    fun updateItem(position: Int) {
+        notifyItemChanged(position)
+    }
+
     fun removeItems(list: List<Product>) {
         dataList.removeAll(list)
         notifyDataSetChanged()
