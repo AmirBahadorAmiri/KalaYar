@@ -27,12 +27,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
+class AddTransactionFragment : BaseFragment(), TransactionProductAdapterListener {
 
     lateinit var binding: TransactionAddProductFragmentBinding
     lateinit var addTransactionViewModel: AddTransactionViewModel
 
-    val transactionProductAdapter = TransactionProductAdapter()
+    val transactionProductAdapter = TransactionProductAdapter(this)
     val transactionSearchProductAdapter = TransactionSearchProductAdapter()
 
     override fun onCreateView(
@@ -283,6 +283,18 @@ class AddTransactionFragment : BaseFragment(), OnButtonCheckListener {
         transactionProductAdapter.clearList()
         calculateLastPrice()
         addTransactionViewModel.getAllProduct()
+    }
+
+    override fun onClickListener(product: Product, position: Int) {
+        toast("${product.product_name}")
+    }
+
+    override fun onLongClickListener(product: Product, position: Int) {
+    }
+
+    override fun onRemoveClickListener(product: Product, position: Int) {
+        transactionProductAdapter.removeItem(position)
+        calculateLastPrice()
     }
 
 }
