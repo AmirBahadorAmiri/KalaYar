@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.amirbahadoramiri.kalayar.domain.models.TransactionType"/>
+        <variable
+            name="transaction"
+            type="com.amirbahadoramiri.kalayar.domain.models.Transaction" />
+        <variable
+            name="store"
+            type="com.amirbahadoramiri.kalayar.domain.models.Store" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_16_top"
+        android:backgroundTint="@color/kalayar_page_background_color"
+        android:paddingBottom="@dimen/STANDARD_24dp">
+
+        <LinearLayout
+            android:id="@+id/store_container_pdf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/STANDARD_24dp"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{store.store_name}"
+                android:textColor="@color/kalayar_text_color"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{store.store_address}"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="14sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@{store.store_phonenumber}"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/kalayar_item_background_color" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/handle"
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_marginTop="@dimen/STANDARD_8dp"
+            android:background="@color/kalayar_icon_hint_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/transaction_type_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/STANDARD_24dp"
+            android:layout_marginRight="@dimen/STANDARD_24dp"
+            android:padding="12dp"
+            android:background="@drawable/radius_16"
+            android:backgroundTint="@{transaction.transaction_type == TransactionType.INCREASE ? @color/kalayar_dialog_blue_color_tint : @color/kalayar_dialog_red_color_tint}"
+            app:srcCompat="@{transaction.transaction_type == TransactionType.INCREASE ? @drawable/kalayar_plus : @drawable/kalayar_minus}"
+            app:tint="@{transaction.transaction_type == TransactionType.INCREASE ? @color/kalayar_dialog_blue_color : @color/kalayar_dialog_red_color}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_container_pdf" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/print_btn"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/STANDARD_24dp"
+            android:layout_marginLeft="@dimen/STANDARD_24dp"
+            android:padding="12dp"
+            android:background="@drawable/radius_16"
+            android:backgroundTint="@color/kalayar_item_background_color"
+            app:srcCompat="@drawable/kalayar_print"
+            app:tint="@color/kalayar_primary_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/store_container_pdf" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:layout_marginLeft="@dimen/STANDARD_24dp"
+            android:text="@{transaction.transaction_title}"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_20sp"
+            android:textStyle="bold"
+            android:gravity="right"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/transaction_type_icon"
+            app:layout_constraintTop_toTopOf="@id/transaction_type_icon"
+            app:layout_constraintBottom_toTopOf="@id/date_container"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+        <LinearLayout
+            android:id="@+id/date_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="4dp"
+            app:layout_constraintRight_toRightOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toBottomOf="@id/transaction_type_icon">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{transaction.onlyTime}"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="@dimen/STANDARD_12sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="|"
+                android:textColor="@color/kalayar_icon_hint_color"
+                android:textSize="@dimen/STANDARD_12sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{transaction.onlyDate}"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="@dimen/STANDARD_12sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="@{transaction.dayName}"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="@dimen/STANDARD_12sp" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/STANDARD_24dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:background="@drawable/radius_16"
+            android:backgroundTint="@color/kalayar_edittext_background_color"
+            android:padding="@dimen/STANDARD_8dp"
+            android:gravity="right"
+            android:text="@{transaction.transaction_description}"
+            android:textColor="@color/kalayar_text_color"
+            android:textSize="@dimen/STANDARD_16sp"
+            android:visibility="@{transaction.transaction_description.isEmpty() ? View.GONE : View.VISIBLE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/transaction_type_icon" />
+
+        <LinearLayout
+            android:id="@+id/total_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:layout_marginHorizontal="@dimen/STANDARD_24dp"
+            android:background="@drawable/radius_16"
+            android:backgroundTint="@color/kalayar_item_background_color"
+            android:orientation="horizontal"
+            android:padding="@dimen/STANDARD_16dp"
+            android:gravity="right|center_vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/total_price_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/kalayar_primary_color"
+                android:textSize="@dimen/STANDARD_16sp"
+                android:textStyle="bold"
+                android:text="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/STANDARD_8dp"
+                android:text="@string/transaction_last_price"
+                android:textColor="@color/kalayar_text_color"
+                android:textSize="@dimen/STANDARD_12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/list_header"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="@dimen/STANDARD_16dp"
+            android:layout_marginHorizontal="@dimen/STANDARD_24dp"
+            android:background="@drawable/radius_16_top"
+            android:backgroundTint="@color/kalayar_item_background_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total_container">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/header_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/products_name"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="@dimen/STANDARD_12sp"
+                app:layout_constraintHorizontal_weight="0.4"
+                app:layout_constraintLeft_toRightOf="@id/header_price"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/header_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/price_toman"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="@dimen/STANDARD_12sp"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintLeft_toRightOf="@id/header_count"
+                app:layout_constraintRight_toLeftOf="@id/header_name"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/header_count"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/products_count"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="@dimen/STANDARD_12sp"
+                app:layout_constraintHorizontal_weight="0.3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/header_price" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/items_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/STANDARD_24dp"
+            android:paddingBottom="@dimen/STANDARD_16dp"
+            android:clipToPadding="false"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list_header"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/items_container_pdf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/STANDARD_24dp"
+            android:paddingBottom="@dimen/STANDARD_16dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list_header"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

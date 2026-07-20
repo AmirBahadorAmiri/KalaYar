@@ -15,8 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.TransactionFragmentBinding
+import com.amirbahadoramiri.kalayar.databinding.TransactionShowSheetBinding
 import com.amirbahadoramiri.kalayar.domain.models.Transaction
+import com.amirbahadoramiri.kalayar.domain.models.TransactionItem
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.amirbahadoramiri.kalayar.tools.PDFUtils
+import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -24,8 +28,6 @@ import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
 class TransactionsFragment : BaseFragment(), TransactionEventListener {
-
-    private val TRANSACTION_LIMIT = 100
 
     lateinit var binding: TransactionFragmentBinding
     lateinit var transactionViewModel: TransactionViewModel
@@ -69,7 +71,7 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         }
 
         if (transactionViewModel.getAllTransactionLiveData.value == null) {
-            transactionViewModel.getAllTransactions(TRANSACTION_LIMIT)
+            transactionViewModel.getAllTransactions()
         }
 
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Transaction>("new_transaction")
@@ -133,6 +135,47 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
 
     override fun onShowTransaction(transaction: Transaction, position: Int) {
         val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val showBinding = TransactionShowSheetBinding.inflate(layoutInflater)
+        bottomSheetDialog.setContentView(showBinding.root)
+        showBinding.transaction = transaction
+
+        val itemAdapter = TransactionItemAdapter()
+        showBinding.itemsRecyclerview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = itemAdapter
+        }
+
+        var currentItems = listOf<TransactionItem>()
+        var currentTotalPrice = 0L
+
+        transactionViewModel.getTransactionItemsLiveData.observe(viewLifecycleOwner) { items ->
+            currentItems = items
+            itemAdapter.setData(items)
+            var totalPrice = 0L
+            items.forEach { totalPrice += (it.product_price * it.change_amount) }
+            currentTotalPrice = totalPrice
+            showBinding.totalPriceValue.text = "${TextUtils.numberFormat(totalPrice)} ${getString(R.string.toman)}"
+        }
+
+        transactionViewModel.getStoreLiveData.observe(viewLifecycleOwner) { store ->
+            showBinding.store = store
+        }
+
+        transaction.transaction_id?.let {
+            transactionViewModel.getTransactionItems(it)
+        }
+        transactionViewModel.getStore()
+
+        showBinding.printBtn.setOnClickListener {
+            PDFUtils.generateAndShareTransactionPDF(
+                requireContext(),
+                transaction,
+                currentItems,
+                currentTotalPrice,
+                showBinding.store
+            )
+        }
+
         bottomSheetDialog.show()
     }
 
@@ -146,8 +189,27 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
     }
 
     override fun onPrintTransaction(transaction: Transaction, position: Int) {
-        val bottomSheetDialog = BottomSheetDialog(requireContext())
-        bottomSheetDialog.show()
+        transaction.transaction_id?.let {
+            transactionViewModel.getTransactionItems(it)
+            transactionViewModel.getStore()
+            
+            val itemsObserver = object : androidx.lifecycle.Observer<List<TransactionItem>> {
+                override fun onChanged(items: List<TransactionItem>) {
+                    val storeObserver = object : androidx.lifecycle.Observer<com.amirbahadoramiri.kalayar.domain.models.Store?> {
+                        override fun onChanged(store: com.amirbahadoramiri.kalayar.domain.models.Store?) {
+                            var totalPrice = 0L
+                            items.forEach { totalPrice += (it.product_price * it.change_amount) }
+                            PDFUtils.generateAndShareTransactionPDF(requireContext(), transaction, items, totalPrice, store)
+                            
+                            transactionViewModel.getStoreLiveData.removeObserver(this)
+                        }
+                    }
+                    transactionViewModel.getStoreLiveData.observe(viewLifecycleOwner, storeObserver)
+                    transactionViewModel.getTransactionItemsLiveData.removeObserver(this)
+                }
+            }
+            transactionViewModel.getTransactionItemsLiveData.observe(viewLifecycleOwner, itemsObserver)
+        }
     }
 
     override fun onUpdateTransaction(transaction: Transaction, position: Int) {}

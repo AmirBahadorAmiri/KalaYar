@@ -28,4 +28,25 @@ data class Transaction(
         return "${calendar.shortDateString}  ${calendar.hour}:${calendar.minute}:${calendar.second}\n${calendar.weekDayName}"
     }
 
+    @Ignore
+    fun getOnlyDate() : String {
+        val calendar: PrimeCalendar = PersianCalendar()
+        calendar.setTime(Date(transaction_create_time))
+        return calendar.shortDateString
+    }
+
+    @Ignore
+    fun getOnlyTime() : String {
+        val calendar: PrimeCalendar = PersianCalendar()
+        calendar.setTime(Date(transaction_create_time))
+        return String.format("%02d:%02d", calendar.hour, calendar.minute)
+    }
+
+    @Ignore
+    fun getDayName() : String {
+        val calendar: PrimeCalendar = PersianCalendar()
+        calendar.setTime(Date(transaction_create_time))
+        return calendar.weekDayName
+    }
+
 }
