@@ -48,7 +48,7 @@ class HomeFragment : BaseFragment() {
 
     private fun setupPrices() {
         binding.pricesRecyclerview.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, true)
             adapter = priceAdapter
         }
 
