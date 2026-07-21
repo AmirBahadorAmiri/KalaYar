@@ -18,17 +18,17 @@ public class ImageBindingAdapter {
         }
     }
 
-    @BindingAdapter("app:tint")
+    @BindingAdapter("tint")
     public static void setTint(ImageView view, int color) {
         view.setImageTintList(ColorStateList.valueOf(color));
     }
 
-    @BindingAdapter("app:srcCompat")
+    @BindingAdapter("srcCompat")
     public static void setSrcCompat(AppCompatImageView view, Drawable drawable) {
         view.setImageDrawable(drawable);
     }
 
-    @BindingAdapter("android:backgroundTint")
+    @BindingAdapter("backgroundTint")
     public static void setBackgroundTint(View view, int color) {
         view.setBackgroundTintList(ColorStateList.valueOf(color));
     }
