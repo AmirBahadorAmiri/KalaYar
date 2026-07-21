@@ -5,13 +5,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Network {
 
-    public static String URL = "https://www.tasnimnews.ir/fa/currency";
+    public static String API_URL = "https://www.tasnimnews.ir/";
     private static Retrofit retrofit;
     private static NetworkInterface networkInterface;
 
     public static Retrofit create() {
         return new Retrofit.Builder()
-                .baseUrl("https://google.com")
+                .baseUrl(API_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
