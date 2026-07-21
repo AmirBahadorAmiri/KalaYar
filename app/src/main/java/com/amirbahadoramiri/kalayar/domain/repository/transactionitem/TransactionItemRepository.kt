@@ -13,5 +13,6 @@ class TransactionItemRepository(private val transactionItemDataSource: Transacti
     suspend fun updateItems(transactionItems: List<TransactionItem>) = transactionItemDataSource.updateItems(transactionItems)
     suspend fun getItem(item_id: Long) = transactionItemDataSource.getItem(item_id)
     suspend fun getItems(transaction_id: Long) = transactionItemDataSource.getItems(transaction_id)
+    suspend fun getAllItems() = transactionItemDataSource.getAllTransactionItems()
 
 }

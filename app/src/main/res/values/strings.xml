@@ -15,8 +15,16 @@
     <string name="products_name">نام محصولات</string>
     <string name="transactions">تراکنش ها</string>
     <string name="inventory">موجودی</string>
-    <string name="money">دارایی</string>
+    <string name="money">گزارش</string>
     <string name="import_export_database">پایگاه داده</string>
+    <string name="sales_report">گزارش فروش</string>
+    <string name="inventory_status">وضعیت انبار</string>
+    <string name="sales_today">فروش امروز</string>
+    <string name="sales_1_month">فروش ۱ ماه اخیر</string>
+    <string name="sales_3_months">فروش ۳ ماه اخیر</string>
+    <string name="sales_6_months">فروش ۶ ماه اخیر</string>
+    <string name="sales_1_year">فروش ۱ سال اخیر</string>
+    <string name="total_sales">مجموع فروش</string>
     <string name="product_search_name">نام محصول را جستوجو کنید</string>
     <string name="product_insert">ثبت محصول</string>
     <string name="product_add">افزودن محصول</string>
@@ -93,4 +101,5 @@
     <string name="type_agree_to_continue">در صورت آگاهی از پیامدهای این عملیات، عبارت «موافقم» را در فیلد زیر وارد کنید.</string>
     <string name="delete_it">حذف شود!</string>
     <string name="password_too_short">رمز عبور باید حداقل ۴ کاراکتر باشد</string>
+    <string name="live_prices">قیمت‌های زنده</string>
 </resources>
