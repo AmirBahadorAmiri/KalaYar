@@ -2,36 +2,100 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/kalayar_page_background_color"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/kalayar_page_background_color"
+        android:fillViewport="true">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/STANDARD_32dp"
-            android:layout_marginRight="@dimen/STANDARD_32dp"
-            android:text="@string/kalayar"
-            android:textColor="@color/kalayar_primary_color"
-            android:textSize="@dimen/STANDARD_32sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/afrigha"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:paddingBottom="32dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/STANDARD_16dp"
-            android:layout_marginTop="@dimen/STANDARD_32dp"
-            android:layout_marginRight="@dimen/STANDARD_16dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/STANDARD_32dp"
+                android:layout_marginRight="@dimen/STANDARD_32dp"
+                android:text="@string/kalayar"
+                android:textColor="@color/kalayar_primary_color"
+                android:textSize="@dimen/STANDARD_32sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/afrigha"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/STANDARD_16dp"
+                android:layout_marginTop="@dimen/STANDARD_32dp"
+                android:layout_marginRight="@dimen/STANDARD_16dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <LinearLayout
+                android:id="@+id/prices_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/STANDARD_32dp"
+                android:layout_marginRight="@dimen/STANDARD_32dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerview_1">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/tasnim_logo_card"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginRight="@dimen/STANDARD_8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    app:cardBackgroundColor="#a91e22"
+                    app:cardCornerRadius="14dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="4dp"
+                        android:src="@drawable/tasnimnews_logo" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/prices_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/live_prices"
+                    android:textColor="@color/kalayar_text_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/prices_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/STANDARD_16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/prices_header" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.amirbahadoramiri.kalayar.domain.models.PriceItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@color/kalayar_item_background_color">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.name}"
+                android:textColor="@color/kalayar_text_hint_color"
+                android:textSize="12sp"
+                android:gravity="center" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{item.price}"
+                android:textColor="@color/kalayar_text_color"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@{item.change}"
+                android:textColor="@{item.isPositive ? @color/kalayar_confirm_color : @color/kalayar_dialog_red_color}"
+                android:textSize="11sp"
+                android:gravity="center"
+                android:textDirection="ltr" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

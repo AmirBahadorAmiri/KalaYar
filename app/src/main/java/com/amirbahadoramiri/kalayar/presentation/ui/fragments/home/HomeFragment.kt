@@ -1,13 +1,17 @@
 package com.amirbahadoramiri.kalayar.presentation.ui.fragments.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.HomeFragmentBinding
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
@@ -16,6 +20,8 @@ import com.amirbahadoramiri.kalayar.presentation.ui.fragments.main.MainFragmentD
 class HomeFragment : BaseFragment() {
 
     lateinit var binding: HomeFragmentBinding
+    lateinit var homeViewModel: HomeViewModel
+    private val priceAdapter = PriceAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,8 +38,32 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setup() {
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         setupAdapter()
+        setupPrices()
         customOnBackPressed()
+        
+        homeViewModel.fetchPrices()
+    }
+
+    private fun setupPrices() {
+        binding.pricesRecyclerview.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            adapter = priceAdapter
+        }
+
+        homeViewModel.pricesLiveData.observe(viewLifecycleOwner) { prices ->
+            priceAdapter.setData(prices)
+        }
+
+        binding.tasnimLogoCard.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.tasnimnews.ir/fa/currency"))
+            startActivity(browserIntent)
+        }
+
+        homeViewModel.errorLiveData.observe(viewLifecycleOwner) { error ->
+            // Optionally show error
+        }
     }
 
     private fun setupAdapter() {
@@ -66,7 +96,7 @@ class HomeFragment : BaseFragment() {
             val navController =
                 requireActivity().findNavController(R.id.activityMainFragmentContainer)
             if (navController.currentDestination?.id == R.id.mainFragment) {
-                val action = MainFragmentDirections.actionMainFragmentToMoneyFragment()
+                val action = MainFragmentDirections.actionMainFragmentToReportFragment()
                 navController.navigate(action)
             }
         })
