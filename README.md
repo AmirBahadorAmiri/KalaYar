@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="app/src/main/res/drawable/ic_launcher_full.png" width="400" title="KalaYar Logo">
+</p>
+
 # کالایار (KalaYar) 📦
 ### اپلیکیشن جامع انبارداری نوین و مدیریت هوشمند فروشگاه
 
