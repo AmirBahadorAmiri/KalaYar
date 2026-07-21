@@ -11,7 +11,7 @@
     <color name="kalayar_edittext_background_color">#363636</color>
     <color name="kalayar_item_background_color">#363636</color>
     <color name="kalayar_page_background_color">#272727</color>
-    <color name="kalayar_primary_color">#DD481E</color>
+    <color name="kalayar_primary_color">#007FFF</color>
     <color name="kalayar_confirm_color">#06d6a0</color>
     <color name="kalayar_button_group_stroke_color">#363636</color>
     <color name="kalayar_track_selector_disable_color">#959595</color>
