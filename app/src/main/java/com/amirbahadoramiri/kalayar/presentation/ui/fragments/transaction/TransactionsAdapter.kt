@@ -82,25 +82,25 @@ class TransactionsAdapter(val transactionEventListener: TransactionEventListener
                                 .setTitle(view.context.getString(R.string.transaction_delete))
                                 .setMessage(view.context.getString(R.string.transaction_delete_message))
                                 .setCardBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
-                                .setNegativeButtonText(view.context.getString(R.string.delete))
-                                .setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color))
-                                .setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint))
-                                .setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
-                                .setPositiveButtonText(view.context.getString(R.string.cancel))
-                                .setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color))
-                                .setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint))
+                                .setPositiveButtonText(view.context.getString(R.string.delete))
+                                .setPositiveButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_red_color))
+                                .setPositiveButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_red_color_tint))
                                 .setPositiveButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
+                                .setNegativeButtonText(view.context.getString(R.string.cancel))
+                                .setNegativeButtonTextColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color))
+                                .setNegativeButtonRippleColor(itemView.context.getColor(R.color.kalayar_dialog_blue_color_tint))
+                                .setNegativeButtonBackgroundColor(itemView.context.getColor(R.color.kalayar_page_background_color))
 
                         dialog.setOnClickListener(object : OnConfirmListener {
                             override fun onPositiveButtonClicked() {
-                                dialog.dismiss()
-                            }
-
-                            override fun onNegativeButtonClicked() {
                                 transactionEventListener.onRemoveTransaction(
                                     dataList[absoluteAdapterPosition],
                                     absoluteAdapterPosition
                                 )
+                                dialog.dismiss()
+                            }
+
+                            override fun onNegativeButtonClicked() {
                                 dialog.dismiss()
                             }
                         })
