@@ -8,3 +8,4 @@
 .externalNativeBuild
 .cxx
 .artifacts/
+/app/release/

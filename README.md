@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="app/src/main/res/drawable/ic_launcher_full.png" width="400" title="KalaYar Logo">
+  <img src="app/src/main/res/drawable/ic_launcher.webp" width="400" title="KalaYar Logo">
 </p>
 
 # کالایار (KalaYar) 📦
