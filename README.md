@@ -68,6 +68,11 @@ git clone https://github.com/your-username/KalaYar.git
 ## 📸 اسکرین‌شات‌ها
 *(در این بخش می‌توانید تصاویر محیط برنامه را قرار دهید)*
 
+
+<img width="338" height="600" alt="2fd567d7-14bf-46aa-b953-36e47538f52e" src="https://github.com/user-attachments/assets/3adf2df9-ed6c-41c8-a584-fd5bffab9732" />
+<img width="338" height="600" alt="46d14151-ce43-4f28-8763-98fc79b99aff" src="https://github.com/user-attachments/assets/f14c2a38-50e1-4c3d-b353-bc69b6cecad4" />
+<img width="1066" height="600" alt="e1f58c9d-98f1-4759-9373-f33d54fc2249" src="https://github.com/user-attachments/assets/e9509f0f-137e-4b00-989e-cbbd811dc029" />
+
 ---
 
 ## 👨‍💻 توسعه‌دهنده
