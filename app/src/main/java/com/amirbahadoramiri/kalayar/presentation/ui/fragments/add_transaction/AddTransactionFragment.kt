@@ -219,7 +219,7 @@ class AddTransactionFragment : BaseFragment(), TransactionProductAdapterListener
 
         addProductSheetBinding.transactionProductChangeCount.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(editable: Editable?) {
-                val text = addProductSheetBinding.transactionProductChangeCount.text.toString()
+                val text = addProductSheetBinding.transactionProductChangeCount.text.toString().replace(",", "")
                 if (text.isNotEmpty()) {
                     val value = text.toInt()
                     if (value < 1) {
@@ -236,7 +236,7 @@ class AddTransactionFragment : BaseFragment(), TransactionProductAdapterListener
         })
 
         addProductSheetBinding.productPlus.setOnClickListener {
-            val text = addProductSheetBinding.transactionProductChangeCount.text.toString()
+            val text = addProductSheetBinding.transactionProductChangeCount.text.toString().replace(",", "")
             if (text.isNotEmpty()) {
                 val value = text.toInt()
                 val newValue = (value + 1).toString()
@@ -253,7 +253,7 @@ class AddTransactionFragment : BaseFragment(), TransactionProductAdapterListener
         }
 
         addProductSheetBinding.productMinus.setOnClickListener {
-            val text = addProductSheetBinding.transactionProductChangeCount.text.toString()
+            val text = addProductSheetBinding.transactionProductChangeCount.text.toString().replace(",", "")
             if (text.isNotEmpty()) {
                 val value = text.toInt()
                 if (value > 1) addProductSheetBinding.transactionProductChangeCount.setText((value - 1).toString())
@@ -263,7 +263,7 @@ class AddTransactionFragment : BaseFragment(), TransactionProductAdapterListener
         }
 
         addProductSheetBinding.confirmButton.setOnClickListener {
-            val change_amount = addProductSheetBinding.transactionProductChangeCount.text.toString().toLong()
+            val change_amount = addProductSheetBinding.transactionProductChangeCount.text.toString().replace(",", "").toLong()
             val final_value = if (binding.transactionType.checkedButtonId == R.id.increase) (product.product_count + change_amount) else (product.product_count - change_amount)
             product.change_amount = change_amount
             product.final_value = final_value

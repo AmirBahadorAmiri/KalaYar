@@ -12,7 +12,8 @@ class TextUtils {
         }
 
         fun numberFormat(string: String): String {
-            return numberFormat(string.toLong())
+            val cleanString = string.replace(",", "")
+            return if (cleanString.isEmpty()) "" else numberFormat(cleanString.toLong())
         }
 
         fun numberFormat(value: Long): String {

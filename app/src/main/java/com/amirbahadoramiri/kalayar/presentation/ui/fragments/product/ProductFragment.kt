@@ -174,7 +174,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
             } else {
                 if (product == null) {
                     val newProduct = Product(
-                        product_name, product_unit, product_price.toLong(), product_count.toLong()
+                        product_name, product_unit, product_price.replace(",", "").toLong(), product_count.replace(",", "").toLong()
                     )
                     onAddProduct(newProduct, 0)
                 } else {
