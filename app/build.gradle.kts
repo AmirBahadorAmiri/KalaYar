@@ -5,6 +5,21 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
+val versionMajor = 1
+val versionMinor = 0
+val versionPatch = 1
+
+val debugMinify = false
+val releaseMinify = true
+
+private fun generateVersionCode() : Int {
+    return (versionMajor+versionMinor+versionPatch);
+}
+
+private fun generateVersionName() : String {
+    return "${versionMajor}.${versionMinor}.${versionPatch}"
+}
+
 android {
     namespace = "com.amirbahadoramiri.kalayar"
     compileSdk {
@@ -15,8 +30,8 @@ android {
         applicationId = "com.amirbahadoramiri.kalayar"
         minSdk = 26
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = generateVersionCode()
+        versionName = generateVersionName()
 
         multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
