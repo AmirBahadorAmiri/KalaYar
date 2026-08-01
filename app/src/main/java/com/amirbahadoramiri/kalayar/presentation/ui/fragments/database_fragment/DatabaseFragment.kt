@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.data.db.PublicDatabase
 import com.amirbahadoramiri.kalayar.databinding.DatabaseFragmentBinding
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -58,60 +62,73 @@ class DatabaseFragment : BaseFragment() {
     }
 
     private fun backupDatabase(uri: Uri) {
-        try {
-            val db = PublicDatabase.getPublicDatabase(requireContext())
-            db.openHelper.writableDatabase.query("PRAGMA wal_checkpoint(FULL)").use { it.moveToFirst() }
-            PublicDatabase.closeDatabase()
+        lifecycleScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    val db = PublicDatabase.getPublicDatabase(requireContext())
+                    db.openHelper.writableDatabase.query("PRAGMA wal_checkpoint(FULL)").use { it.moveToFirst() }
+                    PublicDatabase.closeDatabase()
 
-            val dbFile = requireContext().getDatabasePath("public.db")
-            if (!dbFile.exists()) {
-                toast(getString(R.string.database_not_initialized))
-                return
-            }
+                    val dbFile = requireContext().getDatabasePath("public.db")
+                    if (!dbFile.exists()) {
+                        withContext(Dispatchers.Main) {
+                            toast(getString(R.string.database_not_initialized))
+                        }
+                        return@withContext
+                    }
 
-            requireContext().contentResolver.openOutputStream(uri)?.use { output ->
-                FileInputStream(dbFile).use { input ->
-                    input.copyTo(output)
+                    requireContext().contentResolver.openOutputStream(uri)?.use { output ->
+                        FileInputStream(dbFile).use { input ->
+                            input.copyTo(output)
+                        }
+                    }
+                    withContext(Dispatchers.Main) {
+                        toast(getString(R.string.backup_saved_successfully))
+                    }
                 }
+            } catch (e: Exception) {
+                toast("خطا در تهیه نسخه پشتیبان: ${e.message}")
             }
-            toast(getString(R.string.backup_saved_successfully))
-        } catch (e: Exception) {
-            toast("خطا در تهیه نسخه پشتیبان: ${e.message}")
         }
     }
 
     private fun restoreDatabase(uri: Uri) {
-        try {
-            PublicDatabase.closeDatabase()
+        lifecycleScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    PublicDatabase.closeDatabase()
 
-            val dbFile = requireContext().getDatabasePath("public.db")
-            
-            requireContext().contentResolver.openInputStream(uri)?.use { input ->
-                FileOutputStream(dbFile).use { output ->
-                    input.copyTo(output)
+                    val dbFile = requireContext().getDatabasePath("public.db")
+                    
+                    requireContext().contentResolver.openInputStream(uri)?.use { input ->
+                        FileOutputStream(dbFile).use { output ->
+                            input.copyTo(output)
+                        }
+                    }
+
+                    val shmFile = File(dbFile.path + "-shm")
+                    val walFile = File(dbFile.path + "-wal")
+                    if (shmFile.exists()) shmFile.delete()
+                    if (walFile.exists()) walFile.delete()
+
+                    withContext(Dispatchers.Main) {
+                        val intent = requireContext().packageManager
+                            .getLaunchIntentForPackage(requireContext().packageName)
+                            ?.apply {
+                                addFlags(
+                                    Intent.FLAG_ACTIVITY_NEW_TASK or
+                                            Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                )
+                            }
+                        intent?.let {
+                            startActivity(it)
+                            requireActivity().finishAffinity()
+                        }
+                    }
                 }
+            } catch (e: Exception) {
+                toast("خطا در بازیابی دیتابیس: ${e.message}")
             }
-
-            val shmFile = File(dbFile.path + "-shm")
-            val walFile = File(dbFile.path + "-wal")
-            if (shmFile.exists()) shmFile.delete()
-            if (walFile.exists()) walFile.delete()
-
-            val intent = requireContext().packageManager
-                .getLaunchIntentForPackage(requireContext().packageName)
-                ?.apply {
-                    addFlags(
-                        Intent.FLAG_ACTIVITY_NEW_TASK or
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    )
-                }
-            intent?.let {
-                startActivity(it)
-                requireActivity().finishAffinity()
-            }
-            
-        } catch (e: Exception) {
-            toast("خطا در بازیابی دیتابیس: ${e.message}")
         }
     }
 

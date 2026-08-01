@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.TransactionFragmentBinding
 import com.amirbahadoramiri.kalayar.databinding.TransactionShowSheetBinding
+import com.amirbahadoramiri.kalayar.domain.models.Store
 import com.amirbahadoramiri.kalayar.domain.models.Transaction
 import com.amirbahadoramiri.kalayar.domain.models.TransactionItem
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
@@ -77,7 +79,7 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Transaction>("new_transaction")
             ?.observe(viewLifecycleOwner) { transaction ->
                 transaction?.let {
-                    onAddTransaction(it,0)
+                    onAddTransaction(it, 0)
                     findNavController().currentBackStackEntry?.savedStateHandle?.remove<Transaction>("new_transaction")
                 }
             }
@@ -118,7 +120,8 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
 
         binding.addTransaction.setOnClickListener {
             if (findNavController().currentDestination?.id == R.id.transactionsFragment) {
-                val action = TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
+                val action =
+                    TransactionsFragmentDirections.actionTransactionsFragmentToAddTransactionFragment()
                 findNavController().navigate(action)
             }
         }
@@ -130,7 +133,7 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
                 popBackStack()
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressedCallback)
     }
 
     override fun onShowTransaction(transaction: Transaction, position: Int) {
@@ -146,19 +149,30 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
         }
 
         var currentItems = listOf<TransactionItem>()
+        var currentStore: Store? = null
         var currentTotalPrice = 0L
 
-        transactionViewModel.getTransactionItemsLiveData.observe(viewLifecycleOwner) { items ->
+        val itemsObserver = Observer<List<TransactionItem>> { items ->
             currentItems = items
             itemAdapter.setData(items)
             var totalPrice = 0L
             items.forEach { totalPrice += (it.product_price * it.change_amount) }
             currentTotalPrice = totalPrice
-            showBinding.totalPriceValue.text = "${TextUtils.numberFormat(totalPrice)} ${getString(R.string.toman)}"
+            showBinding.totalPriceValue.text =
+                "${TextUtils.numberFormat(totalPrice)} ${getString(R.string.toman)}"
         }
 
-        transactionViewModel.getStoreLiveData.observe(viewLifecycleOwner) { store ->
+        val storeObserver = Observer<Store?> { store ->
+            currentStore = store
             showBinding.store = store
+        }
+
+        transactionViewModel.getTransactionItemsLiveData.observe(viewLifecycleOwner, itemsObserver)
+        transactionViewModel.getStoreLiveData.observe(viewLifecycleOwner, storeObserver)
+
+        bottomSheetDialog.setOnDismissListener {
+            transactionViewModel.getTransactionItemsLiveData.removeObserver(itemsObserver)
+            transactionViewModel.getStoreLiveData.removeObserver(storeObserver)
         }
 
         transaction.transaction_id?.let {
@@ -172,7 +186,7 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
                 transaction,
                 currentItems,
                 currentTotalPrice,
-                showBinding.store
+                currentStore
             )
         }
 
@@ -189,18 +203,23 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
     }
 
     override fun onPrintTransaction(transaction: Transaction, position: Int) {
-        transaction.transaction_id?.let {
-            transactionViewModel.getTransactionItems(it)
+        transaction.transaction_id?.let { id ->
+            transactionViewModel.getTransactionItems(id)
             transactionViewModel.getStore()
-            
-            val itemsObserver = object : androidx.lifecycle.Observer<List<TransactionItem>> {
-                override fun onChanged(items: List<TransactionItem>) {
-                    val storeObserver = object : androidx.lifecycle.Observer<com.amirbahadoramiri.kalayar.domain.models.Store?> {
-                        override fun onChanged(store: com.amirbahadoramiri.kalayar.domain.models.Store?) {
+
+            val itemsObserver = object : Observer<List<TransactionItem>> {
+                override fun onChanged(transactionItems: List<TransactionItem>) {
+                    val storeObserver = object : Observer<Store?> {
+                        override fun onChanged(store: Store?) {
                             var totalPrice = 0L
-                            items.forEach { totalPrice += (it.product_price * it.change_amount) }
-                            PDFUtils.generateAndShareTransactionPDF(requireContext(), transaction, items, totalPrice, store)
-                            
+                            transactionItems.forEach { totalPrice += (it.product_price * it.change_amount) }
+                            PDFUtils.generateAndShareTransactionPDF(
+                                requireContext(),
+                                transaction,
+                                transactionItems,
+                                totalPrice,
+                                store
+                            )
                             transactionViewModel.getStoreLiveData.removeObserver(this)
                         }
                     }
@@ -216,7 +235,7 @@ class TransactionsFragment : BaseFragment(), TransactionEventListener {
     override fun onAddTransaction(transaction: Transaction, position: Int) {
         lifecycleScope.launch {
             delay(500.milliseconds)
-            transactionsAdapter.addTransaction(transaction,position)
+            transactionsAdapter.addTransaction(transaction, position)
             binding.transactionRecyclerview.scrollToPosition(position)
             transactionViewModel.getAllTransactionLiveData.value?.add(position, transaction)
         }

@@ -7,13 +7,13 @@ plugins {
 
 val versionMajor = 1
 val versionMinor = 0
-val versionPatch = 1
+val versionPatch = 2
 
 val debugMinify = false
 val releaseMinify = true
 
 private fun generateVersionCode() : Int {
-    return (versionMajor+versionMinor+versionPatch);
+    return versionMajor * 10000 + versionMinor * 100 + versionPatch
 }
 
 private fun generateVersionName() : String {
@@ -53,7 +53,7 @@ android {
     }
 
     dataBinding {
-        enable=true
+        enable = true
     }
 
     buildFeatures {
@@ -86,7 +86,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation(libs.room.runtime)
-    annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
 
     implementation(libs.retrofit)
@@ -100,8 +99,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
 
     implementation(libs.hilt.android)
-    implementation(libs.dagger.android.support)
-    annotationProcessor(libs.dagger.hilt.compiler)
+    ksp(libs.dagger.hilt.compiler)
 
     implementation(libs.chip.navigation.bar)
 

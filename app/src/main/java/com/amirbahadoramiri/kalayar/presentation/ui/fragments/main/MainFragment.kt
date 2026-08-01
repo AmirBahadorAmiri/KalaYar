@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.MainFragmentBinding
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.github.amirbahadoramiri.telegramdialog.TelegramConfirmDialog
+import com.github.amirbahadoramiri.telegramdialog.direction.DialogDirection
+import com.github.amirbahadoramiri.telegramdialog.listeners.OnConfirmListener
 import com.ismaeldivita.chipnavigation.ChipNavigationBar
-import androidx.navigation.findNavController
 
 class MainFragment: BaseFragment() {
 
@@ -61,9 +63,33 @@ class MainFragment: BaseFragment() {
     private fun customOnBackPressed() {
         val backPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                val exitDialog = TelegramConfirmDialog(requireContext(), DialogDirection.RTL)
+                    .setTitle(getString(R.string.exit_app))
+                    .setMessage(getString(R.string.exit_app_message))
+                    .setCancelable(true)
+                    .setCardBackgroundColor(requireContext().getColor(R.color.kalayar_page_background_color))
+                    .setPositiveButtonText(getString(R.string.yes))
+                    .setPositiveButtonTextColor(requireContext().getColor(R.color.kalayar_dialog_red_color))
+                    .setPositiveButtonRippleColor(requireContext().getColor(R.color.kalayar_dialog_red_color_tint))
+                    .setPositiveButtonBackgroundColor(requireContext().getColor(R.color.kalayar_page_background_color))
+                    .setNegativeButtonText(getString(R.string.cancel))
+                    .setNegativeButtonTextColor(requireContext().getColor(R.color.kalayar_dialog_blue_color))
+                    .setNegativeButtonRippleColor(requireContext().getColor(R.color.kalayar_dialog_blue_color_tint))
+                    .setNegativeButtonBackgroundColor(requireContext().getColor(R.color.kalayar_page_background_color))
+
+                exitDialog.setOnClickListener(object : OnConfirmListener {
+                    override fun onNegativeButtonClicked() {
+                        exitDialog.dismiss()
+                    }
+
+                    override fun onPositiveButtonClicked() {
+                        requireActivity().finish()
+                    }
+                })
+                exitDialog.show()
             }
         }
-        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, backPressedCallback)
     }
 
 }

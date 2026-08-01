@@ -102,4 +102,6 @@
     <string name="delete_it">حذف شود!</string>
     <string name="password_too_short">رمز عبور باید حداقل ۴ کاراکتر باشد</string>
     <string name="live_prices">قیمت‌های زنده</string>
+    <string name="exit_app">خروج از برنامه</string>
+    <string name="exit_app_message">آیا مایل به خروج از برنامه هستید؟</string>
 </resources>

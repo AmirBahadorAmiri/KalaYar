@@ -172,16 +172,5 @@ class ProfileFragment : BaseFragment() {
         binding.rateButton.setOnClickListener {
             Packager.openInMarket(requireContext())
         }
-
-        customOnBackPressed()
     }
-
-    private fun customOnBackPressed() {
-        val backPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
-    }
-
 }

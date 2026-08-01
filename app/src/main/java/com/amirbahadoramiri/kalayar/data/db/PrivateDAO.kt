@@ -12,15 +12,15 @@ import com.amirbahadoramiri.kalayar.domain.models.User
 interface PrivateDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addUser(user: User)
+    suspend fun addUser(user: User)
 
     @Delete
-    fun deleteUser(user: User)
+    suspend fun deleteUser(user: User)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateUser(user: User)
+    suspend fun updateUser(user: User)
 
     @Query("SELECT * FROM user limit 1")
-    fun getUser(): User?
+    suspend fun getUser(): User?
 
 }

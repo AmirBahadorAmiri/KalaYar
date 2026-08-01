@@ -41,7 +41,6 @@ class HomeFragment : BaseFragment() {
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         setupAdapter()
         setupPrices()
-        customOnBackPressed()
         
         homeViewModel.fetchPrices()
     }
@@ -118,14 +117,6 @@ class HomeFragment : BaseFragment() {
             layoutManager = GridLayoutManager(requireContext(), 3, GridLayoutManager.VERTICAL, false)
             adapter = adapter1
         }
-    }
-
-    private fun customOnBackPressed() {
-        val backPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this, backPressedCallback)
     }
 
 }

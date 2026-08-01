@@ -10,7 +10,7 @@ import retrofit2.http.Url;
 public interface NetworkInterface {
 
     @GET
-    String getData(@Url String url);
+    Call<ResponseBody> getData(@Url String url);
 
     @Headers("Content-Length: 0")
     @POST("common/CurrencyTable")
