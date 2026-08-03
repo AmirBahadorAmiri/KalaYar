@@ -33,7 +33,11 @@ class ProductFragment : BaseFragment(), ProductEventListener {
     private val productAdapter = ProductAdapter(this)
     private var ASC = true
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = ProductFragmentBinding.inflate(inflater)
         return binding.root
     }
@@ -138,14 +142,10 @@ class ProductFragment : BaseFragment(), ProductEventListener {
         if (product != null) sheetBinding.product = product
 
         sheetBinding.productCount.addTextChangedListener(
-            textChangeListener(
-                sheetBinding.productCount, 9
-            )
+            textChangeListener(sheetBinding.productCount, 9)
         )
         sheetBinding.productPrice.addTextChangedListener(
-            textChangeListener(
-                sheetBinding.productPrice, 12
-            )
+            textChangeListener(sheetBinding.productPrice, 12)
         )
 
         sheetBinding.confirmButton.setOnClickListener {
@@ -174,7 +174,10 @@ class ProductFragment : BaseFragment(), ProductEventListener {
             } else {
                 if (product == null) {
                     val newProduct = Product(
-                        product_name, product_unit, product_price.replace(",", "").toLong(), product_count.replace(",", "").toLong()
+                        product_name,
+                        product_unit,
+                        product_price.replace(",", "").toLong(),
+                        product_count.replace(",", "").toLong()
                     )
                     onAddProduct(newProduct, 0)
                 } else {

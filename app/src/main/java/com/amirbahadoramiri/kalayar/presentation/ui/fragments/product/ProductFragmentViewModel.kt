@@ -18,6 +18,7 @@ class ProductFragmentViewModel(application: Application) : AndroidViewModel(appl
         viewModelScope.launch {
             repository.addProduct(product).let {
                 product.product_id = it
+                getAllProductLiveData.value?.add(product)
             }
         }
     }
