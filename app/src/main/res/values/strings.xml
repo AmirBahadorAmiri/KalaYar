@@ -62,7 +62,7 @@
     <string name="contact_insert_name">نام مشتری را وارد کنید</string>
     <string name="contact_insert_number">تلفن مشتری را وارد کنید</string>
     <string name="transaction_delete">حذف تراکنش</string>
-    <string name="transaction_delete_message">تمامی موجودی ها ها باقی خواهند ماند\nبا حذف تراکنش موافقید ؟</string>
+    <string name="transaction_delete_message">تمامی موجودی ها باقی خواهند ماند\nبا حذف تراکنش موافقید ؟</string>
     <string name="product_delete">حذف محصول</string>
     <string name="product_delete_message">محصول و موجودی های آن حذف خواهند شد\nتمامی تراکنش ها باقی خواهند ماند، با حذف\nمحصول موافقید ؟</string>
     <string name="contact_delete">حذف مشتری</string>
@@ -78,7 +78,7 @@
     <string name="zero">0</string>
     <string name="product_types_count">تعداد انواع محصولات</string>
     <string name="password">رمز عبور</string>
-    <string name="dark_theme">تم تاریک</string>
+    <string name="dark_theme">تم تیره</string>
     <string name="rate_and_review">شرکت در نظرسنجی و دادن امتیاز</string>
     <string name="about_us">درباره ما</string>
     <string name="one">1</string>
@@ -92,7 +92,7 @@
     <string name="password_warning_data_loss">در صورت فراموشی رمز عبور تمام اطلاعات پاک خواهند شد آیا با گذاشتن رمز عبور موافقید ؟</string>
     <string name="yes">بله</string>
     <string name="enter_password">رمز عبور را وارد کنید</string>
-    <string name="enter_text">مقدار را وارد کنید...</string>
+    <string name="enter_text">مقدار را وارد کنید…</string>
     <string name="choose_password">انتخاب رمز عبور</string>
     <string name="login">ورود</string>
     <string name="forget_password">فراموشی رمز عبور</string>

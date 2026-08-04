@@ -7,7 +7,7 @@ plugins {
 
 val versionMajor = 1
 val versionMinor = 0
-val versionPatch = 2
+val versionPatch = 3
 
 val debugMinify = false
 val releaseMinify = true
