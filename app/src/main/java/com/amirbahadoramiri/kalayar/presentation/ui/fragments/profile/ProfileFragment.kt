@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.CompoundButton
-import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.ViewModelProvider
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.ProfileFragmentBinding
@@ -44,16 +43,13 @@ class ProfileFragment : BaseFragment() {
 
     private fun setup() {
         profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class)
+
+
         profileViewModel.storeLiveData.observe(viewLifecycleOwner) {
             store = it
             binding.store = store
         }
-        profileViewModel.userLiveData.observe(viewLifecycleOwner) {
-            binding.passwordSwitchButton.isChecked = it.user_password.isNotEmpty()
-        }
         profileViewModel.getStore()
-        profileViewModel.checkPassword()
-
         binding.storeView.setOnClickListener {
             val storeViewSheet = BottomSheetDialog(requireContext())
             val storeViewSheetBinding = ProfileStoreBottomSheetBinding.inflate(layoutInflater)
@@ -71,23 +67,37 @@ class ProfileFragment : BaseFragment() {
             storeViewSheet.show()
         }
 
+
         binding.themeSwitchButton.isChecked = DarkMode.checkDarkMode(requireContext())
         binding.themeSwitchButton.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                DarkMode.enableDarkMode(requireContext())
-            } else {
-                DarkMode.disableDarkMode(requireContext())
+            if (buttonView.isPressed) {
+                val location = IntArray(2)
+                buttonView.getLocationInWindow(location)
+                val x = location[0] + buttonView.width / 2
+                val y = location[1] + buttonView.height / 2
+                DarkMode.toggleDarkMode(requireActivity(), isChecked, x, y)
             }
         }
         binding.themeButton.setOnClickListener {
-            binding.themeSwitchButton.isChecked = !binding.themeSwitchButton.isChecked
+            val isChecked = !binding.themeSwitchButton.isChecked
+            binding.themeSwitchButton.isChecked = isChecked
+            val location = IntArray(2)
+            it.getLocationInWindow(location)
+            val x = location[0] + it.width / 2
+            val y = location[1] + it.height / 2
+            DarkMode.toggleDarkMode(requireActivity(), isChecked, x, y)
         }
 
+
+        profileViewModel.userLiveData.observe(viewLifecycleOwner) {
+            binding.passwordSwitchButton.isChecked = it.user_password.isNotEmpty()
+        }
+        profileViewModel.checkPassword()
         binding.passwordSwitchButton.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
             override fun onCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
-                if (!buttonView.isPressed) return
-
                 val user = profileViewModel.userLiveData.value ?: return
+
+                if (isChecked == user.user_password.isNotEmpty()) return
 
                 if (isChecked) {
 
@@ -168,6 +178,7 @@ class ProfileFragment : BaseFragment() {
         binding.passwordButton.setOnClickListener {
             binding.passwordSwitchButton.isChecked = !binding.passwordSwitchButton.isChecked
         }
+
 
         binding.rateButton.setOnClickListener {
             Packager.openInMarket(requireContext())
