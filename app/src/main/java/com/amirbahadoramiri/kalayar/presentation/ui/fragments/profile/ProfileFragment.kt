@@ -67,27 +67,18 @@ class ProfileFragment : BaseFragment() {
             storeViewSheet.show()
         }
 
-
-        binding.themeSwitchButton.isChecked = DarkMode.checkDarkMode(requireContext())
-        binding.themeSwitchButton.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (buttonView.isPressed) {
-                val location = IntArray(2)
-                buttonView.getLocationInWindow(location)
-                val x = location[0] + buttonView.width / 2
-                val y = location[1] + buttonView.height / 2
-                DarkMode.toggleDarkMode(requireActivity(), isChecked, x, y)
-            }
-        }
-        binding.themeButton.setOnClickListener {
-            val isChecked = !binding.themeSwitchButton.isChecked
-            binding.themeSwitchButton.isChecked = isChecked
+        if ( DarkMode.checkDarkMode(requireContext()) )
+            binding.themeModeButton.setImageResource(R.drawable.kalayar_dark_mode)
+        else
+            binding.themeModeButton.setImageResource(R.drawable.kalayar_light_mode)
+        binding.themeModeButton.setOnClickListener {
+            val isChecked = !DarkMode.checkDarkMode(requireContext())
             val location = IntArray(2)
             it.getLocationInWindow(location)
             val x = location[0] + it.width / 2
             val y = location[1] + it.height / 2
-            DarkMode.toggleDarkMode(requireActivity(), isChecked, x, y)
+            DarkMode.toggleDarkMode(requireActivity(), isChecked)
         }
-
 
         profileViewModel.userLiveData.observe(viewLifecycleOwner) {
             binding.passwordSwitchButton.isChecked = it.user_password.isNotEmpty()

@@ -42,7 +42,7 @@ open class BaseActivity : AppCompatActivity() {
                 overlay.post {
                     val finalRadius = hypot(rootLayout.width.toDouble(), rootLayout.height.toDouble()).toFloat()
                     val anim = ViewAnimationUtils.createCircularReveal(overlay, cx, cy, finalRadius, 0f)
-                    anim.duration = 700
+                    anim.duration = 500
                     anim.addListener(object : AnimatorListenerAdapter() {
                         override fun onAnimationEnd(animation: Animator) {
                             rootLayout.removeView(overlay)
@@ -69,7 +69,7 @@ open class BaseActivity : AppCompatActivity() {
                 rootLayout.post {
                     val finalRadius = hypot(rootLayout.width.toDouble(), rootLayout.height.toDouble()).toFloat()
                     val anim = ViewAnimationUtils.createCircularReveal(rootLayout, cx, cy, 0f, finalRadius)
-                    anim.duration = 700
+                    anim.duration = 500
                     anim.addListener(object : AnimatorListenerAdapter() {
                         override fun onAnimationEnd(animation: Animator) {
                             decorView.removeView(background)

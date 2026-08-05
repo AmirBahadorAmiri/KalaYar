@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -26,6 +27,20 @@
             android:textStyle="bold"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/theme_mode_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/STANDARD_32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            tools:src="@drawable/kalayar_dark_mode"
+            app:layout_constraintBottom_toBottomOf="@id/title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/title"
+            app:tint="@color/kalayar_icon_color" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/store_view"
@@ -166,37 +181,6 @@
             app:trackTint="@null" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/theme_button"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/STANDARD_60dp"
-            android:layout_marginLeft="@dimen/STANDARD_16dp"
-            android:layout_marginRight="@dimen/STANDARD_16dp"
-            android:gravity="right|center_vertical"
-            android:text="@string/dark_theme"
-            android:textColor="@color/kalayar_text_color"
-            android:textSize="@dimen/STANDARD_16sp"
-            app:backgroundTint="@color/kalayar_item_background_color"
-            app:cornerRadius="@dimen/STANDARD_32dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password_button"
-            app:rippleColor="@color/kalayar_item_ripple_color" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/themeSwitchButton"
-            android:layout_width="wrap_content"
-            android:layout_height="28dp"
-            android:layout_marginLeft="@dimen/STANDARD_16dp"
-            android:checked="false"
-            android:thumb="@drawable/thumb_selector"
-            app:layout_constraintBottom_toBottomOf="@id/theme_button"
-            app:layout_constraintLeft_toLeftOf="@id/theme_button"
-            app:layout_constraintTop_toTopOf="@id/theme_button"
-            app:thumbTint="@null"
-            app:track="@drawable/track_selector"
-            app:trackTint="@null" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/rate_button"
             android:layout_width="0dp"
             android:layout_height="@dimen/STANDARD_60dp"
@@ -210,7 +194,7 @@
             app:cornerRadius="@dimen/STANDARD_32dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/theme_button"
+            app:layout_constraintTop_toBottomOf="@id/password_button"
             app:rippleColor="@color/kalayar_item_ripple_color" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
