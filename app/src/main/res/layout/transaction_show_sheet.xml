@@ -179,7 +179,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/transaction_type_icon" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/total_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -187,32 +187,39 @@
             android:layout_marginHorizontal="@dimen/STANDARD_24dp"
             android:background="@drawable/radius_16"
             android:backgroundTint="@color/kalayar_item_background_color"
-            android:orientation="horizontal"
             android:padding="@dimen/STANDARD_16dp"
-            android:gravity="right|center_vertical"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/total_price_value"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/kalayar_primary_color"
                 android:textSize="@dimen/STANDARD_16sp"
                 android:textStyle="bold"
+                android:gravity="left|center_vertical"
+                android:layout_marginRight="@dimen/STANDARD_16dp"
+                app:layout_constraintRight_toLeftOf="@id/mablaq_nahaee"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:text="0" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mablaq_nahaee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/STANDARD_8dp"
                 android:text="@string/transaction_last_price"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:textColor="@color/kalayar_text_color"
                 android:textSize="@dimen/STANDARD_12sp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/list_header"

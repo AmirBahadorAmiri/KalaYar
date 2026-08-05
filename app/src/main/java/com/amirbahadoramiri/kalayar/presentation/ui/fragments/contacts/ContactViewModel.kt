@@ -18,6 +18,7 @@ class ContactViewModel(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             repository.addContact(contact).let {
                 contact.contact_id = it
+                allContactsLiveData.value?.add(contact)
             }
         }
     }
