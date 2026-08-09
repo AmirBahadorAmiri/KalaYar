@@ -3,7 +3,14 @@
         <shape android:shape="oval">
             <solid android:color="@android:color/white" />
             <size android:width="@dimen/STANDARD_24dp" android:height="@dimen/STANDARD_24dp" />
-            <stroke android:width="3dp" android:color="@android:color/white" />
+            <stroke android:width="3dp" android:color="@color/kalayar_track_selector_disable_color" />
+        </shape>
+    </item>
+    <item android:state_checked="true">
+        <shape android:shape="oval">
+            <solid android:color="@android:color/white" />
+            <size android:width="@dimen/STANDARD_24dp" android:height="@dimen/STANDARD_24dp" />
+            <stroke android:width="3dp" android:color="@color/kalayar_primary_color" />
         </shape>
     </item>
 </selector>

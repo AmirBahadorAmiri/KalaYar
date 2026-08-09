@@ -30,8 +30,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/theme_mode_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/STANDARD_24dp"
+            android:layout_height="@dimen/STANDARD_24dp"
             android:layout_marginLeft="@dimen/STANDARD_32dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"

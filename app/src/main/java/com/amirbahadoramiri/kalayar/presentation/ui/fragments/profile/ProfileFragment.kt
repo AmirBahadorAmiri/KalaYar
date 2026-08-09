@@ -77,7 +77,7 @@ class ProfileFragment : BaseFragment() {
             it.getLocationInWindow(location)
             val x = location[0] + it.width / 2
             val y = location[1] + it.height / 2
-            DarkMode.toggleDarkMode(requireActivity(), isChecked)
+            DarkMode.toggleDarkMode(requireActivity(), isChecked, x, y)
         }
 
         profileViewModel.userLiveData.observe(viewLifecycleOwner) {

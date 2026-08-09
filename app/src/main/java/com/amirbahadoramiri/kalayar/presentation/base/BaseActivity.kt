@@ -28,57 +28,32 @@ open class BaseActivity : AppCompatActivity() {
             val cx = DarkMode.revealX
             val cy = DarkMode.revealY
 
-            if (DarkMode.targetDarkMode) {
-                // انیمیشن برای تم تیره: لایه قبلی (روشن) روی تم جدید است و کوچک می‌شود
-                val overlay = ImageView(this)
-                overlay.setImageBitmap(bitmap)
-                overlay.scaleType = ImageView.ScaleType.FIT_XY
-                overlay.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-                rootLayout.addView(overlay)
+            // انیمیشن یکسان برای هر دو حالت (بزرگ‌شونده):
+            // لایه قبلی زیر قرار می‌گیرد و تم جدید روی آن بزرگ می‌شود
+            val background = ImageView(this)
+            background.setImageBitmap(bitmap)
+            background.scaleType = ImageView.ScaleType.FIT_XY
+            background.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
 
-                overlay.post {
-                    val finalRadius = hypot(rootLayout.width.toDouble(), rootLayout.height.toDouble()).toFloat()
-                    val anim = ViewAnimationUtils.createCircularReveal(overlay, cx, cy, finalRadius, 0f)
-                    anim.duration = 500
-                    anim.addListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            rootLayout.removeView(overlay)
-                            DarkMode.themeBitmap = null
-                            DarkMode.isThemeChanged = false
-                        }
-                    })
-                    anim.start()
-                }
-            } else {
-                // انیمیشن برای تم روشن: لایه قبلی (تیره) زیر است و تم جدید روی آن بزرگ می‌شود
-                val background = ImageView(this)
-                background.setImageBitmap(bitmap)
-                background.scaleType = ImageView.ScaleType.FIT_XY
-                background.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-                
-                // حقه: لایه تیره را به DecorView اضافه می‌کنیم تا زیر کل اکتیویتی باشد
-                val decorView = window.decorView as ViewGroup
-                decorView.addView(background, 0)
+            // لایه قبلی را به DecorView اضافه می‌کنیم تا زیر کل اکتیویتی باشد
+            val decorView = window.decorView as ViewGroup
+            decorView.addView(background, 0)
 
-                rootLayout.post {
-                    val finalRadius = hypot(rootLayout.width.toDouble(), rootLayout.height.toDouble()).toFloat()
-                    val anim = ViewAnimationUtils.createCircularReveal(rootLayout, cx, cy, 0f, finalRadius)
-                    anim.duration = 500
-                    anim.addListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            decorView.removeView(background)
-                            DarkMode.themeBitmap = null
-                            DarkMode.isThemeChanged = false
-                        }
-                    })
-                    anim.start()
-                }
+            rootLayout.post {
+                val finalRadius = hypot(rootLayout.width.toDouble(), rootLayout.height.toDouble()).toFloat()
+                val anim = ViewAnimationUtils.createCircularReveal(rootLayout, cx, cy, 0f, finalRadius)
+                anim.duration = 700
+                anim.addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        decorView.removeView(background)
+                        DarkMode.themeBitmap = null
+                        DarkMode.isThemeChanged = false
+                    }
+                })
+                anim.start()
             }
         }
     }
