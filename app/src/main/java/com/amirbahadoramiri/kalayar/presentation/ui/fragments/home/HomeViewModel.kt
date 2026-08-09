@@ -39,14 +39,14 @@ class HomeViewModel : ViewModel() {
                             
                             // Mappings for Tasnim Titles (Gold & Coins first, then common currencies)
                             val mappings = mapOf(
-                                "tgju_gold_irg18" to "طلای ۱۸ عیار",
-                                "mesghal" to "مثقال طلا",
+                                "geram18" to "طلای ۱۸ عیار",
+                                "geram24" to "طلای ۲۴ عیار",
                                 "ons" to "انس طلا",
-                                "sekee" to "سکه امامی",
-                                "sekeb" to "سکه بهار آزادی",
-                                "nim" to "نیم سکه",
-                                "rob" to "ربع سکه",
-                                "gerami" to "سکه گرمی",
+                                "retail_sekee" to "سکه امامی",
+                                "retail_sekeb" to "سکه بهار آزادی",
+                                "retail_nim" to "نیم سکه",
+                                "retail_rob" to "ربع سکه",
+                                "retail_gerami" to "سکه گرمی",
                                 "price_usd_rl" to "دلار آمریکا",
                                 "price_dollar_rl" to "دلار آمریکا",
                                 "price_usd" to "دلار آمریکا",
