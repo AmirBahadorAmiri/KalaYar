@@ -75,9 +75,15 @@
 # END OF RETROFIT PROGUARD
 
 
+# GSON PROGUARD
+-keepattributes Signature
+-keepattributes RuntimeVisibleAnnotations
+-keepattributes RuntimeInvisibleAnnotations
 
-
-
+-keepclassmembers,allowobfuscation class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+#END OF GSON PROGUARD
 
 
 

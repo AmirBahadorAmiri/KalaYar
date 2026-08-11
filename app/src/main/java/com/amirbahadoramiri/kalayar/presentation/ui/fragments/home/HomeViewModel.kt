@@ -80,11 +80,11 @@ class HomeViewModel : ViewModel() {
                             pricesLiveData.postValue(items)
                             
                         } catch (e: Exception) {
-                            errorLiveData.postValue("خطا در پردازش داده‌ها")
+                            errorLiveData.postValue(e.message)
                         }
                     }
                 } else {
-                    errorLiveData.postValue("خطا در دریافت اطلاعات")
+                    errorLiveData.postValue("response not successful")
                 }
             }
 

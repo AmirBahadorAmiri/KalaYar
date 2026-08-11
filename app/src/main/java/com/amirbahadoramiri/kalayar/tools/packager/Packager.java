@@ -28,9 +28,14 @@ public class Packager {
         return "نگارش " + Packager.getVersionName(context);
     }
 
-    public static int getVersionCode(Context context) {
+    public static long getVersionCode(Context context) {
         try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).getLongVersionCode();
+            }
+            else {
+                return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+            }
         } catch (PackageManager.NameNotFoundException e) {
             Log.d("TAG", "getVersionName: " + e.getMessage());
         }
