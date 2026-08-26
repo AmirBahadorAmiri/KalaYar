@@ -180,5 +180,21 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/store_phone_layout" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/restore_button"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/STANDARD_60dp"
+            android:layout_marginLeft="@dimen/STANDARD_16dp"
+            android:layout_marginRight="@dimen/STANDARD_16dp"
+            android:layout_marginTop="@dimen/STANDARD_8dp"
+            android:text="@string/restore_backup"
+            android:textSize="@dimen/STANDARD_16sp"
+            android:textColor="@color/kalayar_text_on_primary_color"
+            app:backgroundTint="@color/kalayar_primary_color"
+            app:cornerRadius="@dimen/STANDARD_32dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirm_button" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
