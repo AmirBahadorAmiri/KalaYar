@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
@@ -21,15 +22,14 @@ import kotlin.math.hypot
 
 open class BaseActivity : AppCompatActivity() {
 
-    fun handleCircularReveal() {
+    fun handleThemeTransition() {
         val bitmap = DarkMode.themeBitmap
         if (DarkMode.isThemeChanged && bitmap != null) {
             val rootLayout = findViewById<ViewGroup>(android.R.id.content)
             val cx = DarkMode.revealX
             val cy = DarkMode.revealY
 
-            // انیمیشن یکسان برای هر دو حالت (بزرگ‌شونده):
-            // لایه قبلی زیر قرار می‌گیرد و تم جدید روی آن بزرگ می‌شود
+            // لایه حاوی تصویر قدیمی (اسکرین‌شات)
             val background = ImageView(this)
             background.setImageBitmap(bitmap)
             background.scaleType = ImageView.ScaleType.FIT_XY
@@ -38,14 +38,26 @@ open class BaseActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
 
-            // لایه قبلی را به DecorView اضافه می‌کنیم تا زیر کل اکتیویتی باشد
+            // اضافه کردن اسکرین‌شات به بالاترین لایه (روی تم جدید)
             val decorView = window.decorView as ViewGroup
-            decorView.addView(background, 0)
+            decorView.addView(background)
 
             rootLayout.post {
                 val finalRadius = hypot(rootLayout.width.toDouble(), rootLayout.height.toDouble()).toFloat()
-                val anim = ViewAnimationUtils.createCircularReveal(rootLayout, cx, cy, 0f, finalRadius)
-                anim.duration = 700
+                
+                // انیمیشن «کندن» اسکرین‌شات قدیمی از روی صفحه
+                val anim = ViewAnimationUtils.createCircularReveal(background, cx, cy, finalRadius, 0f)
+                
+                anim.duration = 800
+                anim.interpolator = DecelerateInterpolator()
+                
+                // همزمان محو شدن برای نرمی بیشتر
+                background.animate()
+                    .alpha(0f)
+                    .setDuration(800)
+                    .setInterpolator(DecelerateInterpolator())
+                    .start()
+                
                 anim.addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         decorView.removeView(background)

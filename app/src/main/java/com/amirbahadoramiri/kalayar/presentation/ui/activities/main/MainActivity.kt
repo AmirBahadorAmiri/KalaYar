@@ -14,7 +14,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         edgeColor()
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
-        handleCircularReveal()
+        handleThemeTransition()
         setViewCompat()
     }
 
