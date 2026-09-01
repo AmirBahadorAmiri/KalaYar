@@ -20,6 +20,8 @@
             app:navGraph="@navigation/bottom_navigation_menu" />
 
         <com.ismaeldivita.chipnavigation.ChipNavigationBar
+            android:background="@color/kalayar_bottom_navigation_background_color"
+            android:elevation="@dimen/STANDARD_4dp"
             android:id="@+id/chipNavigationBar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

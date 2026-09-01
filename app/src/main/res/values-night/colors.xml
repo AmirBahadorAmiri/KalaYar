@@ -20,4 +20,5 @@
     <color name="kalayar_dialog_blue_color_tint">#80085DB3</color>
     <color name="kalayar_dialog_red_color">#F64848</color>
     <color name="kalayar_dialog_red_color_tint">#80D34E4E</color>
+    <color name="kalayar_bottom_navigation_background_color">#2A2C2E</color>
 </resources>
