@@ -80,6 +80,13 @@ class ProfileFragment : BaseFragment() {
             .start()
 
         binding.themeModeButton.setOnClickListener {
+//            binding.themeModeButton.animate()
+//                .setDuration(500)
+//                .rotation(360F)
+//                .setInterpolator(DecelerateInterpolator())
+//                .withEndAction {
+//                }
+//                .start()
             val isChecked = !DarkMode.checkDarkMode(requireContext())
             val location = IntArray(2)
             it.getLocationInWindow(location)
@@ -127,7 +134,7 @@ class ProfileFragment : BaseFragment() {
                                 .setMessage(getString(R.string.enter_password))
                                 .setCardBackgroundColor(requireContext().getColor(R.color.kalayar_page_background_color))
                                 .setEditTextDrawable(
-                                    R.drawable.kalayar_password_hint_icon,
+                                    R.drawable.kalayar_password,
                                     requireContext().getColor(R.color.kalayar_dialog_blue_color)
                                 )
                                 .setEditTextHint(getString(R.string.enter_text))

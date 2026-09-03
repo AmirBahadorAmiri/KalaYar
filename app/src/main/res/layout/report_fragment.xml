@@ -28,11 +28,11 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:src="@drawable/kalayar_left"
+            android:src="@drawable/kalayar_arrow_left"
             app:layout_constraintBottom_toBottomOf="@id/title"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/title"
-            app:tint="@color/kalayar_icon_color" />
+            app:tint="@color/kalayar_primary_color" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -67,8 +67,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_marginLeft="8dp"
-                        android:src="@drawable/kalayar_inventory"
-                        app:tint="@color/kalayar_text_hint_color" />
+                        android:src="@drawable/kalayar_report"
+                        app:tint="@color/kalayar_primary_color" />
 
                 </LinearLayout>
 
@@ -164,8 +164,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:layout_marginLeft="8dp"
-                        android:src="@drawable/kalayar_money"
-                        app:tint="@color/kalayar_text_hint_color" />
+                        android:src="@drawable/kalayar_give_money"
+                        app:tint="@color/kalayar_primary_color" />
 
                 </LinearLayout>
 

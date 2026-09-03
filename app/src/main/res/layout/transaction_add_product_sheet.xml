@@ -111,6 +111,8 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
+                android:padding="@dimen/STANDARD_8dp"
+                app:tint="@color/kalayar_dialog_red_color"
                 android:src="@drawable/kalayar_minus" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -121,7 +123,9 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:src="@drawable/kalayar_plus" />
+                android:padding="@dimen/STANDARD_8dp"
+                app:tint="@color/kalayar_dialog_blue_color"
+                android:src="@drawable/kalayar_add" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

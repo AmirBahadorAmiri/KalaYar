@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_135" data-name="Rectangle 135" width="24" height="24" transform="translate(-1047 329)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="kalayar_name" transform="translate(1047 -329)" clip-path="url(#clip-path)">
+    <g id="icons8_edit_user_1" transform="translate(-1050.428 325.571)">
+      <path id="Path_91" data-name="Path 91" d="M18.606,18.286l-3.531,3.531a4.65,4.65,0,0,0-1.36,3.269v.057H6.857a3.429,3.429,0,0,1,0-6.857Z"/>
+      <circle id="Ellipse_20" data-name="Ellipse 20" cx="5.714" cy="5.714" r="5.714" transform="translate(8 3.429)" opacity="0.35"/>
+      <path id="Path_92" data-name="Path 92" d="M23.5,19.931l-5.211,5.211H12.571V18.286h8A3.389,3.389,0,0,1,23.5,19.931Z" opacity="0.35"/>
+      <path id="Path_93" data-name="Path 93" d="M26.443,16.43a2.425,2.425,0,0,0-3.094.343l-6.665,6.665A2.342,2.342,0,0,0,16,25.091V26.53a.9.9,0,0,0,.9.9h1.439a2.334,2.334,0,0,0,1.653-.685l6.753-6.753A2.339,2.339,0,0,0,26.443,16.43Z"/>
+    </g>
+  </g>
+</svg>

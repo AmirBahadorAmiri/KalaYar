@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_132" data-name="Rectangle 132" width="24" height="24" transform="translate(-1047 329)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="kalayar_database_restore" transform="translate(1047 -329)" clip-path="url(#clip-path)">
+    <g id="icons8_database_restore" transform="translate(-1050.428 325.572)">
+      <path id="Path_83" data-name="Path 83" d="M24,8V5.714a2.285,2.285,0,0,0-2.286-2.286h-16A2.285,2.285,0,0,0,3.429,5.714V8a2.285,2.285,0,0,0,2.286,2.286,2.285,2.285,0,0,0-2.286,2.286v2.286a2.285,2.285,0,0,0,2.286,2.286,2.285,2.285,0,0,0-2.286,2.286v2.286A2.285,2.285,0,0,0,5.714,24h16A2.285,2.285,0,0,0,24,21.714V19.428a2.285,2.285,0,0,0-2.286-2.286A2.285,2.285,0,0,0,24,14.857V12.571a2.285,2.285,0,0,0-2.286-2.286A2.285,2.285,0,0,0,24,8Z" opacity="0.35"/>
+      <path id="Path_84" data-name="Path 84" d="M19.08,20.571h1.491v4.571a2.285,2.285,0,0,0,2.286,2.286h0a2.285,2.285,0,0,0,2.286-2.286V20.571h1.491A.875.875,0,0,0,27.2,19.1l-3.526-3.874a1.083,1.083,0,0,0-1.63,0L18.516,19.1A.875.875,0,0,0,19.08,20.571Z"/>
+      <path id="Path_85" data-name="Path 85" d="M19.572,14.544l-13.858,2.6H17.207Z"/>
+      <path id="Path_86" data-name="Path 86" d="M24,8V6.857L5.714,10.286h16A2.285,2.285,0,0,0,24,8Z"/>
+      <path id="Path_87" data-name="Path 87" d="M18.285,22.749A3.063,3.063,0,0,1,16.9,21.9L5.714,24H18.285Z"/>
+    </g>
+  </g>
+</svg>

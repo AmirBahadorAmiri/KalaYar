@@ -83,7 +83,7 @@
             android:padding="12dp"
             android:background="@drawable/radius_16"
             android:backgroundTint="@{transaction.transaction_type == TransactionType.INCREASE ? @color/kalayar_dialog_blue_color_tint : @color/kalayar_dialog_red_color_tint}"
-            app:srcCompat="@{transaction.transaction_type == TransactionType.INCREASE ? @drawable/kalayar_plus : @drawable/kalayar_minus}"
+            app:srcCompat="@{transaction.transaction_type == TransactionType.INCREASE ? @drawable/kalayar_add : @drawable/kalayar_minus}"
             app:tint="@{transaction.transaction_type == TransactionType.INCREASE ? @color/kalayar_dialog_blue_color : @color/kalayar_dialog_red_color}"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/store_container_pdf" />

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_134" data-name="Rectangle 134" width="24" height="24" transform="translate(-1047 329)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="kalayar_phone" transform="translate(1047 -329)" clip-path="url(#clip-path)">
+    <g id="icons8_whatsapp" transform="translate(-1049.399 326.6)">
+      <path id="Path_89" data-name="Path 89" d="M14.4,2.4A11.981,11.981,0,0,0,3.652,19.712L2.446,24.535a1.5,1.5,0,0,0,1.819,1.819l4.823-1.206A12,12,0,1,0,14.4,2.4Z" opacity="0.35"/>
+      <path id="Path_90" data-name="Path 90" d="M19.671,16.16a2.486,2.486,0,0,0-3.516,0l-.619.619L12.02,13.263l.619-.619a2.486,2.486,0,1,0-4.183-1.231,10.465,10.465,0,0,0,3.011,5.918,10.465,10.465,0,0,0,5.918,3.011,2.483,2.483,0,0,0,2.286-4.182Z"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_146" data-name="Rectangle 146" width="24" height="24" transform="translate(-1047 329)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="kalayar_minus" transform="translate(1047 -329)" clip-path="url(#clip-path)">
+    <g id="icons8_subtract" transform="translate(-1051 325)">
+      <path id="Path_119" data-name="Path 119" d="M17.333,13.333H6.667a2.667,2.667,0,1,0,0,5.333H17.333Z" opacity="0.35"/>
+      <path id="Path_120" data-name="Path 120" d="M28,16a2.666,2.666,0,0,0-2.667-2.667H16v5.333h9.333A2.666,2.666,0,0,0,28,16Z"/>
+    </g>
+  </g>
+</svg>

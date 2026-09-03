@@ -85,7 +85,7 @@ class SplashFragment : BaseFragment() {
                                     .setCancelable(false)
                                     .setCardBackgroundColor(requireContext().getColor(R.color.kalayar_page_background_color))
                                     .setEditTextDrawable(
-                                        R.drawable.kalayar_password_hint_icon,
+                                        R.drawable.kalayar_password,
                                         requireContext().getColor(R.color.kalayar_dialog_blue_color)
                                     )
                                     .setEditTextHint(getString(R.string.enter_text))

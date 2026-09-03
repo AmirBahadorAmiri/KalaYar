@@ -37,7 +37,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/store_phone_register_icon"
+                app:srcCompat="@drawable/kalayar_phone"
                 app:tint="@color/kalayar_primary_color" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -52,7 +52,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/contact_call"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/kalayar_sms" />
+                app:tint="@color/kalayar_primary_color"
+                app:srcCompat="@drawable/kalayar_message" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/contact_icon"
@@ -62,7 +63,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/kalayar_user" />
+                app:tint="@color/kalayar_primary_color"
+                app:srcCompat="@drawable/kalayar_person" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/contact_name"

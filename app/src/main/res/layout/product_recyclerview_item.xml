@@ -68,12 +68,12 @@
             android:clickable="true"
             android:focusable="true"
             android:paddingTop="@dimen/STANDARD_8dp"
-            app:tint="@color/kalayar_icon_on_item_color"
+            app:tint="@color/kalayar_primary_color"
             android:paddingBottom="@dimen/STANDARD_8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/kalayar_horizontal_menu" />
+            app:srcCompat="@drawable/kalayar_more" />
 
         <View
             android:background="@color/kalayar_icon_hint_color"

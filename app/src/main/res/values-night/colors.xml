@@ -8,17 +8,17 @@
     <color name="kalayar_icon_color">#F3F3F3</color>
     <color name="kalayar_icon_on_item_color">#F3F3F3</color>
     <color name="kalayar_icon_on_primary_color">@android:color/white</color>
-    <color name="kalayar_edittext_background_color">#35393E</color>
-    <color name="kalayar_item_background_color">#35393E</color>
-    <color name="kalayar_page_background_color">#1E2227</color>
-    <color name="kalayar_primary_color">#0E7BE9</color>
+    <color name="kalayar_edittext_background_color">#292938</color>
+    <color name="kalayar_item_background_color">#292938</color>
+    <color name="kalayar_page_background_color">#1B1B26</color>
+    <color name="kalayar_primary_color">#E97147</color>
     <color name="kalayar_confirm_color">#06d6a0</color>
     <color name="kalayar_button_group_stroke_color">#363636</color>
     <color name="kalayar_track_selector_disable_color">#959595</color>
     <color name="kalayar_item_ripple_color">#959595</color>
     <color name="kalayar_dialog_blue_color">#0E7BE9</color>
-    <color name="kalayar_dialog_blue_color_tint">#80085DB3</color>
+    <color name="kalayar_dialog_blue_color_tint">#4D085DB3</color>
     <color name="kalayar_dialog_red_color">#F64848</color>
-    <color name="kalayar_dialog_red_color_tint">#80D34E4E</color>
-    <color name="kalayar_bottom_navigation_background_color">#2A2C2E</color>
+    <color name="kalayar_dialog_red_color_tint">#4DD34E4E</color>
+    <color name="kalayar_bottom_navigation_background_color">#222230</color>
 </resources>

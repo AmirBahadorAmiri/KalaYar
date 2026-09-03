@@ -40,7 +40,7 @@
             app:layout_constraintBottom_toBottomOf="@id/title"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@id/title"
-            app:tint="@color/kalayar_icon_color" />
+            app:tint="@color/kalayar_primary_color" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/store_view"
@@ -70,7 +70,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/kalayar_user"
+                    app:srcCompat="@drawable/kalayar_person"
                     app:tint="@color/kalayar_primary_color" />
 
                 <androidx.appcompat.widget.AppCompatTextView

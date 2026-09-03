@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_133" data-name="Rectangle 133" width="24" height="24" transform="translate(-1047 329)" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="kalayar_message" transform="translate(1047 -329)" clip-path="url(#clip-path)">
+    <g id="icons8_chat_bubble" transform="translate(-1049.399 326.6)">
+      <path id="Path_88" data-name="Path 88" d="M14.4,2.4A11.981,11.981,0,0,0,3.652,19.712L2.446,24.535a1.5,1.5,0,0,0,1.819,1.819l4.823-1.206A12,12,0,1,0,14.4,2.4Z" opacity="0.35"/>
+      <circle id="Ellipse_17" data-name="Ellipse 17" cx="1.8" cy="1.8" r="1.8" transform="translate(12.6 12.6)"/>
+      <circle id="Ellipse_18" data-name="Ellipse 18" cx="1.8" cy="1.8" r="1.8" transform="translate(18.6 12.6)"/>
+      <circle id="Ellipse_19" data-name="Ellipse 19" cx="1.8" cy="1.8" r="1.8" transform="translate(6.6 12.6)"/>
+    </g>
+  </g>
+</svg>
