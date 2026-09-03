@@ -1,4 +1,4 @@
-package com.amirbahadoramiri.kalayar.presentation.ui.fragments.money
+package com.amirbahadoramiri.kalayar.presentation.ui.fragments.report
 
 import android.os.Bundle
 import android.view.LayoutInflater

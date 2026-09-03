@@ -53,7 +53,7 @@
         android:label="InventoryFragment" />
     <fragment
         android:id="@+id/reportFragment"
-        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.money.ReportFragment"
+        android:name="com.amirbahadoramiri.kalayar.presentation.ui.fragments.report.ReportFragment"
         android:label="ReportFragment" />
     <fragment
         android:id="@+id/productFragment"
