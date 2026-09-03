@@ -78,7 +78,7 @@
     <string name="zero">0</string>
     <string name="product_types_count">تعداد انواع محصولات</string>
     <string name="password">رمز عبور</string>
-    <string name="rate_and_review">شرکت در نظرسنجی و دادن امتیاز</string>
+    <string name="rate_and_review">شرکت در نظرسنجی و امتیاز دادن</string>
     <string name="one">1</string>
     <string name="no_products_added">هیچ محصولی اضافه نکردید</string>
     <string name="transaction_title_cannot_be_empty">تیتر تراکنش نمیتواند خالی باشد</string>

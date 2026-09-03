@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.view.animation.DecelerateInterpolator
 import android.widget.CompoundButton
 import androidx.lifecycle.ViewModelProvider
 import com.amirbahadoramiri.kalayar.R
@@ -68,9 +69,16 @@ class ProfileFragment : BaseFragment() {
         }
 
         if ( DarkMode.checkDarkMode(requireContext()) )
-            binding.themeModeButton.setImageResource(R.drawable.kalayar_dark_mode)
+            binding.themeModeButton.setImageResource(R.drawable.kalayar_moon)
         else
-            binding.themeModeButton.setImageResource(R.drawable.kalayar_light_mode)
+            binding.themeModeButton.setImageResource(R.drawable.kalayar_sun)
+
+        binding.themeModeButton.animate()
+            .setDuration(1600)
+            .rotation(360F)
+            .setInterpolator(DecelerateInterpolator())
+            .start()
+
         binding.themeModeButton.setOnClickListener {
             val isChecked = !DarkMode.checkDarkMode(requireContext())
             val location = IntArray(2)
