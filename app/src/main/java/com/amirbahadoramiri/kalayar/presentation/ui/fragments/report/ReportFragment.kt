@@ -9,13 +9,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.amirbahadoramiri.kalayar.R
 import com.amirbahadoramiri.kalayar.databinding.ReportFragmentBinding
 import com.amirbahadoramiri.kalayar.domain.models.ReportData
+import com.amirbahadoramiri.kalayar.domain.models.Store
 import com.amirbahadoramiri.kalayar.presentation.base.BaseFragment
+import com.amirbahadoramiri.kalayar.tools.PDFUtils
 import com.amirbahadoramiri.kalayar.tools.text_utils.TextUtils
 
 class ReportFragment : BaseFragment() {
 
     private lateinit var binding: ReportFragmentBinding
     private lateinit var viewModel: ReportViewModel
+    private var store: Store? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +40,24 @@ class ReportFragment : BaseFragment() {
         viewModel.reportLiveData.observe(viewLifecycleOwner) { data ->
             updateUI(data)
         }
+
+        viewModel.getStoreLiveData.observe(viewLifecycleOwner) {
+            store = it
+        }
         
         viewModel.calculateReport()
+        viewModel.getStore()
 
         customOnBackPressed()
 
         binding.backBtn.setOnClickListener {
             popBackStack()
+        }
+
+        binding.printBtn.setOnClickListener {
+            viewModel.reportLiveData.value?.let { reportData ->
+                PDFUtils.generateAndShareReportPDF(requireContext(), reportData, store)
+            }
         }
     }
 

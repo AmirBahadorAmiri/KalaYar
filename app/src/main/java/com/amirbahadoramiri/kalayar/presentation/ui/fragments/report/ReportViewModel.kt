@@ -7,9 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.amirbahadoramiri.kalayar.data.repository.RoomProductDataSource
 import com.amirbahadoramiri.kalayar.data.repository.RoomTransactionDataSource
 import com.amirbahadoramiri.kalayar.data.repository.RoomTransactionItemDataSource
+import com.amirbahadoramiri.kalayar.data.repository.RoomStoreDataSource
 import com.amirbahadoramiri.kalayar.domain.models.ReportData
+import com.amirbahadoramiri.kalayar.domain.models.Store
 import com.amirbahadoramiri.kalayar.domain.models.TransactionType
 import com.amirbahadoramiri.kalayar.domain.repository.product.ProductRepository
+import com.amirbahadoramiri.kalayar.domain.repository.store.StoreRepository
 import com.amirbahadoramiri.kalayar.domain.repository.transaction.TransactionRepository
 import com.amirbahadoramiri.kalayar.domain.repository.transactionitem.TransactionItemRepository
 import kotlinx.coroutines.async
@@ -21,8 +24,10 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
     private val productRepository = ProductRepository(RoomProductDataSource(application))
     private val transactionRepository = TransactionRepository(RoomTransactionDataSource(application))
     private val transactionItemRepository = TransactionItemRepository(RoomTransactionItemDataSource(application))
+    private val storeRepository = StoreRepository(RoomStoreDataSource(application))
 
     val reportLiveData = MutableLiveData<ReportData>()
+    val getStoreLiveData = MutableLiveData<Store?>()
 
     fun calculateReport() {
         viewModelScope.launch {
@@ -128,6 +133,12 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
                     highValueProduct = highValueProduct
                 )
             )
+        }
+    }
+
+    fun getStore() {
+        viewModelScope.launch {
+            getStoreLiveData.postValue(storeRepository.getStore())
         }
     }
 }
