@@ -122,6 +122,10 @@ class ContactsFragment : BaseFragment(), ContactEventListener {
                 addContactBottomSheetBinding.contactNumberLayout.error =
                     getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
+            } else if (contactViewModel.allContactsLiveData.value?.any { it.contact_number == contact_number && it.contact_id != contact?.contact_id } == true) {
+                addContactBottomSheetBinding.contactNumberLayout.error =
+                    getString(R.string.duplicate_number_error)
+                toast(getString(R.string.duplicate_number_error))
             } else {
                 if (contact == null) {
                     val newContact = Contact(contact_name, contact_number)
