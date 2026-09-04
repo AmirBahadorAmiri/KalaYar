@@ -37,15 +37,22 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
             // 1. Inventory Calculations
             var totalInventoryValue: Long = 0
             var totalProductsCount: Long = 0
+            var lowStockCount = 0
+            var highValueProduct = "-"
+            var maxStockValue = -1L
+
             products.forEach {
-                totalInventoryValue += (it.product_price * it.product_count)
+                val stockValue = it.product_price * it.product_count
+                totalInventoryValue += stockValue
                 totalProductsCount += it.product_count
+                if (it.product_count < 5) lowStockCount++
+                if (stockValue > maxStockValue) {
+                    maxStockValue = stockValue
+                    highValueProduct = it.product_name
+                }
             }
 
-            // 2. Sales Calculations
-            val now = System.currentTimeMillis()
-            val cal = Calendar.getInstance()
-
+            // 2. Time Helper
             fun getStartTime(monthsAgo: Int = 0, isToday: Boolean = false): Long {
                 val c = Calendar.getInstance()
                 if (isToday) {
@@ -71,6 +78,9 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
             var sales6Months = 0L
             var sales1Year = 0L
             var totalSales = 0L
+            var totalProfit = 0L
+            val productSalesMap = mutableMapOf<String, Long>()
+            products.forEach { productSalesMap[it.product_name] = 0L }
 
             // Map transaction ID to its items
             val transactionItemsMap = allItems.groupBy { it.transaction_id }
@@ -78,7 +88,13 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
             transactions.filter { it.transaction_type == TransactionType.DECREASE }.forEach { trans ->
                 val transItems = transactionItemsMap[trans.transaction_id] ?: emptyList()
                 var transTotal = 0L
-                transItems.forEach { transTotal += (it.product_price * it.change_amount) }
+                var transProfit = 0L
+                transItems.forEach { 
+                    transTotal += (it.product_price * it.change_amount)
+                    transProfit += ((it.product_price - it.purchase_price) * it.change_amount)
+                    
+                    productSalesMap[it.product_name] = (productSalesMap[it.product_name] ?: 0L) + it.change_amount
+                }
 
                 val time = trans.transaction_create_time
                 if (time >= todayStart) salesToday += transTotal
@@ -87,7 +103,11 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
                 if (time >= sixMonthsStart) sales6Months += transTotal
                 if (time >= oneYearStart) sales1Year += transTotal
                 totalSales += transTotal
+                totalProfit += transProfit
             }
+
+            val topSellingProduct = productSalesMap.maxByOrNull { it.value }?.key ?: "-"
+            val leastSellingProduct = productSalesMap.minByOrNull { it.value }?.key ?: "-"
 
             reportLiveData.postValue(
                 ReportData(
@@ -99,7 +119,13 @@ class ReportViewModel(application: Application) : AndroidViewModel(application) 
                     sales3Months = sales3Months,
                     sales6Months = sales6Months,
                     sales1Year = sales1Year,
-                    totalSales = totalSales
+                    totalSales = totalSales,
+                    totalProfit = totalProfit,
+                    lowStockCount = lowStockCount,
+                    transactionCount = transactions.size,
+                    topSellingProduct = topSellingProduct,
+                    leastSellingProduct = leastSellingProduct,
+                    highValueProduct = highValueProduct
                 )
             )
         }

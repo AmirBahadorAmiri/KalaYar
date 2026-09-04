@@ -57,6 +57,12 @@ class ReportFragment : BaseFragment() {
         binding.rowProductTypes.rowTitle.text = getString(R.string.product_types_count)
         binding.rowProductTypes.rowValue.text = data.productTypesCount.toString()
 
+        binding.rowLowStock.rowTitle.text = getString(R.string.low_stock_products)
+        binding.rowLowStock.rowValue.text = data.lowStockCount.toString()
+
+        binding.rowHighValue.rowTitle.text = getString(R.string.high_value_stock)
+        binding.rowHighValue.rowValue.text = data.highValueProduct
+
         // Sales
         binding.rowSalesToday.rowTitle.text = getString(R.string.sales_today)
         binding.rowSalesToday.rowValue.text = formatPrice(data.salesToday)
@@ -75,6 +81,18 @@ class ReportFragment : BaseFragment() {
 
         binding.rowTotalSales.rowTitle.text = getString(R.string.total_sales)
         binding.rowTotalSales.rowValue.text = formatPrice(data.totalSales)
+
+        binding.rowTotalProfit.rowTitle.text = getString(R.string.total_profit)
+        binding.rowTotalProfit.rowValue.text = formatPrice(data.totalProfit)
+
+        binding.rowTopSelling.rowTitle.text = getString(R.string.top_selling_product)
+        binding.rowTopSelling.rowValue.text = data.topSellingProduct
+
+        binding.rowLeastSelling.rowTitle.text = getString(R.string.least_selling_product)
+        binding.rowLeastSelling.rowValue.text = data.leastSellingProduct
+
+        binding.rowTransactionCount.rowTitle.text = getString(R.string.total_transactions_count)
+        binding.rowTransactionCount.rowValue.text = data.transactionCount.toString()
     }
 
     private fun formatPrice(value: Long): String {

@@ -13,7 +13,7 @@ import com.amirbahadoramiri.kalayar.domain.models.Transaction
 import com.amirbahadoramiri.kalayar.domain.models.TransactionItem
 
 @Database(
-    version = 3,
+    version = 4,
     exportSchema = false,
     entities = [Store::class, Product::class, Contact::class,
         Transaction::class, TransactionItem::class]
@@ -33,7 +33,7 @@ abstract class PublicDatabase : RoomDatabase() {
                     "public.db"
                 )
                     .fallbackToDestructiveMigration(false)
-                    .addMigrations(migration_1_2, migration_2_3)
+                    .addMigrations(migration_1_2, migration_2_3, migration_3_4)
                     .build()
                 publicDatabase = instance
                 instance
@@ -59,6 +59,13 @@ abstract class PublicDatabase : RoomDatabase() {
             )
         """.trimIndent()
                 )
+            }
+        }
+
+        private val migration_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE product ADD COLUMN product_purchase_price INTEGER NOT NULL DEFAULT 0")
+                db.execSQL("ALTER TABLE transaction_item ADD COLUMN purchase_price INTEGER NOT NULL DEFAULT 0")
             }
         }
 

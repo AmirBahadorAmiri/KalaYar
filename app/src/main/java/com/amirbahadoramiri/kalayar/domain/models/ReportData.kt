@@ -9,5 +9,11 @@ data class ReportData(
     val sales3Months: Long = 0,
     val sales6Months: Long = 0,
     val sales1Year: Long = 0,
-    val totalSales: Long = 0
+    val totalSales: Long = 0,
+    val totalProfit: Long = 0,
+    val lowStockCount: Int = 0,
+    val transactionCount: Int = 0,
+    val topSellingProduct: String = "-",
+    val leastSellingProduct: String = "-",
+    val highValueProduct: String = "-"
 )

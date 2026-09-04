@@ -10,6 +10,7 @@ data class Product(
     var product_name: String,   // String (64)
     var product_unit: String,   // String (32)
     var product_price: Long,    // max: 9,223,372,036,854,775,808  /* max 12 */
+    var product_purchase_price: Long = 0,
     var product_count: Long,    // max: 9,223,372,036,854,775,808  /* max 9  */
 
     @PrimaryKey(autoGenerate = true)

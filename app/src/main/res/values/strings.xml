@@ -29,7 +29,9 @@
     <string name="product_insert">ثبت محصول</string>
     <string name="product_add">افزودن محصول</string>
     <string name="product_insert_name">نام محصول را وارد کنید</string>
-    <string name="product_insert_price">قیمت محصول را وارد کنید (تومان)</string>
+    <string name="product_insert_price">قیمت فروش محصول را وارد کنید (تومان)</string>
+    <string name="product_insert_purchase_price">قیمت خرید محصول را وارد کنید (تومان)</string>
+    <string name="purchase_price">قیمت خرید</string>
     <string name="product_insert_count">مقدار محصول را وارد کنید (تعداد / وزن)</string>
     <string name="product_insert_unit">واحد اندازه گیری را وارد کنید</string>
     <string name="price_toman">قیمت (تومان)</string>
@@ -72,8 +74,13 @@
     <string name="create_backup">تهیه نسخه پشتیبان (Backup)</string>
     <string name="restore_backup">بازیابی نسخه پشتیبان (Restore)</string>
     <string name="database_notice">توجه: برای حفظ امنیت داده‌ها، حتماً نسخه پشتیبان را در محلی امن ذخیره کنید.</string>
-    <string name="unit">واحد</string>
     <string name="total_inventory_value">ارزش کل موجودی</string>
+    <string name="total_profit">سود کل (تراکنش‌های خروجی)</string>
+    <string name="low_stock_products">محصولات رو به اتمام (کمتر از ۵ عدد)</string>
+    <string name="total_transactions_count">تعداد کل تراکنش‌ها</string>
+    <string name="top_selling_product">پرفروش‌ترین کالا</string>
+    <string name="least_selling_product">کم‌فروش‌ترین کالا</string>
+    <string name="high_value_stock">با ارزش‌ترین کالای انبار</string>
     <string name="default_price">0 تومان</string>
     <string name="total_products_count">تعداد کل کالاها</string>
     <string name="zero">0</string>

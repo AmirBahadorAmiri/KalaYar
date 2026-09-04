@@ -9,6 +9,7 @@ data class TransactionItem(
     var product_name: String,       // String (64)
     var product_unit: String,       // String (32)
     var product_price: Long,
+    var purchase_price: Long = 0,
     var previous_value: Long,       // max: 9,223,372,036,854,775,808
     var change_amount: Long,        // max: 9,223,372,036,854,775,808   /* max 9 */
     var final_value: Long,          // max: 9,223,372,036,854,775,808

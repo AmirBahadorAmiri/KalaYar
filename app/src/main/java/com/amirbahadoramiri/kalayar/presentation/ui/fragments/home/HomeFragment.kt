@@ -75,7 +75,7 @@ class HomeFragment : BaseFragment() {
                 navController.navigate(action)
             }
         })
-        dataList.add(PageModel(getString(R.string.transactions), R.drawable.kalayar_transactions) {
+        dataList.add(PageModel(getString(R.string.transactions), R.drawable.kalayar_history) {
             val navController =
                 requireActivity().findNavController(R.id.activityMainFragmentContainer)
             if (navController.currentDestination?.id == R.id.mainFragment) {
@@ -83,15 +83,7 @@ class HomeFragment : BaseFragment() {
                 navController.navigate(action)
             }
         })
-        dataList.add(PageModel(getString(R.string.inventory), R.drawable.kalayar_inventory) {
-            val navController =
-                requireActivity().findNavController(R.id.activityMainFragmentContainer)
-            if (navController.currentDestination?.id == R.id.mainFragment) {
-                val action = MainFragmentDirections.actionMainFragmentToInventoryFragment()
-                navController.navigate(action)
-            }
-        })
-        dataList.add(PageModel(getString(R.string.money), R.drawable.kalayar_money) {
+        dataList.add(PageModel(getString(R.string.money), R.drawable.kalayar_report) {
             val navController =
                 requireActivity().findNavController(R.id.activityMainFragmentContainer)
             if (navController.currentDestination?.id == R.id.mainFragment) {
@@ -100,10 +92,7 @@ class HomeFragment : BaseFragment() {
             }
         })
         dataList.add(
-            PageModel(
-                getString(R.string.import_export_database),
-                R.drawable.kalayar_database
-            ) {
+            PageModel(getString(R.string.import_export_database), R.drawable.kalayar_sql) {
                 val navController =
                     requireActivity().findNavController(R.id.activityMainFragmentContainer)
                 if (navController.currentDestination?.id == R.id.mainFragment) {

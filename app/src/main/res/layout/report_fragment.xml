@@ -140,6 +140,28 @@
                             android:id="@+id/row_product_types"
                             layout="@layout/report_item_row" />
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/kalayar_edittext_background_color" />
+
+                        <include
+                            android:id="@+id/row_low_stock"
+                            layout="@layout/report_item_row" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/kalayar_edittext_background_color" />
+
+                        <include
+                            android:id="@+id/row_high_value"
+                            layout="@layout/report_item_row" />
+
                     </LinearLayout>
 
                 </com.google.android.material.card.MaterialCardView>
@@ -240,6 +262,50 @@
 
                         <include
                             android:id="@+id/row_total_sales"
+                            layout="@layout/report_item_row" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/kalayar_edittext_background_color" />
+
+                        <include
+                            android:id="@+id/row_total_profit"
+                            layout="@layout/report_item_row" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/kalayar_edittext_background_color" />
+
+                        <include
+                            android:id="@+id/row_top_selling"
+                            layout="@layout/report_item_row" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/kalayar_edittext_background_color" />
+
+                        <include
+                            android:id="@+id/row_least_selling"
+                            layout="@layout/report_item_row" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="@color/kalayar_edittext_background_color" />
+
+                        <include
+                            android:id="@+id/row_transaction_count"
                             layout="@layout/report_item_row" />
 
                     </LinearLayout>

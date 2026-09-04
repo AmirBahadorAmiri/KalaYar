@@ -147,15 +147,20 @@ class ProductFragment : BaseFragment(), ProductEventListener {
         sheetBinding.productPrice.addTextChangedListener(
             textChangeListener(sheetBinding.productPrice, 12)
         )
+        sheetBinding.productPurchasePrice.addTextChangedListener(
+            textChangeListener(sheetBinding.productPurchasePrice, 12)
+        )
 
         sheetBinding.confirmButton.setOnClickListener {
             val product_name = sheetBinding.productName.text.toString()
             val product_unit = sheetBinding.productUnit.text.toString()
             val product_price = sheetBinding.productPrice.text.toString()
+            val product_purchase_price = sheetBinding.productPurchasePrice.text.toString()
             val product_count = sheetBinding.productCount.text.toString()
 
             sheetBinding.productNameLayout.isErrorEnabled = false
             sheetBinding.productPriceLayout.isErrorEnabled = false
+            sheetBinding.productPurchasePriceLayout.isErrorEnabled = false
             sheetBinding.productUnitLayout.isErrorEnabled = false
             sheetBinding.productCountLayout.isErrorEnabled = false
 
@@ -164,6 +169,9 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                 toast(getString(R.string.fill_necessary_field))
             } else if (product_price.isEmpty()) {
                 sheetBinding.productPriceLayout.error = getString(R.string.is_necessary)
+                toast(getString(R.string.fill_necessary_field))
+            } else if (product_purchase_price.isEmpty()) {
+                sheetBinding.productPurchasePriceLayout.error = getString(R.string.is_necessary)
                 toast(getString(R.string.fill_necessary_field))
             } else if (product_count.isEmpty()) {
                 sheetBinding.productCountLayout.error = getString(R.string.is_necessary)
@@ -177,6 +185,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                         product_name,
                         product_unit,
                         product_price.replace(",", "").toLong(),
+                        product_purchase_price.replace(",", "").toLong(),
                         product_count.replace(",", "").toLong()
                     )
                     onAddProduct(newProduct, 0)
@@ -184,6 +193,7 @@ class ProductFragment : BaseFragment(), ProductEventListener {
                     product.product_name = product_name
                     product.product_unit = product_unit
                     product.product_price = product_price.replace(",", "").toLong()
+                    product.product_purchase_price = product_purchase_price.replace(",", "").toLong()
                     product.product_count = product_count.replace(",", "").toLong()
                     onUpdateProduct(product, position)
                 }
